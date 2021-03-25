@@ -1,0 +1,19 @@
+{
+  "name": "sgmy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "drago.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gremory",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.1",
+    "mongoose": "^5.11.14",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.5.0"
+  }
+}
