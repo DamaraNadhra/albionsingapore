@@ -263,10 +263,10 @@ client.on('message', async (message) => {
                 let playerId = res.data.players[0].Id
                 let guildname = res.data.players[0].GuildName;
                 if (guildname !== 'Singapore') {
-                    message.channel.send(`<@${message.author.id}> Your name has been registered. you should be good soon =)`)
                     axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerId}`)
                     .then(async (playerInfo) => {
                         if (parseInt(playerInfo.data.LifetimeStatistics.PvE.Total) + parseInt(playerInfo.data.KillFame) > 1000000) {
+                            message.channel.send(`<@${message.author.id}> Your name has been registered. you should be good soon =)`)
                             message.guild.members.cache.get(message.author.id).setNickname(name)
                             message.member.roles.add('824661303259037727')
                             await register.create({
@@ -275,6 +275,8 @@ client.on('message', async (message) => {
                                 personID: playerId,
                                 joinedAt: tanggalfix,
                             })
+                        } else {
+                            return message.channel.send('Oof looks like your pve and pvp fame are below requirement')
                         }
                     })
                 } else {
