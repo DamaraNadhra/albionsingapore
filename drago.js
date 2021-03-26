@@ -278,7 +278,8 @@ client.on('message', async (message) => {
                             })
                             console.log(fameAmount)
                         } else {
-                            return message.channel.send('Oof looks like your pve and pvp fame are below requirement')
+                            message.channel.send('Oof looks like your pve and pvp fame are below requirement')
+                            console.log(fameAmount)
                         }
                     })
                 } else {
