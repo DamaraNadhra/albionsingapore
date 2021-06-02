@@ -265,32 +265,30 @@ client.on('message', async (message) => {
                 if (guildname !== 'Singapore') {
                     axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerId}`)
                     .then(async (playerInfo) => {
-                        let fameAmount = parseInt(playerInfo.data.LifetimeStatistics.PvE.Total) + parseInt(playerInfo.data.KillFame); 
-                        if (fameAmount > 1000000) {
-                            message.channel.send(`<@${message.author.id}> Your name has been registered. you should be good soon =)`)
-                            message.guild.members.cache.get(message.author.id).setNickname(name)
-                            message.member.roles.add('824661303259037727')
-                            await register.create({
-                                personName: name,
-                                discordID: message.author.id,
-                                personID: playerId,
-                                joinedAt: tanggalfix,
-                            })
-                            console.log(fameAmount)
-                        } else {
-                            message.channel.send('Oof looks like your pve and pvp fame are below requirement')
-                            console.log(fameAmount)
-                        }
+                        axios.get(`https://api.aotools.net/v2/blacklist/${name}`)
+                        .then(async (blacklisted) => {
+                            if (blacklisted.data.isBlacklisted = true) return message.channel.send("I'm sorry but looks like you're already blacklisted from ARCH Alliance, please contact them to remove your blacklist mark")
+                            let fameAmount = parseInt(playerInfo.data.LifetimeStatistics.PvE.Total) + parseInt(playerInfo.data.KillFame); 
+                            if (fameAmount > 2000000) {
+                                message.channel.send(`<@${message.author.id}> Your name has been registered. you should be good soon =)`)
+                                await register.create({
+                                    personName: name,
+                                    discordID: message.author.id,
+                                    personID: playerId,
+                                })
+                            } else {
+                                message.channel.send('Oof looks like your pve and pvp fame are below requirement')
+                                console.log(fameAmount)
+                            }
+                        })
                     })
                 } else {
-                    message.reply('Sweet! you are in Singapore already.. Welcome')
+                    message.reply('You\'re in singapore already -_-')
                     message.guild.members.cache.get(message.author.id).setNickname(name)
-                    message.member.roles.add('706471167971557447')
                     await register.create({
                         personName: name,
                         discordID: message.author.id,
                         personID: playerId,
-                        joinedAt: tanggalfix,
                     })
                 }
                 
