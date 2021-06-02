@@ -262,6 +262,7 @@ client.on('message', async (message) => {
             .then(async (res) => {
                 let playerId = res.data.players[0].Id
                 let guildname = res.data.players[0].GuildName;
+                console.log(res.data.players)
                 if (guildname !== 'Singapore') {
                     axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerId}`)
                     .then(async (playerInfo) => {
