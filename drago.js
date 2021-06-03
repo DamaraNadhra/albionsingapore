@@ -497,11 +497,11 @@ client.on('message', async (message) => {
         axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
         .then(async result => {
             console.log(result.data.isBlacklisted)
-            if (result.data.isBlacklisted = true) {
+            if (result.data.isBlacklisted === true) {
                 const embed = new Discord.MessageEmbed()
                 .setColor('AQUA')
                 .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
-                .setDescription('This player is blacklisted! Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
+                .setDescription('**This player is blacklisted!** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
                 .setFooter('If this is wrong please contact the officers :D')
                 message.channel.send(embed)
             } else {
