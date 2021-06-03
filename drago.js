@@ -496,6 +496,7 @@ client.on('message', async (message) => {
         if (!firstArgument) return message.reply('Please state the person you want to check!')
         axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
         .then(async result => {
+            console.log(result.data.isBlacklisted)
             if (result.data.isBlacklisted = true) {
                 const embed = new Discord.MessageEmbed()
                 .setColor('AQUA')
