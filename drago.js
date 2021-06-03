@@ -515,6 +515,31 @@ client.on('message', async (message) => {
             return message.channel.send(embedz)
         }
     }
+}) 
+const emojis = {
+    white_check_mark: 'Recruit'
+}
+const handleReactions = (reaction, user, add) => {
+    if (user.id === '805976602864386059') {
+        return
+    }
+    const emoji = reaction._emoji.name
+    const { guild } = reaction.message
+
+    const roleName = emojis[emoji]
+    if (!roleName) {
+        return
+    }
+    const role = guild.roles.cache.find(role => role.name === roleName)
+    const member = guild.members.cache.find(member => member.id === user.id)
+    if (add) {
+        member.roles.add(role)
+    } 
+}
+client.on('messageReactionAdd', (reaction, user) => {
+    if (reaction.message.channel.id === '849925701988515851') {
+        handleReactions(reaction, user, true)
+    }
 })
 client.on('ready', () => {
     console.log('The Bot is Online')
