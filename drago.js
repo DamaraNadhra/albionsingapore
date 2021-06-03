@@ -491,7 +491,7 @@ client.on('message', async (message) => {
         const embedz = new Discord.MessageEmbed()
         .setColor('RED')
         .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
-        .setDescription(`**ERROR** \n\nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
+        .setDescription(`**ERROR** \nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
         .setFooter('If this is wrong please contact the officers :D')
         if (message.channel.id !== '779514684797091850' | message.channel.id !== '760731834354499585') return message.channel.send(embedz)
         let firstArgument = args[0];
