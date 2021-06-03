@@ -491,6 +491,22 @@ client.on('message', async (message) => {
             ])
             message.channel.send(embed)
         }
+    } else if (command === 'checkbl') {
+        let firstArgument = args[0];
+        if (!firstArgument) return message.reply('Please state the person you want to check!')
+        axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
+        .then(async result => {
+            if (result.data.isBlacklisted = true) {
+                const embed = new Discord.MessageEmbed()
+                .setColor('AQUA')
+                .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
+                .setDescription('This player is blacklisted! Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
+                .setFooter('If this is wrong please contact the officers :D')
+                message.channel.send(embed)
+            } else {
+                message.reply(`${result.data.name} is not blacklisted :D`)
+            }
+        })
     }
 })
 client.on('ready', () => {
