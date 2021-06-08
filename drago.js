@@ -264,7 +264,17 @@ client.on('message', async (message) => {
                 let playerId = res.data.players[0].Id
                 let guildname = res.data.players[0].GuildName;
                 console.log(res.data.players)
-                if (guildname !== 'Singapore') {
+                if (guildname === 'CN Avalonian Company') {
+                    message.reply('已注册，欢迎!')
+                    message.guild.members.cache.get(message.author.id).setNickname(name)
+                    message.guild.members.cache.get(message.author.id).roles.add('851706125065388042')
+                    await register.create({ 
+                        personName: name,
+                        discordID: message.author.id,
+                        personID: playerId,
+                        guildName: 'CN'
+                    })
+                } else if (guildname !== 'Singapore') {
                     axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerId}`)
                     .then(async (playerInfo) => {
                         axios.get(`https://api.aotools.net/v2/blacklist/${name}`)
@@ -294,17 +304,7 @@ client.on('message', async (message) => {
                         personID: playerId,
                         guildName: 'SG'
                     })
-                } else if (guildname === 'CN Avalonian Company') {
-                    message.reply('已注册，欢迎!')
-                    message.guild.members.cache.get(message.author.id).setNickname(name)
-                    message.guild.members.cache.get(message.author.id).roles.add('851706125065388042')
-                    await register.create({ 
-                        personName: name,
-                        discordID: message.author.id,
-                        personID: playerId,
-                        guildName: 'CN'
-                    })
-                }
+                } 
                 
             }).catch(e => {
                 return message.channel.send(`That person isnt exist in this game bro`)
