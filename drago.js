@@ -242,8 +242,14 @@ client.on('message', async (message) => {
         await mongo().then(async mongoose => {
             let personExistable = await register.findOne({ discordID: message.author.id})
             if (personExistable) {
-                return message.channel.send(`Oof, im sorry but looks like your discord account has been linked with **${personExistable.personName}**`)
-            }
+                if (personExistable.guildName === 'CN') {
+                    return message.reply(`对不起，但我认为你的 Discord account 已与 **${personExistable.personName}** 关联`)
+                } else if (personExistable.guildName === 'SG') {
+                    return message.reply(`Oof sorry, but it looks like your discord account has already linked with **${personExistable.personName}**`)
+                } else {
+                    return message.reply(`Oof sorry, but it looks like your discord account has already linked with **${personExistable.personName}**`)
+                }
+            } 
             let name = args[0];
             let tanggal = new Date()
             var hari = tanggal.getDay()
@@ -251,7 +257,7 @@ client.on('message', async (message) => {
                         var tahun = tanggal.getFullYear()
                         let tanggalfix = `${hari}/${bulan}/${tahun}`
             if (!name) {
-                return message.reply('I\'m sorry but you have to insert your IGN to register yourself')
+                return message.reply('I\'m sorry but you have to insert your IGN to register yourself \n\n')
             } 
             axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=${name}`)
             .then(async (res) => {
@@ -271,6 +277,7 @@ client.on('message', async (message) => {
                                     personName: name,
                                     discordID: message.author.id,
                                     personID: playerId,
+                                    guildName: 'SG'
                                 })
                             } else {
                                 message.channel.send('Oof looks like your pve and pvp fame are below requirement')
@@ -278,13 +285,24 @@ client.on('message', async (message) => {
                             }
                         })
                     })
-                } else {
+                } else if (guildname === 'Singapore') {
                     message.reply('You\'re in singapore already -_-')
                     message.guild.members.cache.get(message.author.id).setNickname(name)
                     await register.create({
                         personName: name,
                         discordID: message.author.id,
                         personID: playerId,
+                        guildName: 'SG'
+                    })
+                } else if (guildname === 'CN Avalonian Company') {
+                    message.reply('已注册，欢迎!')
+                    message.guild.members.cache.get(message.author.id).setNickname(name)
+                    message.guild.members.cache.get(message.author.id).roles.add('851706125065388042')
+                    await register.create({ 
+                        personName: name,
+                        discordID: message.author.id,
+                        personID: playerId,
+                        guildName: 'CN'
                     })
                 }
                 

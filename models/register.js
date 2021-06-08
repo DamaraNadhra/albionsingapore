@@ -10,6 +10,7 @@ const testSchema = mongoose.Schema({
     discordID: reqString,
     personID: reqString,
     joinedAt: reqString,
+    guildName: reqString,
 })
 
 module.exports = mongoose.model('register', testSchema)
