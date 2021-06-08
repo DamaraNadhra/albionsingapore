@@ -533,7 +533,7 @@ client.on('message', async (message) => {
             return message.channel.send(embedz)
         }
     } else if (command === 'sadge') {
-        if (message.author.id === '694488949980135444') {
+        if (message.author.id === '694488949980135444' | message.author.id === '209607795505496065') {
            message.channel.send('Life is hard, but you must keep going <:godbless:824231355331510274> \n**Gato2021**')
         }
     }
