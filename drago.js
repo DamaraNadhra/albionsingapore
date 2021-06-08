@@ -269,7 +269,7 @@ client.on('message', async (message) => {
                     .then(async (playerInfo) => {
                         axios.get(`https://api.aotools.net/v2/blacklist/${name}`)
                         .then(async (blacklisted) => {
-                            if (blacklisted.data.isBlacklisted = true) return message.channel.send("I'm sorry but looks like you're already blacklisted from ARCH Alliance, please contact them to remove your blacklist mark")
+                            if (blacklisted.data.isBlacklisted === true) return message.channel.send("I'm sorry but looks like you're already blacklisted from ARCH Alliance, please contact them to remove your blacklist mark")
                             let fameAmount = parseInt(playerInfo.data.LifetimeStatistics.PvE.Total) + parseInt(playerInfo.data.KillFame); 
                             if (fameAmount > 2000000) {
                                 message.channel.send(`<@${message.author.id}> Your name has been registered. you should be good soon =)`)
