@@ -532,6 +532,10 @@ client.on('message', async (message) => {
         } else {
             return message.channel.send(embedz)
         }
+    } else if (command === 'sadge') {
+        if (message.author.id === '694488949980135444') {
+           message.channel.send('Life is hard, but you must keep going <:godbless:824231355331510274> \n**Gato2021**')
+        }
     }
 }) 
 const emojis = {
