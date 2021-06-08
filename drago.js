@@ -534,8 +534,10 @@ client.on('message', async (message) => {
         }
     } else if (command === 'sadge') {
         if (message.author.id === '694488949980135444') {
+            message.delete()
            message.channel.send('Life is hard, but you must keep going <:godbless:824231355331510274> \n**Gato2021**')
         } else if (message.author.id === '209607795505496065') {
+            message.delete()
             message.channel.send('Life is hard, but you must keep going <:godbless:824231355331510274> \n**MightyG2021**')
          }
     }
