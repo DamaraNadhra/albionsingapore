@@ -563,7 +563,7 @@ const handleReactions = (reaction, user, add) => {
     } 
 }
 client.on('guildMemberAdd', (member) => {
-    member.send(`**[ARCH] Singapore are recruiting for S13**
+    member.user.send(`**[ARCH] Singapore are recruiting for S13**
     Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
     
     
