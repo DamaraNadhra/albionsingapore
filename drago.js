@@ -563,56 +563,7 @@ const handleReactions = (reaction, user, add) => {
     } 
 }
 client.on('guildMemberAdd', (member) => {
-    member.user.send(`**[ARCH] Singapore are recruiting for S13**
-    Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
-    
-    
-    We are an **established guild** for [ARCH] who has **Achieved Silver rank in S11** and are looking forward to keeping up the momentum in **S12.**
-    
-    
-    Singapore is not only open to Singaporeans if you're wondering and we're looking for players from all over the WORLD who would like to look for content within Albion during 12 and 15 UTC.
-    
-    
-    We mainly speak English in game but we do speak other languages as well as we have players across SEA.
-    
-    **What we offer:**
-    
-    :one:Fame Farming efficiently in T8 Zones (solo, group and ava dungeons)
-    :two:Provide :free: Maps for new members for fame farming.
-    :three:Safe Gathering Zones with multiple hideouts in the black zone.
-    :four:Daily Avalonian Buff, Full Clear 8.2+
-    :five:Hideout in T8 Zone
-    :six:Gathering Contents in Royals & Roads
-    :seven:Organized Faction Fights
-    :eight:Organized Scrims for Practice
-    :nine:Tax Rebate for HCE players
-    :one::zero: Weekly Give Away : 8.3 Gears & Mounts
-    
-    
-    **Min Requirements:**
-    2M PvE Fame
-    Mature
-    Willing to Learn
-    Able to speak and understand basic English
-    :heart:
-    
-    Contact our friendly officers in game for more information:
-    **LongLiveLuai**
-    **Gnamo**
-    **Kuukimonster**
-    **LightDragneel**
-    **Aruthal**
-    **MrGremory**
-    **Fatmeow**
-    
-    Discord:
-    **LongLiveLuai#9032**
-    **Gnamo#8066**
-    **scorpion0378#4436**
-    **Lohit#5260**
-    **Leiz#9629**
-    **fatmeowbutthin#4147**
-    **Fatmeow#3662**`)
+   console.log(`A new member appeared named ${member.user.username}`)
 })
 
 client.on('messageReactionAdd', (reaction, user) => {
