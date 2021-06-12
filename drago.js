@@ -621,7 +621,19 @@ client.on('messageReactionAdd', (reaction, user) => {
     }
 })
 client.on('ready', () => {
+    const statusArray = [
+        'Gato #1',
+        'Luai is rich but gay',
+        'Ybibaboo my god'
+    ]
     console.log('The Bot is Online')
+    let index = 0;
+    setInterval(() => {
+        if (index === statusArray.length) index = 0;
+        const status = statusArray[index];
+        client.user.setActivity(status, { type: 'WATCHING'}).catch(console.error)
+        index++;
+    }, 3000);
 })
 client.login(process.env.token)
 
