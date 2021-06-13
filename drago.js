@@ -14,7 +14,7 @@ client.on('message', async (message) => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
-
+    if (!message.content.startsWith(prefix)) return;
     if (command === 'splits') {
         await mongo().then(async mongoose => {
             let nama = args[0]
@@ -540,6 +540,20 @@ client.on('message', async (message) => {
             message.delete()
             message.channel.send('Life is hard, but you must keep going <:godbless:824231355331510274> \n**MightyG2021**')
          }
+    } else if (command === 'handle') {
+        if (message.member.roles.cache.has('759793776439984170')) {
+            if (message.channel.parentID === '853522303811321876') {
+                const ticketNumber = message.content.slice(6);
+                const channel = message.guild.channels.cache.get('779514684797091850');
+                const channelID = message.channel.id;
+                message.channel.setName(`gremory${ticketNumber}`)
+                channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
+                message.delete()
+            }
+        } else {
+            message.delete()
+            return message.author.send('I\'m sorry but you don\'t have the right to use this command')
+        }
     }
 }) 
 const emojis = {
