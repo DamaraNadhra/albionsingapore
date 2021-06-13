@@ -557,6 +557,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+                                
+                            })
                         } else if (message.author.id === '382507136883621889') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -565,6 +572,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         } else if (message.author.id === '412598799081406465') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -573,6 +587,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         } else if (message.author.id === '229238295257677835') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -581,6 +602,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         } else if (message.author.id === '590791325759045643') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -589,6 +617,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         } else if (message.author.id === '409717155035217922') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -597,6 +632,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         } else if (message.author.id === '263996887131095041') {
                             const ticketNumber = message.channel.name.slice('ticket'.length);
                             const channel = message.guild.channels.cache.get('779514684797091850');
@@ -605,6 +647,13 @@ client.on('message', async (message) => {
                             channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                             message.delete()
                             console.log(ticketNumber)
+                            await report.create({
+                                officer: message.guild.members.cache.get(message.author.id).nickname,
+                                officerId: message.author.id,
+                                channelId: message.channel.id,
+                                status: 'Ongoing'
+
+                            })
                         }
                     }
                 } else {
@@ -691,11 +740,14 @@ client.on('guildMemberAdd', (member) => {
    **Fatmeow#3662**`)
 })
 
-client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.channel.id === '849925701988515851') {
-        handleReactions(reaction, user, true)
-    }
+client.on('channelDelete', (channel) => {
+    const channelId = channel.id
+    await mongo().then(async mongoose => {
+        await report.findOneAndDelete({ channelId: channelId})
+    })
+
 })
+
 client.on('ready', () => {
     const statusArray = [
         'Gato #1',

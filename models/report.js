@@ -8,6 +8,7 @@ const reqString = {
 const testSchema = mongoose.Schema({
     officer: reqString,
     officerId: reqString,
+    channelId: reqString,
     status: reqString,
     victim: reqString,
     victimId: reqString
