@@ -657,12 +657,12 @@ client.on('message', async (message) => {
                     }
                 }
             } else {
+                message.author.send('This command is used to handle cases!')
                 message.delete()
-                return message.author.send('This command is used to handle cases!')
             }
         } else {
             message.delete()
-            return message.author.send('I\'m sorry but you don\'t have the right to use this command')
+            message.author.send('I\'m sorry but you don\'t have the right to use this command')
         }
         })
         
