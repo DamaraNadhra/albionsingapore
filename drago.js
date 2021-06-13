@@ -545,7 +545,7 @@ client.on('message', async (message) => {
         await mongo().then(async mongoose => {
             if (message.member.roles.cache.has('759793776439984170')) {
             if (message.channel.parentID === '853522303811321876') {
-                let isHandled = await report.findOne({ officerId: message.author.id})
+                let isHandled = await report.findOne({ channelId: message.channel.id})
                 if (isHandled) {
                     return message.author.send(`I'm sorry but ${message.guild.members.cache.get(isHandled.officerId).nickname} is handling this case`)
                 } else {
