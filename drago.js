@@ -543,12 +543,13 @@ client.on('message', async (message) => {
     } else if (command === 'handle') {
         if (message.member.roles.cache.has('759793776439984170')) {
             if (message.channel.parentID === '853522303811321876') {
-                const ticketNumber = message.content.slice('ticket'.length);
+                const ticketNumber = message.content.slice('ticket'.length).trim().split();
                 const channel = message.guild.channels.cache.get('779514684797091850');
                 const channelID = message.channel.id;
                 message.channel.setName(`gremory${ticketNumber}`)
-                channel.send(`<@${message.author.id}> is handling case <#${channelID}>x`)
+                channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                 message.delete()
+                console.log(ticketNumber)
             }
         } else {
             message.delete()
