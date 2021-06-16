@@ -690,8 +690,6 @@ client.on('message', async (message) => {
             .setTimestamp(new Date())
             message.channel.send(embed)
             console.log(event)
-        }).catch(e => {
-            message.channel.send('Cannot find a killboard with that id')
         })
     }
 }) 
