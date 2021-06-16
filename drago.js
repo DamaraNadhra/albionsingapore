@@ -679,17 +679,19 @@ client.on('message', async (message) => {
         .then(async result => {
             let event = result.data
             const embed = new Discord.MessageEmbed()
-            .setAuthor('Killboard Info', robot.user.displayAvatarURL())
+            .setAuthor('Killboard Info', client.user.displayAvatarURL())
             .setColor('BLUE')
             .setDescription(`List to fast check killboard \n[Killboard link](https://albiononline.com/en/killboard/kill/${eventId}) \n**Deathfame:** ${event.KillFame}`)
             .addFields(
                 {name: '__**Victim**__', value: `**Name:** ${event.Victim.Name} \n**Average IP:** ${Math.round(event.Victim.AverageItemPower)} \n**Guild:** ${event.Victim.GuildName} \n**Aliance:** ${event.Victim.AllianceName}`, inline: true},
                 { name: '__**Killer**__', value: `**Name:** ${event.Killer.Name} \n**Average IP:** ${Math.round(event.Killer.AverageItemPower)} \n**Guild:** ${event.Killer.GuildName} \n**Alliance:** ${event.Killer.AllianceName}`, inline: true}
             )
-            .setFooter('Singapore on top', robot.user.displayAvatarURL())
+            .setFooter('Singapore on top', client.user.displayAvatarURL())
             .setTimestamp(new Date())
             message.channel.send(embed)
             console.log(event)
+        }).catch(e => {
+            message.channel.send('Cannot find a killboard with that id')
         })
     }
 }) 
