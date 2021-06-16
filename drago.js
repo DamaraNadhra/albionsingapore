@@ -556,7 +556,7 @@ client.on('message', async (message) => {
                         message.channel.setName(`gremory${ticketNumber}`)
                         channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                         message.delete()
-                        console.log(ticketNumber)
+                        console.log(ticketNumber) 
                         await report.create({
                             officer: message.guild.members.cache.get(message.author.id).nickname,
                             officerId: message.author.id,
@@ -667,6 +667,30 @@ client.on('message', async (message) => {
         })
         
             
+    } else if (command === 'battles') {
+        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=MrGremory`)
+        .then(async result => {
+            console.log(result.data.players[0].guild + '= ' + result.data.players[0].guildId)
+        })
+    } else if (command === 'info') {
+        const eventId = args[0];
+        if (!eventId) return message.reply('Please state the event Id')
+        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/${eventId}`)
+        .then(async result => {
+            let event = result.data
+            const embed = new Discord.MessageEmbed()
+            .setAuthor('Killboard Info', robot.user.displayAvatarURL())
+            .setColor('BLUE')
+            .setDescription(`List to fast check killboard \n[Killboard link](https://albiononline.com/en/killboard/kill/${eventId})`)
+            .addFields(
+                {name: '__**Victim**__', value: `**Name:** ${event.Victim.Name} \n**Average IP:** ${Math.round(event.Victim.AverageItemPower)} \n**Guild:** ${event.Victim.GuildName} \n**Aliance:** ${event.Victim.AllianceName}`, inline: true},
+                { name: '__**Killer**__', value: `**Name:** ${event.Killer.Name} \n**Average IP:** ${Math.round(event.Killer.AverageItemPower)} \n**Guild:** ${event.Killer.GuildName} \n**Alliance:** ${event.Killer.AllianceName}`, inline: true}
+            )
+            .setFooter('Singapore on top', robot.user.displayAvatarURL())
+            .setTimestamp(new Date())
+            message.channel.send(embed)
+            console.log(event)
+        })
     }
 }) 
 const emojis = {
