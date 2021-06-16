@@ -672,7 +672,7 @@ client.on('message', async (message) => {
         .then(async result => {
             console.log(result.data.players[0].guild + '= ' + result.data.players[0].guildId)
         })
-    } else if (command === 'info') {
+    } else if (command === 'fastcheck') {
         const eventId = args[0];
         if (!eventId) return message.reply('Please state the event Id')
         axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/${eventId}`)
