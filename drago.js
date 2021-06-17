@@ -830,11 +830,6 @@ client.on('message', async (message) => {
         })
         
             
-    } else if (command === 'battles') {
-        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=MrGremory`)
-        .then(async result => {
-            console.log(result.data.players[0].guild + '= ' + result.data.players[0].guildId)
-        })
     } else if (command === 'fastcheck') {
         const eventId = args[0];
         if (!eventId) return message.reply('Please state the event Id')
@@ -866,7 +861,7 @@ client.on('message', async (message) => {
             VIEW_CHANNEL: true
         })
         message.reply(`${personMention} has been added to ${channelMention}`)
-    } else if (command === 'player') {
+    } else if (command === 'checkbattle') {
         let battleId = args[0];
         if (!battleId) return message.reply('You must state the battle Id!')
         axios.get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleId}`)
