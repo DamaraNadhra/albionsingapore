@@ -693,6 +693,16 @@ client.on('message', async (message) => {
         }).catch(e => {
             message.channel.send('Cannot find a killboard with that id')
         })
+    } else if (command === 'add') {
+        let personMention = message.mentions.members.first()
+        let channelMention = message.mentions.channels.first()
+        if (!personMention) return message.reply(`Please state the person's mention`)
+        if (!channelMention) return message.reply(`Please state the channel's mention`)
+        channelMention.updateOverwrite(personMention.user, {
+            SEND_MESSAGES: true,
+            VIEW_CHANNEL: true
+        })
+        message.reply(`${personMention} has been added to ${channelMention}`)
     }
 }) 
 const emojis = {
