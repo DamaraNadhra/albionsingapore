@@ -870,7 +870,7 @@ client.on('message', async (message) => {
             await axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/battle/${battleId}?ofset=0&limit=50`)
            .then(async result => {
             let event = result.data
-            let eventAkhir = event.filter(m => m.Victim.AllianceName === 'ARCH')
+            let eventAkhir = event.filter(m => m.Victim.GuildName === 'Singapore')
                 eventAkhir.forEach(async (m, i) => {
                     let gear = m.Victim.Equipment
                     let test =  Object.keys(gear).filter(m => gear[m] != null && m !== 'Bag' && m !== 'Potion' && m !== 'Cape' && m !== 'Mount' && m !== 'Food')
