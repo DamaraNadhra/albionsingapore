@@ -10,6 +10,169 @@ const report = require('./models/report')
 const register = require('./models/register')
 const axios = require('axios'); 
 const prefix = '!'
+const sets = (mainHand, offHand, head, armor, shoes, array) => {
+    if (offHand == null) {
+        if (!mainHand.Type.toString().includes(array[0]) && !head.Type.toString().includes(array[1]) && !armor.Type.toString().includes(array[2]) && !shoes.Type.toString().includes(array[3])) return false
+        
+    } else {
+        if (!mainHand.Type.toString().includes(array[0]) && !offHand.Type.toString().includes(array[1]) && !head.Type.toString().includes(array[2]) && !armor.Type.toString().includes(array[3]) && !shoes.Type.toString().includes(array[4])) return false
+    }
+}
+const compareSet = (mainHand, offHand, head, armor, shoes) => {
+    let avaHammerTank = ['2H_ICECRYSTAL_UNDEAD', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_AVALON', 'SHOES_LEATHER_SET2']
+    let oneHandFrost = ['MAIN_FROSTSTAFF', 'OFF_JESTERCANE_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET2', 'SHOES_CLOTH_SET1']
+    let oneHandFrost2 = ['MAIN_FROSTSTAFF', 'OFF_SHIELD_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let cursedSkull = ['2H_SKULLORB_HELL', 'HEAD_LEATHER_SET3', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_ROYAL']
+    let cursedSkull2 = ['2H_SKULLORB_HELL', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_LEATHER_SET2']
+    let greatAxe1 = ['2H_AXE', 'HEAD_CLOTH_SET1', 'ARMOR_PLATE_SET1', 'SHOES_LEATHER_SET2']
+    let greatAxe2 = ['2H_AXE', 'HEAD_CLOTH_SET1', 'ARMOR_LEATHER_HELL', 'SHOES_LEATHER_SET2']
+    let greatAxe3 = ['2H_AXE', 'HEAD_CLOTH_SET1', 'ARMOR_LEATHER_UNDEAD', 'SHOES_LEATHER_SET2']
+    let bridledFury = ['2H_DAGGER_KATAR_AVALON', 'HEAD_LEATHER_MORGANA', 'ARMOR_LEATHER_HELL', 'SHOES_LEATHER_SET2']
+    let bridledFury2 = ['2H_DAGGER_KATAR_AVALON', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_ROYAL']
+    let shadowCaller = ['MAIN_CURSEDSTAFF_AVALON', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let shadowCaller2 = ['MAIN_CURSEDSTAFF_AVALON', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let grailSeeker = ['2H_QUARTERSTAFF_AVALON', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET2', 'SHOES_LEATHER_SET2']
+    let grailSeeker2 = ['2H_QUARTERSTAFF_AVALON', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_LEATHER_SET2']
+    let soulscythe2 = ['2H_TWINSCYTHE_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_LEATHER_SET2']
+    let soulScythe = ['2H_TWINSCYTHE_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET2', 'SHOES_LEATHER_SET2']
+    let groveKeeper = ['2H_RAM_KEEPER', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET3', 'SHOES_LEATHER_SET2']
+    let groveKeeper2 = ['2H_RAM_KEEPER', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_LEATHER_SET2']
+    let morningstar = ['2H_FLAIL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_LEATHER_SET2']
+    let morningstar2 = ['2H_FLAIL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_LEATHER_SET2']
+    let camlaan = ['2H_MACE_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_LEATHER_SET2']
+    let camlaan2 = ['2H_MACE_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_LEATHER_SET2']
+    let rampant = ['2H_NATURESTAFF_KEEPER', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let rampant2 = ['2H_NATURESTAFF_KEEPER', 'HEAD_LEATHER_SET1', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let wild = ['2H_WILDSTAFF', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let wild2 = ['2H_WILDSTAFF', 'HEAD_LEATHER_SET1', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let greatHoly = ['2H_HOLYSTAFF', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let greatHoly2 = ['2H_HOLYSTAFF', 'HEAD_LEATHER_SET1', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let fallen = ['2H_HOLYSTAFF_HELL', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let fallen2 = ['2H_HOLYSTAFF_HELL', 'HEAD_LEATHER_SET1', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let icicle = ['2H_ICEGAUNTLETS_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let icicle2 = ['2H_ICEGAUNTLETS_HELL', 'HEAD_PLATE_KEEPER', 'ARMOR_PLATE_SET2', 'SHOES_CLOTH_SET1']
+    let damnation = ['2H_CURSEDSTAFF_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_SET1']
+    let damnation2 = ['2H_CURSEDSTAFF_MORGANA', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_ROYAL']
+    let arcane1 = ['MAIN_ARCANESTAFF', 'OFF_HORN_KEEPER', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let arcane2 = ['MAIN_ARCANESTAFF', 'OFF_HORN_KEEPER', 'HEAD_LEATHER_SET1', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let arcane3 = ['MAIN_ARCANESTAFF', 'OFF_SHIELD_HELL', 'HEAD_PLATER_KEEPER', 'ARMOR_PLATE_SET2', 'SHOES_CLOTH_SET1']
+    let locus = ['2H_ENIGMATICORB_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_CLOTH_SET1']
+    let locu2 = ['2H_ENIGMATICORB_MORGANA', 'HEAD_LEATHER_SET1', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let locus3 = ['2H_ENIGMATICORB_MORGANA', 'HEAD_LEATHER_SET3', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let enigma = ['2H_ENIGMATICSTAFF', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_CLOTH_SET1']
+    let enigma2 = ['2H_ENIGMATICSTAFF', 'HEAD_LEATHER_SET1', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let enigma3 = ['2H_ENIGMATICSTAFF', 'HEAD_LEATHER_SET3', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let occult = ['2H_ARCANESTAFF_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_KEEPER', 'SHOES_CLOTH_SET1']
+    let occult2 = ['2H_ARCANESTAFF_HELL', 'HEAD_LEATHER_SET1', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let occult3 = ['2H_ARCANESTAFF_HELL', 'HEAD_LEATHER_SET3', 'ARMOR_PLATE_SET2', 'SHOES_CLOTH_SET1']
+    let dual = ['2H_DUALSWORD', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET1', 'SHOES_CLOTH_SET1']
+    let dual2 = ['2H_DUALSWORD', 'HEAD_PLATE_SET2', 'ARMOR_LEATHER_HELL', 'SHOES_CLOTH_SET1']
+    let spiritHunter = ['2H_HARPOON_HELL', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let spiritHunter2 = ['2H_HARPOON_HELL', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_ROYAL']
+    let clarent = ['MAIN_SCIMITAR_MORGANA', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET1', 'SHOES_LEATHER_SET2']
+    let clarent2 = ['MAIN_SCIMITAR_MORGANA', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_LEATHER_MORGANA', 'ARMOR_LEATHER_HELL', 'SHOES_LEATHER_SET2']
+    let clarent3 = ['MAIN_SCIMITAR_MORGANA', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_LEATHER_MORGANA', 'ARMOR_LEATHER_KEEPER', 'SHOES_LEATHER_SET2']
+    let gala = ['2H_DUALSCIMITAR_UNDEAD', 'HEAD_LEATHER_MORGANA', 'ARMOR_LEATHER_HELL', 'SHOES_CLOTH_ROYAL']
+    let gala2 = ['2H_DUALSCIMITAR_UNDEAD', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET3']
+    let dayBreaker = ['MAIN_SPEAR_LANCE_AVALON', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_PLATE_SET1', 'ARMOR_LEATHER_HELL', 'SHOES_CLOTH_SET1']
+    let dayBreaker2 = ['MAIN_SPEAR_LANCE_AVALON', 'OFF_SPIKEDSHIELD_MORGANA', 'HEAD_PLATE_SET1', 'ARMOR_PLATE_SET1', 'SHOES_CLOTH_SET1']
+    let dayBreaker3 = ['MAIN_SPEAR_LANCE_AVALON', 'OFF_HORN_KEEPER', 'HEAD_LEATHER_SET1', 'ARMOR_PLATE_HELL', 'SHOES_CLOTH_SET1']
+    let realmBreaker = ['2H_AXE_AVALON', 'HEAD_CLOTH_SET1', 'ARMOR_LEATHER_HELL', 'SHOES_CLOTH_SET1']
+    let realmBreaker2 = ['2H_AXE_AVALON', 'HEAD_CLOTH_SET1', 'ARMOR_PLATE_SET1', 'SHOES_CLOTH_SET1']
+    let halberd = ['2H_HALBERD', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET1', 'SHOES_CLOTH_SET1']
+    let halberd2 = ['2H_HALBERD', 'HEAD_CLOTH_SET1', 'ARMOR_LEATHER_HELL', 'SHOES_CLOTH_SET1']
+    let halberd3 = ['2H_HALBERD', 'HEAD_CLOTH_SET1', 'ARMOR_LEATHER_KEEPER', 'SHOES_CLOTH_SET1']
+    let dawnsong = ['2H_FIRE_RINGPAIR_AVALON', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_ROYAL']
+    let dawnsong2 = ['2H_FIRE_RINGPAIR_AVALON', 'HEAD_LEATHER_SET3', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_SET1']
+    let shaper = ['2H_CROSSBOW_CANNON_AVALON', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_ROYAL']
+    let shaper2 = ['2H_CROSSBOW_CANNON_AVALON', 'HEAD_LEATHER_SET3', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let mistpiercer = ['2H_BOW_AVALON', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_ROYAL']
+    let mistpiercer2 = ['2H_BOW_AVALON', 'HEAD_LEATHER_SET3', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_SET1']
+    let perma = ['2H_ICECRYSTAL_UNDEAD', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_SET1']
+    let perma2 = ['2H_ICECRYSTAL_UNDEAD', 'HEAD_CLOTH_ROYAL', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_ROYAL']
+    let brimstone = ['2H_FIRESTAFF_HELL', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_SET1']
+    let brimstone2 = ['2H_FIRESTAFF_HELL', 'HEAD_LEATHER_ROYAL', 'ARMOR_CLOTH_SET1', 'SHOES_CLOTH_ROYAL']
+    let siegebow = ['2H_CROSSBOWLARGE_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_SET1']
+    let siegebow2 = ['2H_CROSSBOWLARGE_MORGANA', 'HEAD_PLATE_SET2', 'ARMOR_CLOTH_SET2', 'SHOES_CLOTH_ROYAL']
+    let weapon = mainHand.Type.toString()
+    if (offHand == null) {
+        if (weapon.includes(avaHammerTank[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, avaHammerTank) == false) return true
+        } else if (weapon.includes(siegebow[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, siegebow) == false | sets(mainHand, offHand, head, armor, shoes, siegebow2) == false) return true
+        } else if (weapon.includes(brimstone[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, brimstone) == false | sets(mainHand, offHand, head, armor, shoes, brimstone2) == false) return true
+        } else if (weapon.includes(perma[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, perma) == false | sets(mainHand, offHand, head, armor, shoes, perma2) == false) return true
+        } else if (weapon.includes(mistpiercer[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, mistpiercer) == false | sets(mainHand, offHand, head, armor, shoes, mistpiercer2) == false) return true
+        } else if (weapon.includes(shaper[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, shaper) == false | sets(mainHand, offHand, head, armor, shoes, shaper2) == false) return true
+        } else if (weapon.includes(dawnsong[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, dawnsong2) == false | sets(mainHand, offHand, head, armor, shoes, dawnsong2) == false) return true
+        } else if (weapon.includes(halberd[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, halberd) == false | sets(mainHand, offHand, head, armor, shoes, halberd2) == false | sets(mainHand, offHand, head, armor, shoes, halberd3) == false) return true
+        } else if (weapon.includes(realmBreaker[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, realmBreaker) == false | sets(mainHand, offHand, head, armor, shoes, realmBreaker2) == false) return true
+        } else if (weapon.includes(gala[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, gala) == false | sets(mainHand, offHand, head, armor, shoes, gala2) == false) return true
+        } else if (weapon.includes(spiritHunter[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, spiritHunter) == false | sets(mainHand, offHand, head, armor, shoes, spiritHunter2) == false) return true
+        } else if (weapon.includes(dual[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, dual) == false | sets(mainHand, offHand, head, armor, shoes, dual2) == false) return true
+        } else if (weapon.includes(occult[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, occult) == false | sets(mainHand, offHand, head, armor, shoes, occult2) == false | sets(mainHand, offHand, head, armor, shoes, occult3) == false) return true
+        } else if (weapon.includes(enigma[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, enigma) == false | sets(mainHand, offHand, head, armor, shoes, enigma2) == false | sets(mainHand, offHand, head, armor, shoes, enigma3) == false) return true
+        } else if (weapon.includes(locus[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, locus) == false | sets(mainHand, offHand, head, armor, shoes, locu2) == false | sets(mainHand, offHand, head, armor, shoes, locus3) == false) return true
+        } else if (weapon.includes(damnation[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, damnation) == false | sets(mainHand, offHand, head, armor, shoes, damnation2) == false) return true
+        } else if (weapon.includes(icicle[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, icicle) == false | sets(mainHand, offHand, head, armor, shoes, icicle2) == false) return true
+        } else if (weapon.includes(fallen[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, fallen) == false | sets(mainHand, offHand, head, armor, shoes, fallen2) == false) return true
+        } else if (weapon.includes(greatHoly[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, greatHoly) == false | sets(mainHand, offHand, head, armor, shoes, greatHoly2) == false) return true
+        } else if (weapon.includes(wild[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, wild) == false | sets(mainHand, offHand, head, armor, shoes, wild2) == false) return true
+        } else if (weapon.includes(rampant[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, rampant) == false | sets(mainHand, offHand, head, armor, shoes, rampant2) == false) return true
+        } else if (weapon.includes(camlaan[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, camlaan) == false | sets(mainHand, offHand, head, armor, shoes, camlaan2) == false) return true
+        } else if (weapon.includes(morningstar[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, morningstar) == false | sets(mainHand, offHand, head, armor, shoes, morningstar2) == false) return true
+        } else if (weapon.includes(groveKeeper[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, groveKeeper) == false | sets(mainHand, offHand, head, armor, shoes, groveKeeper2) == false) return true
+        } else if (weapon.includes(soulScythe[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, soulScythe) == false | sets(mainHand, offHand, head, armor, shoes, soulscythe2) == false) return true
+        } else if (weapon.includes(grailSeeker[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, grailSeeker) == false | sets(mainHand, offHand, head, armor, shoes, grailSeeker2) == false) return true
+        } else if (weapon.includes(bridledFury[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, bridledFury) == false | sets(mainHand, offHand, head, armor, shoes, bridledFury2) == false) return true
+        } else if (weapon.includes(greatAxe1[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, greatAxe1) == false | sets(mainHand, offHand, head, armor, shoes, greatAxe2) == false | sets(mainHand, offHand, head, armor, shoes, greatAxe3) == false) return true
+        } else if (weapon.includes(cursedSkull[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, cursedSkull) == false | sets(mainHand, offHand, head, armor, shoes, cursedSkull2) == false) return true
+        } else {
+            return true
+        }
+    } else {
+        if (weapon.includes(oneHandFrost[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, oneHandFrost) == false | sets(mainHand, offHand, head, armor, shoes, oneHandFrost2) == false) return true
+        } else if (weapon.includes(clarent[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, clarent) == false | sets(mainHand, offHand, head, armor, shoes, clarent2) == false | sets(mainHand, offHand, head, armor, shoes, clarent3) == false) return true
+        } else if (weapon.includes(shadowCaller[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, shadowCaller) == false | sets(mainHand, offHand, head, armor, shoes, shadowCaller2) == false) return true
+        } else if (weapon.includes(arcane1[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, arcane1) == false | sets(mainHand, offHand, head, armor, shoes, arcane2) == false | sets(mainHand, offHand, head, armor, shoes, arcane3) == false) return true
+        } else if (weapon.includes(dayBreaker[0])) {
+            if (sets(mainHand, offHand, head, armor, shoes, dayBreaker) == false | sets(mainHand, offHand, head, armor, shoes, dayBreaker2) == false | sets(mainHand, offHand, head, armor, shoes, dayBreaker3) == false) return true
+        } else {
+            return true
+        }
+    }
+}
 
 client.on('message', async (message) => {
 
@@ -703,6 +866,135 @@ client.on('message', async (message) => {
             VIEW_CHANNEL: true
         })
         message.reply(`${personMention} has been added to ${channelMention}`)
+    } else if (command === 'player') {
+        let battleId = args[0];
+        if (!battleId) return message.reply('You must state the battle Id!')
+        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleId}`)
+        .then(async result => {
+            let events = result.data
+            await axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/battle/${battleId}?ofset=0&limit=50`)
+           .then(async result => {
+            let event = result.data
+            let eventAkhir = event.filter(m => m.Victim.AllianceName === 'ARCH')
+                eventAkhir.forEach(async (m, i) => {
+                    let gear = m.Victim.Equipment
+                    let test =  Object.keys(gear).filter(m => gear[m] != null && m !== 'Bag' && m !== 'Potion' && m !== 'Cape' && m !== 'Mount' && m !== 'Food')
+                        if (gear.MainHand == null| gear.Head == null | gear.Armor == null | gear.Shoes == null ) {
+                            console.log(test)
+                            let MainHand;
+                            let OffHand;
+                            let Head;
+                            let Armor;
+                            let Shoes;
+                            if (m.Victim.Equipment.MainHand == null) {
+                                MainHand = ''
+                            } else {
+                                MainHand = m.Victim.Equipment.MainHand.Type
+                            }
+                            if (m.Victim.Equipment.OffHand == null) {
+                                OffHand = ''
+                            } else {
+                                OffHand = m.Victim.Equipment.OffHand.Type
+                            }
+                            if (m.Victim.Equipment.Head == null) {
+                                Head = ''
+                            } else {
+                                Head = m.Victim.Equipment.Head.Type
+                            }
+                            if (m.Victim.Equipment.Armor == null) {
+                                Armor = ''
+                            } else {
+                                Armor = m.Victim.Equipment.Armor.Type
+                            }
+                            if (m.Victim.Equipment.Shoes == null) {
+                                Shoes = ''
+                            } else {
+                                Shoes = m.Victim.Equipment.Shoes.Type
+                            }
+                            let person = events.players[m.Victim.Id]
+                            const time = (param) => {
+                                let z = new Date(param)
+                                let timeFix = z.toLocaleTimeString()
+                                let dateFix = z.toLocaleDateString()
+                                let final = dateFix + ' ' + timeFix
+                                return final;
+                            }
+                            const embed = new Discord.MessageEmbed()
+                            .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
+                            .setColor('RED')
+                            .setTitle('Bad ZvZ Build!')
+                            .setDescription(`Bad ZvZ build detected! Battle: ${events.id}`)
+                            .addFields(
+                            {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Victim.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
+                            { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
+                             )
+                            .setFooter('Singapore on top', client.user.displayAvatarURL())
+                            .setTimestamp(new Date())
+                            .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
+                            message.channel.send(embed)
+                        }
+                        else {
+                            if (compareSet(gear.MainHand, gear.OffHand, gear.Head, gear.Armor, gear.Shoes) == true) {
+                                let MainHand;
+                            let OffHand;
+                            let Head;
+                            let Armor;
+                            let Shoes;
+                            if (m.Victim.Equipment.MainHand == null) {
+                                MainHand = ''
+                            } else {
+                                MainHand = m.Victim.Equipment.MainHand.Type
+                            }
+                            if (m.Victim.Equipment.OffHand == null) {
+                                OffHand = ''
+                            } else {
+                                OffHand = m.Victim.Equipment.OffHand.Type
+                            }
+                            if (m.Victim.Equipment.Head == null) {
+                                Head = ''
+                            } else {
+                                Head = m.Victim.Equipment.Head.Type
+                            }
+                            if (m.Victim.Equipment.Armor == null) {
+                                Armor = ''
+                            } else {
+                                Armor = m.Victim.Equipment.Armor.Type
+                            }
+                            if (m.Victim.Equipment.Shoes == null) {
+                                Shoes = ''
+                            } else {
+                                Shoes = m.Victim.Equipment.Shoes.Type
+                            }
+                            let person = events.players[m.Victim.Id]
+                            const time = (param) => {
+                                let z = new Date(param)
+                                let timeFix = z.toLocaleTimeString()
+                                let dateFix = z.toLocaleDateString()
+                                let final = dateFix + ' ' + timeFix
+                                return final;
+                            }
+                            const embed = new Discord.MessageEmbed()
+                            .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
+                            .setColor('RED')
+                            .setTitle('Bad ZvZ Build!')
+                            .setDescription(`Bad ZvZ build detected! Battle: ${events.id}`)
+                            .addFields(
+                            {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Victim.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
+                            { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
+                             )
+                            .setFooter('Singapore on top', client.user.displayAvatarURL())
+                            .setTimestamp(new Date())
+                            .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
+                            message.channel.send(embed)
+                            }
+
+                        }
+                        
+                    
+                })
+            })
+        })
+        
     }
 }) 
 const emojis = {
