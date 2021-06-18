@@ -870,8 +870,9 @@ client.on('message', async (message) => {
             await axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/battle/${battleId}?ofset=0&limit=50`)
            .then(async result => {
             let event = result.data
-            let eventAkhir = event.filter(m => m.Victim.GuildName === 'Singapore')
-                eventAkhir.forEach(async (m, i) => {
+            let eventVictim = event.filter(m => m.Victim.GuildName === 'Singapore')
+            let eventKiller = event.filter(m => m.Killer.GuildName === 'Singapore')
+                eventVictim.forEach(async (m, i) => {
                     let gear = m.Victim.Equipment
                     let test =  Object.keys(gear).filter(m => gear[m] != null && m !== 'Bag' && m !== 'Potion' && m !== 'Cape' && m !== 'Mount' && m !== 'Food')
                         if (gear.MainHand == null| gear.Head == null | gear.Armor == null | gear.Shoes == null ) {
@@ -975,6 +976,122 @@ client.on('message', async (message) => {
                             .setDescription(`Bad ZvZ build detected! Battle: ${events.id}`)
                             .addFields(
                             {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Victim.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
+                            { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
+                             )
+                            .setFooter('Singapore on top', client.user.displayAvatarURL())
+                            .setTimestamp(new Date())
+                            .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
+                            message.channel.send(embed)
+                            }
+
+                        }
+                        
+                    
+                })
+                eventKiller.forEach(async (m, i) => {
+                    let gear = m.Killer.Equipment
+                    let test =  Object.keys(gear).filter(m => gear[m] != null && m !== 'Bag' && m !== 'Potion' && m !== 'Cape' && m !== 'Mount' && m !== 'Food')
+                        if (gear.MainHand == null| gear.Head == null | gear.Armor == null | gear.Shoes == null ) {
+                            console.log(test)
+                            let MainHand;
+                            let OffHand;
+                            let Head;
+                            let Armor;
+                            let Shoes;
+                            if (m.Killer.Equipment.MainHand == null) {
+                                MainHand = ''
+                            } else {
+                                MainHand = m.Killer.Equipment.MainHand.Type
+                            }
+                            if (m.Killer.Equipment.OffHand == null) {
+                                OffHand = ''
+                            } else {
+                                OffHand = m.Killer.Equipment.OffHand.Type
+                            }
+                            if (m.Killer.Equipment.Head == null) {
+                                Head = ''
+                            } else {
+                                Head = m.Killer.Equipment.Head.Type
+                            }
+                            if (m.Killer.Equipment.Armor == null) {
+                                Armor = ''
+                            } else {
+                                Armor = m.Killer.Equipment.Armor.Type
+                            }
+                            if (m.Killer.Equipment.Shoes == null) {
+                                Shoes = ''
+                            } else {
+                                Shoes = m.Killer.Equipment.Shoes.Type
+                            }
+                            let person = events.players[m.Killer.Id]
+                            const time = (param) => {
+                                let z = new Date(param)
+                                let timeFix = z.toLocaleTimeString()
+                                let dateFix = z.toLocaleDateString()
+                                let final = dateFix + ' ' + timeFix
+                                return final;
+                            }
+                            const embed = new Discord.MessageEmbed()
+                            .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
+                            .setColor('RED')
+                            .setTitle('Bad ZvZ Build!')
+                            .setDescription(`Bad ZvZ build detected! Battle: ${events.id}`)
+                            .addFields(
+                            {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Killer.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
+                            { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
+                             )
+                            .setFooter('Singapore on top', client.user.displayAvatarURL())
+                            .setTimestamp(new Date())
+                            .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
+                            message.channel.send(embed)
+                        }
+                        else {
+                            if (compareSet(gear.MainHand, gear.OffHand, gear.Head, gear.Armor, gear.Shoes) == true) {
+                                let MainHand;
+                            let OffHand;
+                            let Head;
+                            let Armor;
+                            let Shoes;
+                            if (m.Killer.Equipment.MainHand == null) {
+                                MainHand = ''
+                            } else {
+                                MainHand = m.Killer.Equipment.MainHand.Type
+                            }
+                            if (m.Killer.Equipment.OffHand == null) {
+                                OffHand = ''
+                            } else {
+                                OffHand = m.Killer.Equipment.OffHand.Type
+                            }
+                            if (m.Killer.Equipment.Head == null) {
+                                Head = ''
+                            } else {
+                                Head = m.Killer.Equipment.Head.Type
+                            }
+                            if (m.Killer.Equipment.Armor == null) {
+                                Armor = ''
+                            } else {
+                                Armor = m.Killer.Equipment.Armor.Type
+                            }
+                            if (m.Killer.Equipment.Shoes == null) {
+                                Shoes = ''
+                            } else {
+                                Shoes = m.Killer.Equipment.Shoes.Type
+                            }
+                            let person = events.players[m.Killer.Id]
+                            const time = (param) => {
+                                let z = new Date(param)
+                                let timeFix = z.toLocaleTimeString()
+                                let dateFix = z.toLocaleDateString()
+                                let final = dateFix + ' ' + timeFix
+                                return final;
+                            }
+                            const embed = new Discord.MessageEmbed()
+                            .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
+                            .setColor('RED')
+                            .setTitle('Bad ZvZ Build!')
+                            .setDescription(`Bad ZvZ build detected! Battle: ${events.id}`)
+                            .addFields(
+                            {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Killer.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
                             { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
                              )
                             .setFooter('Singapore on top', client.user.displayAvatarURL())
