@@ -706,7 +706,7 @@ client.on('message', async (message) => {
          }
     } else if (command === 'handle') {
         await mongo().then(async mongoose => {
-            if (message.member.roles.cache.has('759793776439984170')) {
+            if (message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855688610782248980') | message.member.roles.cache.has('855689169018814464')) {
             if (message.channel.parentID === '853522303811321876') {
                 let isHandled = await report.findOne({ channelId: message.channel.id})
                 if (isHandled) {
@@ -807,6 +807,22 @@ client.on('message', async (message) => {
                         const channel = message.guild.channels.cache.get('779514684797091850');
                         const channelID = message.channel.id;
                         message.channel.setName(`lightdragneel${ticketNumber}`)
+                        channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
+                        message.delete()
+                        console.log(ticketNumber)
+                        await report.create({
+                            officer: message.guild.members.cache.get(message.author.id).nickname,
+                            officerId: message.author.id,
+                            channelId: message.channel.id,
+                            status: 'Ongoing'
+
+                        })
+                    } else {
+                        const ticketNumber = message.channel.name.slice('ticket'.length);
+                        const channel = message.guild.channels.cache.get('779514684797091850');
+                        const channelID = message.channel.id;
+                        const nickname = message.guild.members.cache.get(message.author.id).nickname
+                        message.channel.setName(`${nickname}${ticketNumber}`)
                         channel.send(`<@${message.author.id}> is handling case <#${channelID}>`)
                         message.delete()
                         console.log(ticketNumber)
