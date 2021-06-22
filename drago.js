@@ -16,7 +16,7 @@ const sets = (mainHand, offHand, head, armor, shoes, array) => {
     } else {
         if (!mainHand.Type.toString().includes(array[0]) && !offHand.Type.toString().includes(array[1]) && !head.Type.toString().includes(array[2]) && !armor.Type.toString().includes(array[3]) && !shoes.Type.toString().includes(array[4])) return false
     }
-}
+}   
 const compareSet = (mainHand, offHand, head, armor, shoes) => {
     let avaHammerTank = ['2H_ICECRYSTAL_UNDEAD', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_AVALON', 'SHOES_LEATHER_SET2']
     let oneHandFrost = ['MAIN_FROSTSTAFF', 'OFF_JESTERCANE_HELL', 'HEAD_PLATE_SET2', 'ARMOR_PLATE_SET2', 'SHOES_CLOTH_SET1']
@@ -1275,9 +1275,7 @@ const handleReactions = (reaction, user, add) => {
     } 
 }
 client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.channel.id === '849925701988515851') {
-        console.log('Testing')
-    }
+    console.log('test')
 })
 client.on('guildMemberAdd', (member) => {
    member.send(`**[ARCH] Singapore are recruiting for S13**
