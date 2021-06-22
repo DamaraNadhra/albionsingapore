@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const token = 'ODA1OTc2NjAyODY0Mzg2MDU5.YBiuNA.sAzmexbksdaEcwaGkXBBkMAkOeg'
 const mongo = require('./mongo')
 const splitz = require('./models/split-schema')
 const person = require('./models/person')
@@ -1040,16 +1039,19 @@ const handleReactions = (reaction, user, add) => {
     const emoji = reaction._emoji.name
     const { guild } = reaction.message
 
-    const roleName = emojis[emoji]
-    if (!roleName) {
-        return
-    }
+    const roleName = 'Recruit'
     const role = guild.roles.cache.find(role => role.name === roleName)
     const member = guild.members.cache.find(member => member.id === user.id)
     if (add) {
-        member.roles.add(role)
+        member.roles.remove(role)
     } 
 }
+client.on('messageReactionAdd', (reaction, user) => {
+    if (reaction.message.channel.id === '849925701988515851') {
+        if (reaction.users.cache.get('805976602864386059') | user.id === '235148962103951360') return
+        handleReactions(reaction, user, true)
+    }
+})
 client.on('guildMemberAdd', (member) => {
    member.send(`**[ARCH] Singapore are recruiting for S13**
    Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
