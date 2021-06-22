@@ -1048,7 +1048,6 @@ const handleReactions = (reaction, user, add) => {
 }
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.channel.id === '849925701988515851') {
-        if (reaction.users.cache.get('805976602864386059') | user.id === '235148962103951360') return
         handleReactions(reaction, user, true)
     }
 })
