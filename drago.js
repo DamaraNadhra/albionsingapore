@@ -1048,7 +1048,7 @@ const handleReactions = (reaction, user, add) => {
 }
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.channel.id === '849925701988515851') {
-        handleReactions(reaction, user, true)
+        console.log('Testing')
     }
 })
 client.on('guildMemberAdd', (member) => {
