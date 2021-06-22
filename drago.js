@@ -178,6 +178,9 @@ client.on('message', async (message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     if (!message.content.startsWith(prefix)) return;
+
+    
+
     if (command === 'splits') {
         await mongo().then(async mongoose => {
             let nama = args[0]
@@ -1255,6 +1258,21 @@ client.on('message', async (message) => {
         .setFooter('If this is wrong please contact the officers', client.user.displayAvatarURL())
         .setTimestamp(new Date())
         message.channel.send(embed)
+    } else if (command === 'ask') {
+        let question = args.slice(0).join(' ')
+        if (!question) return message.reply("You didn't specify your question!")
+        let responses = [
+            'Yes definitely.',
+            'Most likely',
+            'I\'m not really sure, but he\'s gay',
+            'Nope definitely not',
+            'Ask again later.',
+            'My reply is no.',
+            'Better not tell you now.',
+            'You may rely on it.'
+        ]
+        let answer = responses[Math.floor(Math.random() * responses.length-1)]
+        message.reply(answer)
     }
 }) 
 const emojis = {
@@ -1274,9 +1292,6 @@ const handleReactions = (reaction, user, add) => {
         member.roles.remove(role)
     } 
 }
-client.on('messageReactionAdd', (reaction, user) => {
-    console.log('test')
-})
 client.on('guildMemberAdd', (member) => {
    member.send(`**[ARCH] Singapore are recruiting for S13**
    Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
