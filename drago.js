@@ -696,18 +696,18 @@ client.on('message', async (message) => {
                         const embed = new Discord.MessageEmbed()
                         .setColor('AQUA')
                         .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
-                        .setDescription('**This player is blacklisted!** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
+                        .setDescription('**This player is blacklisted! by ARCH** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
                         .setFooter('If this is wrong please contact the officers :D')
                         message.channel.send(embed)
                     } else if (existable) {
                         const embed = new Discord.MessageEmbed()
                         .setColor('RED')
                         .setAuthor('Singapore Police', client.user.displayAvatarURL())
-                        .setTitle('Warning! Player blacklisted!')
+                        .setTitle('Warning! Player blacklisted! by SG')
                         .addFields(
                             {name: '**Player**', value: existable.blname, inline: true},
                             {name: "**Blacklisted by**", value: `<@${existable.blacklister}> ${existable.date}`, inline: true},
-                            {name: '**Reason**', value: `\`\`\` ${existable.reason} \`\`\``}
+                            {name: '**Reason**', value: `\`\`\`${existable.reason} \`\`\``}
                         )
                         message.channel.send(embed)
                     } else {
@@ -1295,6 +1295,15 @@ client.on('message', async (message) => {
         ]
         let answer = responses[Math.floor(Math.random() * responses.length-1)]
         message.reply(answer)
+    } else if (command === 'unblacklist') {
+        await mongo().then(async mongoose => {
+            let personName = args[0]
+            if (!personName) return message.reply('You must state the person')
+            let isPersonBlacklisted = await blacklist.findOne({ blname: personName.toLowerCase()})
+            if (!isPersonBlacklisted) return message.reply(`I cannot find a person with \`${personName}\` inside the blacklist :D`)
+            await blacklist.findOneAndDelete({ blname: personName.toLowerCase()})
+            message.reply(`Player **${personName}** has been unblacklisted`)
+        })
     }
 }) 
 const emojis = {
