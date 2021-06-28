@@ -9,6 +9,13 @@ const report = require('./models/report')
 const register = require('./models/register')
 const axios = require('axios'); 
 const prefix = '!'
+const blacklist = require('./models/blacklist')
+const dateMaker = (date) => {
+    let timeFix = date.toLocaleTimeString()
+    let dateFix = date.toLocaleDateString()
+    let final = dateFix + ' ' + timeFix
+    return final;
+}
 const sets = (mainHand, offHand, head, armor, shoes, array) => {
     if (offHand == null) {
         if (!mainHand.Type.toString().includes(array[0]) && !head.Type.toString().includes(array[1]) && !armor.Type.toString().includes(array[2]) && !shoes.Type.toString().includes(array[3])) return false
@@ -181,18 +188,19 @@ client.on('message', async (message) => {
 
     
 
-    if (command === 'splits') {
+    if (command === 'blacklist') {
         await mongo().then(async mongoose => {
-            let nama = args[0]
-            let existable = await person.find({ personName: nama});
-            let stringz = ''
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(`Lootsplits for ${message.author.username}`)
-            .setColor('AQUA')
-            .setDescription(`${existable.map(i => i.liquidateID + " " + "--" + " " +  "<#" + i.locationChannel + ">" + " " + "--" + " " + i.status).join('\n')}`)
-            .setFooter('If you believe this is wrong please contact the admin')
-            .setTimestamp(new Date())
-            message.channel.send(embed)
+            let personName = args[0]
+            let reason = args[1]
+            if (!personName) return message.reply('You must state the personName')
+            if (!reason) return message.reply('You must state the reason why you\'re blacklisting this guy')
+            await blacklist.create({
+                blname: personName.toLowerCase(),
+                blacklister: message.author.id,
+                date: dateMaker(new Date()),
+                reason: reason
+            })
+            message.reply(`${personName} has been blacklisted! <:jennielove:844893922634235904>`)
         })
         
     } else if (command === 'start') {
@@ -671,31 +679,45 @@ client.on('message', async (message) => {
             message.channel.send(embed)
         }
     } else if (command === 'checkbl') {
-        let channel = message.guild.channels.cache.get('760731834354499585')
-        const embedz = new Discord.MessageEmbed()
-        .setColor('RED')
-        .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
-        .setDescription(`**ERROR** \nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
-        .setFooter('If this is wrong please contact the officers :D')
-        if (message.channel.id === '779514684797091850' | message.channel.id === '760731834354499585') {
-            let firstArgument = args[0];
-            if (!firstArgument) return message.reply('Please state the person you want to check!')
-            axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
-            .then(async result => {
-                if (result.data.isBlacklisted === true) {
-                    const embed = new Discord.MessageEmbed()
-                    .setColor('AQUA')
-                    .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
-                    .setDescription('**This player is blacklisted!** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
-                    .setFooter('If this is wrong please contact the officers :D')
-                    message.channel.send(embed)
-                } else {
-                    message.reply(`${result.data.name} is not blacklisted :D`)
-                }
-            })
-        } else {
-            return message.channel.send(embedz)
-        }
+        await mongo().then(async mongoose => {
+            let channel = message.guild.channels.cache.get('760731834354499585')
+            let existable = await blacklist.findOne({ blname: args[0].toLowerCase()})
+            const embedz = new Discord.MessageEmbed()
+            .setColor('RED')
+            .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
+            .setDescription(`**ERROR** \nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
+            .setFooter('If this is wrong please contact the officers :D')
+            if (message.channel.id === '779514684797091850' | message.channel.id === '760731834354499585') {
+                let firstArgument = args[0];
+                if (!firstArgument) return message.reply('Please state the person you want to check!')
+                axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
+                .then(async result => {
+                    if (result.data.isBlacklisted === true) {
+                        const embed = new Discord.MessageEmbed()
+                        .setColor('AQUA')
+                        .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
+                        .setDescription('**This player is blacklisted!** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
+                        .setFooter('If this is wrong please contact the officers :D')
+                        message.channel.send(embed)
+                    } else if (existable) {
+                        const embed = new Discord.MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor('Singapore Police', client.user.displayAvatarURL())
+                        .setTitle('Warning! Player blacklisted!')
+                        .addFields(
+                            {name: '**Player**', value: existable.blname, inline: true},
+                            {name: "**Blacklisted by**", value: `<@${existable.blacklister}> ${existable.date}`, inline: true},
+                            {name: '**Reason**', value: `\`\`\` ${existable.reason} \`\`\``}
+                        )
+                        message.channel.send(embed)
+                    } else {
+                        message.reply(`${result.data.name} is not blacklisted :D`)
+                    }
+                })
+            } else {
+                return message.channel.send(embedz)
+            }
+        })
     } else if (command === 'sadge') {
         if (message.author.id === '694488949980135444') {
             message.delete()
