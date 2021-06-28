@@ -191,7 +191,7 @@ client.on('message', async (message) => {
     if (command === 'blacklist') {
         await mongo().then(async mongoose => {
             let personName = args[0]
-            let reason = args[1]
+            let reason = args.slice(1).join(' ')
             if (!personName) return message.reply('You must state the personName')
             if (!reason) return message.reply('You must state the reason why you\'re blacklisting this guy')
             await blacklist.create({
