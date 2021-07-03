@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-
-const client = new Discord.Client();
+const { MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu } = require('discord.js')
+const client = new Discord.Client({ "intents": ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"], "partials": ["MESSAGE", "CHANNEL", "REACTION"]});
 const mongo = require('./mongo')
 const splitz = require('./models/split-schema')
 const person = require('./models/person')
@@ -179,7 +179,217 @@ const compareSet = (mainHand, offHand, head, armor, shoes) => {
         }
     }
 }
-
+const row = new MessageActionRow()
+        .addComponents(
+            new MessageSelectMenu()
+            .setCustomID('dps')
+            .setPlaceholder('ZvZ DPS builds')
+            .addOptions([
+                {
+                    label: 'Dual Swords',
+                    description: 'Melee dps build, good for clumps',
+                    value: 'dualswords',
+                    emoji: '<:dualswords:860679052309299210>'
+                },
+                {
+                    label: 'Permafrost Prism',
+                    description: 'Ranged magic dps build, good for escaping',
+                    value: 'permafrost',
+                    emoji: '<:perma:860679051617107968>'
+                },
+                {
+                    label: 'Halberd',
+                    description: 'Melee dps build, spread the healing sickness',
+                    value: 'halberd',
+                    emoji: '<:halberd:860679050468917258>'
+                },
+                {
+                    label: 'Energy Shaper',
+                    description: 'Ranged dps build, same party lazer doesnt stack',
+                    value: 'energyshaper',
+                    emoji: '<:shaper:860679052142182400>'
+                },
+                {
+                    label: 'Mistpiercer',
+                    description: 'Ranged magic dps build, straight line narrow aoe',
+                    value: 'avabow',
+                    emoji: '<:avabow:860679049973465098>'
+                },
+                {
+                    label: 'Clarent Blade',
+                    description: 'Melee dps build, huge round AoE',
+                    value: 'clarent',
+                    emoji: '<:clarent:860679051445796895>'
+                },
+                {
+                    label: 'Realmbreaker',
+                    description: 'Melee dps build, clap enemy and reduce their hp %',
+                    value: 'realmbreaker',
+                    emoji: '<:realmbreaker:860679051667701810>'
+                },
+                {
+                    label: 'Daybreaker',
+                    description: 'Melee dps build, straight AoE purge',
+                    value: 'daybreaker',
+                    emoji: '<:daybreaker:860679051353915482>'
+                },
+                {
+                    label: 'Galatine Pair',
+                    description: 'Melee dps build, this build CLAPS PPL',
+                    value: 'galatine',
+                    emoji: '<:galatine:860679051038556160>'
+                },
+                {
+                    label: 'Brimstone',
+                    description: 'Ranged magic build, medium size circle AoE BIG DPS',
+                    value: 'brimstone',
+                    emoji: '<:brimstone:860679049901637633>'
+                },
+                {
+                    label: 'Siegebow',
+                    description: 'Ranged dps build, huge AoE weapon',
+                    value: 'siegebow',
+                    emoji: '<:siegebow:860679051786453052>'
+                },
+                {
+                    label: 'Spirithunter',
+                    description: 'Melee dps build, reduce enemy\'s resistance',
+                    value: 'spirithunter',
+                    emoji: '<:spirithunter:860679050363142155>'
+                },
+                {
+                    label: 'Shadowcaller',
+                    description: 'Ranged magic support dps, shed enemies',
+                    value: 'shadowcaller',
+                    emoji: '<:shadowcaller:860813033105915945>'
+                },
+                {
+                    label: 'Dawnsong',
+                    description: 'Ranged magic dps, big fire AoE',
+                    value: 'dawnsong',
+                    emoji: '<:dawnsong:860679051295326208>'
+                },
+                {
+                    label: 'Bridled Fury',
+                    description: 'Melee magic dps, hit and run CLAP',
+                    value: 'bridled',
+                    emoji: '<:bridledfury:860687946868981820>'
+                },
+                {
+                    label: 'Cursed Skull',
+                    description: 'Ranged magic dps, huge circle true damage AoE',
+                    value: 'cursedskull',
+                    emoji: '<:cursedskull:860687944960835624>'
+                },
+                {
+                    label: 'Damnation',
+                    description: 'Ranged magic semi support dps, HUGE AoE shred',
+                    value: 'damnation',
+                    emoji: '<:damnation:860687946905812992>'
+                },
+                {
+                    label: 'Greataxe',
+                    description: 'Harcore melee dps, uninterruptable high dps spin',
+                    value: 'greataxe',
+                    emoji: '<:greataxe:860687945119563786>'
+                },
+            ]),
+            
+        )
+        const tankRow = new MessageActionRow()
+        .addComponents(
+            new MessageSelectMenu()
+            .setCustomID('tanks')
+            .setPlaceholder('ZvZ TANK builds')
+            .addOptions([
+                {
+                    label: 'Camlaann',
+                    description: 'Melee tank build, good for initiating clump',
+                    value: 'camlann',
+                    emoji: '<:camlann:860681322879385621>'
+                },
+                {
+                    label: 'Grailseeker',
+                    description: 'Melee tank build, hold enemy engages',
+                    value: 'grailseeker',
+                    emoji: '<:grailseeker:860691643971665921>'
+                },
+                {
+                    label: 'Soulscythe',
+                    description: 'Melee tank build, good for initiating engage',
+                    value: 'soulscythe',
+                    emoji: '<:soulscythe:860691644211134484>'
+                },
+                {
+                    label: 'Grovekeeper',
+                    description: 'Melee tank build, big aoe stun',
+                    value: 'grovekeeper',
+                    emoji: '<:grovekeeper:860691643593523200>'
+                },
+                {
+                    label: 'Morningstar',
+                    description: 'Melee tank build, roots enemy in long duration',
+                    value: 'morningstar',
+                    emoji: '<:morningstar:860691643250638928>'
+                },
+            ])
+        )
+        const healRow = new MessageActionRow()
+        .addComponents(
+            new MessageSelectMenu()
+            .setCustomID('heals')
+            .setPlaceholder('ZvZ Heal and Supports builds')
+            .addOptions([
+                {
+                    label: 'Fallen Staff',
+                    description: 'Casual holy healer, big pp circle + cleanse heal',
+                    value: 'fallen',
+                    emoji: '<:Fallen:860679051308171266>'
+                },
+                {
+                    label: 'Wild Staff',
+                    description: 'Nature healer, big AOE circle heal',
+                    value: 'wildstaff',
+                    emoji: '<:wildstaff:860693853652910100>'
+                },
+                {
+                    label: 'Great Holy',
+                    description: 'Holy Healer, increase allies resistance',
+                    value: 'greatholy',
+                    emoji: '<:greatholy:860693852611411999>'
+                },
+                {
+                    label: 'Rampant',
+                    description: 'Nature Healer, straight narrow line AOE heals',
+                    value: 'rampant',
+                    emoji: '<:rampant:860693853849518100>'
+                },
+                {
+                    label: 'Malevolent Locus',
+                    description: 'Arcane support, used to cleanse allies',
+                    value: 'locus',
+                    emoji: '<:locus:860822902547283969>'
+                },
+                {
+                    label: 'One Handed Arcane',
+                    description: 'Arcane support, silences and purges enemies in AOE',
+                    value: 'arcane',
+                    emoji: '<:onehandarcane:860822902134538250>'
+                },
+                {
+                    label: 'Occult Staff',
+                    description: 'Arcane support, increase allies movement speed',
+                    value: 'occult',
+                    emoji: '<:occult:860823088475013131>'
+                },
+                {
+                    label: 'Enigmatic Staff',
+                    description: 'Arcane support, gives AOE shield to allies',
+                    value: 'enigmatic',
+                    emoji: '<:enigmatic:860822901184004146>'
+                },
+            ])
+        )
 client.on('message', async (message) => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -205,215 +415,6 @@ client.on('message', async (message) => {
             message.reply(`${personName} has been blacklisted! <:jennielove:844893922634235904>`)
         })
         
-    } else if (command === 'start') {
-        await mongo().then(async mongoose => {
-            let falter = m => m.author.id === message.author.id;
-            await message.channel.send('Aight! can u tell me the date? and the ls \n\n`example: 24-01-2021-ls1`');
-            await message.channel.awaitMessages(falter, {max: 1, time: 60000})
-            .then(async collected => {
-                let date = collected.first().content;
-                let channelLocation = message.channel.id
-                let filter = m => {
-                    if (m.author.id === message.author.id) {
-                        if (m.content.toLowerCase() === 'done') collector.stop();
-                        else return true;
-                    }
-                    else return false;
-                }
-                message.channel.send('Alright! whose the participants? \n\n`type done if u are finish`')
-                let collector = message.channel.createMessageCollector(filter, {max: 25})
-                
-                collector.on('collect', async m => {
-                    console.log(m.content)
-                    await person.create({
-                        personName: m,
-                        liquidateID: date,
-                        locationChannel: channelLocation,
-                        status: 'Pending'
-                    })
-                })
-                collector.on('end',async  m => {
-                    message.channel.send('Thank you sire, your liquidating has been confirmed!')
-                    await splitz.create({
-                        liquidatorID: message.author.id,
-                        date: date,
-                        location: channelLocation,
-                        status: "Pending"
-                    })
-                })
-
-            }).catch(() => {
-                return message.channel.send('You\'re out of time bruh, please restart from the beginning')
-            })
-        })
-        
-    } else if (command === 'info') {
-        await mongo().then(async mongoose => {
-            let firstArgument = args[0];
-            let parti = await person.find({ liquidateID: firstArgument})
-            let ls = await splitz.findOne({ date: firstArgument})
-            let Strang = parti.map(u => u.personName).join('\n');
-            if (!ls) {
-                return message.channel.send('Sorry..., I cannot find lootsplit with that ID')
-            }
-            const embed = new Discord.MessageEmbed()
-            .setColor('ORANGE')
-            .setAuthor(`Loot Split for ${firstArgument}`)
-            .setDescription(`Participants: \n${Strang}`)
-            message.channel.send(embed)
-        })
-    } else if (command === 'regear') {
-        await mongo().then(async mongoose => {
-            let regearId = args[0];
-            let price = args[1];
-            let NickName = message.guild.members.cache.get(message.author.id).nickname
-            const errorembed = new Discord.MessageEmbed()
-            .setColor('RED')
-            .setAuthor('Error')
-            .setDescription('Hello. you need to provide me the correct information so I can return the data for you :heart: \n\n\```!regear [regearID] [estimatedValue]\``` \n\nOr you can just check ur regear queue by typing\n\n\```!regear me\``` \nHave fun =)')
-            .setFooter('If you believe this is wrong please contact the admin')
-            .setTimestamp(new Date())
-            
-            if (regearId.toLowerCase() === 'me') {
-                let description = 'This player has no regear running =)'
-                let nicknameasli;
-                if (NickName === null) {
-                    nicknameasli = message.author.username
-                } else {
-                    nicknameasli = NickName
-                }
-                let regearExistable = regear.findOne({ personName: nicknameasli});
-                if (regearExistable) {
-                    let regearData = await regear.find({ personName: nicknameasli})
-                    
-                    description = regearData.filter(m => m.status === 'Pending').map(item => '**Regear ID:**' + " " + item.regearID + '\n' + '**Estimated:**' + ' ' + item.estimated + '\n' + '**Date:**' + ' ' + item.date + '\n' + `[Validation link](https://albiononline.com/en/killboard/kill/${item.regearID})`).join('\n\n')
-                }
-                const embed = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setAuthor(`Regear queue for ${nicknameasli}`)
-                .setDescription(description)
-                .setFooter('If you believe this is wrong please contact the admin')
-                .setTimestamp(new Date())
-                message.channel.send(embed)
-                console.log(regearExistable)
-            } else if (regearId.toLowerCase() === 'quest') {
-                if (message.member.roles.cache.has('804972129421492224') | message.member.hasPermission(['ADMINISTRATOR'])) {
-                    let regeared = await regear.find({ status: 'Pending'})
-                    let regearString = regeared.map((event, i) => `**#${i + 1}**` + ' ' + '**Name:**' + ' ' + event.personName + '\n' + '**Estimated:**' + event.estimated)
-                    const embed = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setAuthor(`List of regear`)
-                .setDescription(regearString)
-                .setFooter('If you believe this is wrong please contact the admin')
-                .setTimestamp(new Date())
-                message.channel.send(embed)
-                } else {
-                    return message.reply('You don\'t have permission :Yikes:')
-                }
-            } else if (regearId.toLowerCase() === 'clear') {
-                let state = args[1];
-                if (!state) return message.reply('U must state the person u want to clear');
-                let drago = await regear.findOne({ personName: state})
-                if (!drago) return message.channel.send(`I'm sorry but I cannot find this \`${state}\`'s regear, it's either cleared or he never ask for regear :P`)
-                await regear.updateMany({ personName: state}, { status: 'Regeared',
-            regearOfficer: message.author.tag})
-                message.channel.send('`MrGremory`\'s regear has been cleared')
-
-            } else if (regearId === 'check') {
-                let state = args[1]
-                if (!state) return message.reply('U must state the person to check their regears')
-                let description = 'This player has no regear running =)'
-                let regearExistable = regear.findOne({ personName: state});
-                let nicknameasli;
-                if (regearExistable) {
-                    let regearData = await regear.find({ personName: NickName})
-                    description = regearData.map(item => '**Regear ID:**' + " " + item.regearID + '\n' + '**Estimated:**' + ' ' + item.estimated + '\n' + '**Date:**' + ' ' + item.date + '\n' + `[Validation link](https://albiononline.com/en/killboard/kill/${item.regearID})`).join('\n\n')
-                }
-                const embed = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setAuthor(`Regear queue for ${state}`)
-                .setDescription(Boolean(regearExistable) ? description : 'There\'s no regear running for u =)')
-                .setFooter('If you believe this is wrong please contact the admin')
-                .setTimestamp(new Date())
-                message.channel.send(embed)
-            } else if (regearId === 'info') {
-                let ID = args[1];
-                if (!ID) return message.reply('You must state the regear ID')
-                const regearexisz = await regear.findOne({ regearID: ID})
-                if (!regearexisz) return message.reply("I'm sorry but I cannot find a regear with this ID :pepehands:")
-                const regearembed = new Discord.MessageEmbed()
-                .setAuthor('Regear INFO')
-                .setColor('BLUE')
-                .setDescription(`Showing the info of regear with \`${ID}\` ID \n\n**Regear status:** ${regearexisz.status} \n**Date:** ${regearexisz.date} \n**Regear Officer:** ${regearexisz.regearOfficer} \n**Death fame:** ${regearexisz.deathFame} \n[Validation link](https://albiononline.com/en/killboard/kill/${regearexisz.regearID})`)
-                .addFields([
-                    {name: '**Killer**', value: `Name: ${regearexisz.killerName} \nGuild: [${regearexisz.killerAlliance}] ${regearexisz.killerGuild} \nAverage IP: ${regearexisz.killeravg}`, inline: true},
-                    { name: '**Victim**', value: `Name: ${regearexisz.personName} \nGuild: [${regearexisz.victimAlliance}] ${regearexisz.victimGuild} \nAverage IP: ${regearexisz.victimavg}`, inline: true}
-                ])
-                .setFooter('Enjoy sir!')
-                .setTimestamp(new Date())
-                message.channel.send(regearembed)
-            } else {
-                if (!regearId | !price) return message.channel.send(errorembed)
-                let regearex = await regear.findOne({ regearID: regearId})
-                let nicknameasli;
-                if (regearex) {
-                    if (regearex.status === 'Regeared') {
-                        return message.channel.send("It seems that this regear request has been fulfilled by one of the regear officer, please check your regear by typing \n\n`regear info [regearId]`")
-                    } else {
-                        return message.channel.send(`I'm sorry but it seems that you're alreade requested regear for this ID\`${regearId}\``)
-                    }
-                } 
-                let nickname = message.guild.members.cache.get(message.author.id).nickname
-                if (nickname === null) {
-                    nicknameasli = message.author.username
-                } else {
-                    nicknameasli = nickname
-                }
-                let testArray = [
-                    { EventId: 44006,
-                    Location: 'Indonesia'},
-                    {
-                        EventId: 44887,
-                        Location: 'America'
-                    }
-                ]
-                console.log(nicknameasli)
-                axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=${nicknameasli}`)
-                .then(async res => {
-                    let dragonz = res.data.players[0].Id
-                    axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${dragonz}/deaths`)
-                    .then(async response => {
-                        let regearz = response.data.find(event => event.EventId === parseInt(regearId))
-                        if (!regearz) return message.reply('Your regear are not approved because u need to insert the legit Death ID')
-                        console.log(regearz)
-                        const tanggal = new Date()
-
-                        var hari = tanggal.getDay()
-                        var bulan = tanggal.getMonth()
-                        var tahun = tanggal.getFullYear()
-                        let tanggalfix = `${hari}/${bulan}/${tahun}`
-                        message.channel.send(`Regear has been approved \nhttps://albiononline.com/en/killboard/kill/${regearId}`)
-                        await regear.create({
-                            personName: nicknameasli,
-                            regearID: regearId,
-                            estimated: price,
-                            killerName: regearz.Killer.Name,
-                            deathFame: regearz.Victim.DeathFame,
-                            killerGuild: regearz.Killer.GuildName,
-                            killerAlliance: regearz.Killer.AllianceName,
-                            victimAlliance: regearz.Victim.AllianceName,
-                            regearOfficer: 'Still in queue',
-                            victimGuild: regearz.Victim.GuildName,
-                            killeravg: Math.ceil(regearz.Killer.AverageItemPower),
-                            victimavg: Math.ceil(regearz.Victim.AverageItemPower),
-                            status: "Pending",
-                            date: tanggalfix
-                        })
-                    })
-                })
-            }
-        })
-
     } else if (command === 'register') {
         await mongo().then(async mongoose => {
             let personExistable = await register.findOne({ discordID: message.author.id})
@@ -501,7 +502,7 @@ client.on('message', async (message) => {
         .then((res) => {
             let kematian = res.data.map((redo, i) => `**Death #${i + 1}**` + '\n' + `Killed by [${redo.Killer.AllianceName}] [${redo.Killer.GuildName}] ${redo.Killer.Name}` + '\n' + `Death fame: ${redo.TotalVictimKillFame}` + '\n' + `Time: ${new Date('2021-02-20T11:45:04.342798700Z').toDateString()}` + '\n' + `Death ID: ${redo.EventId}` + '\n' + `[Link for validation](https://albiononline.com/en/killboard/kill/${redo.EventId})`).join('\n\n')
             console.log(kematian)
-            const embed = new Discord.MessageEmbed()
+            const embed = new MessageEmbed()
             .setColor('#EC330B ')
             .setTitle('List of Battle ID links for fast check:')
             .setDescription(`[Alliance][GuildName] KillerName | DeathFame | Death Timestamp | BattleID
@@ -511,42 +512,6 @@ client.on('message', async (message) => {
     }).catch(e => {
         return message.channel.send('I think you might insert the wrong name')
     })
-    } else if (command === 'death') {
-        let personName = args[0]
-        let DeathID = args[1];
-        let testarray = [
-            { EventId: 192933029,
-            Equipment: 'Dragon'}, {
-                EventId: 192933089,
-                Equipment: 'Zkai'
-            }
-        ]
-        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=${personName}`)
-        .then(responz => {
-            let personNama = responz.data.players[0].Id
-            console.log('Generating List....')
-        
-        if (!DeathID) return message.reply('You must state your death ID!');
-        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${personNama}/deaths`)
-        .then(res => {
-            
-            console.log(res.data.find((item) => item.EventId.toString() === DeathID))
-        })
-    })
-    } else if (command === 'halp') {
-       
-        const embed = new Discord.MessageEmbed()
-        .setTitle('SGMY')
-        .setDescription(`Hello there! I'm just an ordinary bot, made by gato to help community's job. Nice to meet you! my prefix is ${prefix}`)
-        .setColor('GREEN')
-        .addFields([
-            {name: '__**Commands**__', value: '```halp \ndeaths [playerName]```', inline: true},
-            { name: '__**Regear Commands**__', value: '```regear [deathID] [estimated] \nregear me \nregear clear [PlayerName] \nregear check [playerName] \nregear quest```', inline: true}
-        ])
-        .setFooter('Hell yea boi')
-        .setTimestamp(new Date())
-        message.channel.send(embed)
-    
     } else if (command === 'calculate') {
         let deathId = args[0]
         if (!deathId) return message.reply("You must state the death ID!")
@@ -600,7 +565,7 @@ client.on('message', async (message) => {
                                  y = (sum / 1000000).toFixed(2) + 'm'
                             } 
 
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new MessageEmbed()
                             .setColor('BLACK')
                             .setDescription(` \`\`\`css\n[${res.data.players[0].GuildName}] ${nicknameasli}                      ${y}\`\`\``)
                             .setFooter(`Total gear lost -${sum / 1000}`)
@@ -611,80 +576,11 @@ client.on('message', async (message) => {
                 });
             })
         })
-    } else if (command === 'lost') {
-        let PlayerName = args[0]
-        let deathId = args[1]
-        if (!PlayerName) return message.reply("You must state the PlayerName!")
-        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/search?q=${PlayerName}`)
-        .then(res => {
-            let playerID = res.data.players[0].Id
-            console.log(playerID)
-            axios.get(`https://gameinfo.albiononline.com/api/gameinfo/players/${playerID}/deaths`)
-            .then( async response => {
-                let data = response.data.find(m => m.EventId === parseInt(deathId))
-                let event = data.Victim.Equipment;
-                let finalPrice = []
-                let sum = 0;
-                let prices = [];
-                let priceRequest = [];
-                
-                // console.log('event var length ='+ equipmentLastIndex);
-                Object.keys(event).forEach(async function(m,curIndex){
-                    if (event[m] != null) {
-                        let Type = event[m].Type;
-                        var quality = event[m].Quality;
-                        prices.push( event[m])
-                        priceRequest.push( axios.get(`https://www.albion-online-data.com/api/v2/stats/Prices/${Type}?locations=Martlock&qualities=${quality}`));
-                        axios.get(`https://www.albion-online-data.com/api/v2/stats/Prices/T3_MOUNT_HORSE?locations=Martlock&qualities=0`)
-                        .then(price => {
-                        })
-                    }
-                })
-                Promise.all(priceRequest).then(priceResults => {
-                    let equipmentLastIndex =Object.keys(priceResults).length-1;
-                    priceResults.forEach(function(priceResult,curIndex){
-                        let z =  priceResult.data.map(i => i.sell_price_min);
-                        let b = Math.min(...z)
-                        console.log(z)
-                        sum += b;
-                        if(curIndex === equipmentLastIndex){
-                            console.log(sum)
-                            let y;
-                            if (sum.toString().length < 7) {
-                                 y = (sum / 1000).toFixed(0) + 'k'
-                            } else if (sum.toString().length > 6){
-                                 y = (sum / 1000000).toFixed(2) + 'm'
-                            } 
-
-                            const embed = new Discord.MessageEmbed()
-                            .setColor('BLACK')
-                            .setDescription(` \`\`\`css\n[${res.data.players[0].GuildName}] ${PlayerName}                      ${y}\`\`\``)
-                            .setFooter(`Total gear lost -${sum / 1000}`)
-                            message.channel.send(embed)
-
-                        }
-                    })
-                });
-            })
-        })
-    } else if (command === 'help') {
-        let firstArgument = args[0];
-        if (firstArgument === 'ava' | firstArgument === 'avalonian') {
-            const embed = new Discord.MessageEmbed()
-            .setColor('YELLOW')
-            .setAuthor('Avalonian Help')
-            .setDescription('Hello! are you wondering about Avalonian Dungeon? \n\nWell..Avalonian dungeon is a elite group dungeon designed for 20man which can be found around the outlands of Albion')
-            .addFields([
-                {name: '**Document! -- Important!**', value: '[https://docs.google.com/document/d/16hPCbs-dh_WGYRV3DUhks-Yqx4C9TXUhZrqxdb5Ghj4/edit#heading=h.qvpgenfrjvum](https://docs.google.com/document/d/16hPCbs-dh_WGYRV3DUhks-Yqx4C9TXUhZrqxdb5Ghj4/edit#heading=h.qvpgenfrjvum)'},
-                {name: '**Builds**', value: `- Weeping Repeater \n- Permafrost \n- Bear Paws \n- Cursed staff \n- Blackmonk Stave \n- Second Tank \n- Ironroot Staff \n- Arcane \n- Party Heal \n- Main heal \n- Ava axe \nYou can search for more information by typing \`!build [buildName]\``}
-            ])
-            message.channel.send(embed)
-        }
     } else if (command === 'checkbl') {
         await mongo().then(async mongoose => {
             let channel = message.guild.channels.cache.get('760731834354499585')
             let existable = await blacklist.findOne({ blname: args[0].toLowerCase()})
-            const embedz = new Discord.MessageEmbed()
+            const embedz = new MessageEmbed()
             .setColor('RED')
             .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
             .setDescription(`**ERROR** \nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
@@ -695,14 +591,16 @@ client.on('message', async (message) => {
                 axios.get(`https://api.aotools.net/v2/blacklist/${firstArgument}`)
                 .then(async result => {
                     if (result.data.isBlacklisted === true) {
-                        const embed = new Discord.MessageEmbed()
+                        const embed = new MessageEmbed()
                         .setColor('AQUA')
                         .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
                         .setDescription('**This player is blacklisted! by ARCH** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info')
                         .setFooter('If this is wrong please contact the officers :D')
-                        message.channel.send(embed)
+                        message.channel.send({
+                            embeds: [embed]
+                        })
                     } else if (existable) {
-                        const embed = new Discord.MessageEmbed()
+                        const embed = new MessageEmbed()
                         .setColor('RED')
                         .setAuthor('Singapore Police', client.user.displayAvatarURL())
                         .setTitle('Warning! Player blacklisted! by SG')
@@ -711,9 +609,11 @@ client.on('message', async (message) => {
                             {name: "**Blacklisted by**", value: `<@${existable.blacklister}> ${existable.date}`, inline: true},
                             {name: '**Reason**', value: `\`\`\`${existable.reason} \`\`\``}
                         )
-                        message.channel.send(embed)
+                        message.channel.send({
+                            embeds: [embed]
+                        })
                     } else {
-                        message.reply(`${result.data.name} is not blacklisted :D`)
+                        message.reply(`**${result.data.name}** is not blacklisted :D`)
                     }
                 })
             } else {
@@ -876,7 +776,7 @@ client.on('message', async (message) => {
         axios.get(`https://gameinfo.albiononline.com/api/gameinfo/events/${eventId}`)
         .then(async result => {
             let event = result.data
-            const embed = new Discord.MessageEmbed()
+            const embed = new MessageEmbed()
             .setAuthor('Killboard Info', client.user.displayAvatarURL())
             .setColor('BLUE')
             .setDescription(`List to fast check killboard \n[Killboard link](https://albiononline.com/en/killboard/kill/${eventId}) \n**Deathfame:** ${parseInt(event.TotalVictimKillFame) / 1000}`)
@@ -903,17 +803,25 @@ client.on('message', async (message) => {
                         SEND_MESSAGES: true,
                         VIEW_CHANNEL: true
                     })
-                    message.reply(`${personMention} has been added to ${channelMention}`)
+                    message.reply({
+                        content: `${personMention} has been added to ${channelMention}`
+                    })
                 } else {
-                   return message.reply('This command only works for ticket channels, thank you', '<:jennielove:844893922634235904>')
+                   return message.reply({
+                       content: 'This command only works for ticket channels, thank you, <:jennielove:844893922634235904>'
+                   })
                 }
             })
         } else {
-            return message.reply('You don\'t have permission to use this command')
+            return message.reply({
+                content: 'You don\'t have permission to use this command'
+            })
         }
     } else if (command === 'checkbattle') {
         let battleId = args[0];
-        if (!battleId) return message.reply('You must state the battle Id!')
+        if (!battleId) return message.reply({
+            content: 'You must state the battle Id!'
+        })
         axios.get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleId}`)
         .then(async result => {
             let events = result.data
@@ -967,7 +875,7 @@ client.on('message', async (message) => {
                                 let final = dateFix + ' ' + timeFix
                                 return final;
                             }
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new MessageEmbed()
                             .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                             .setColor('RED')
                             .setTitle('Bad ZvZ Build!')
@@ -979,7 +887,9 @@ client.on('message', async (message) => {
                             .setFooter('Singapore on top', client.user.displayAvatarURL())
                             .setTimestamp(new Date())
                             .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                            message.channel.send(embed)
+                            message.channel.send({
+                                embeds: [embed]
+                            })
                         } else if (parseInt(m.Victim.AverageItemPower) < 1100) { 
                             hasTriggered = false
                             console.log(test)
@@ -1021,7 +931,7 @@ client.on('message', async (message) => {
                                 let final = dateFix + ' ' + timeFix
                                 return final;
                             }
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new MessageEmbed()
                             .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                             .setColor('RED')
                             .setTitle('Bad ZvZ Build!')
@@ -1033,7 +943,9 @@ client.on('message', async (message) => {
                             .setFooter('Singapore on top', client.user.displayAvatarURL())
                             .setTimestamp(new Date())
                             .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                            message.channel.send(embed)
+                            message.channel.send({
+                                embeds: [embed]
+                            })
                         }
                         else {
                             if (compareSet(gear.MainHand, gear.OffHand, gear.Head, gear.Armor, gear.Shoes) == true) {
@@ -1076,7 +988,7 @@ client.on('message', async (message) => {
                                 let final = dateFix + ' ' + timeFix
                                 return final;
                             }
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new MessageEmbed()
                             .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                             .setColor('RED')
                             .setTitle('Bad ZvZ Build!')
@@ -1088,191 +1000,25 @@ client.on('message', async (message) => {
                             .setFooter('Singapore on top', client.user.displayAvatarURL())
                             .setTimestamp(new Date())
                             .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                            message.channel.send(embed)
+                            message.channel.send({
+                                embeds: [embed]
+                            })
                             }
 
                         }
-                        eventKiller.forEach(async (m, i) => {
-                            let gear = m.Killer.Equipment
-                            let test =  Object.keys(gear).filter(m => gear[m] != null && m !== 'Bag' && m !== 'Potion' && m !== 'Cape' && m !== 'Mount' && m !== 'Food')
-                                if (gear.MainHand == null| gear.Head == null | gear.Armor == null | gear.Shoes == null) {
-                                    hasTriggered = false
-                                    console.log(test)
-                                    let MainHand;
-                                    let OffHand;
-                                    let Head;
-                                    let Armor;
-                                    let Shoes;
-                                    if (m.Killer.Equipment.MainHand == null) {
-                                        MainHand = ''
-                                    } else {
-                                        MainHand = m.Killer.Equipment.MainHand.Type
-                                    }
-                                    if (m.Killer.Equipment.OffHand == null) {
-                                        OffHand = ''
-                                    } else {
-                                        OffHand = m.Killer.Equipment.OffHand.Type
-                                    }
-                                    if (m.Killer.Equipment.Head == null) {
-                                        Head = ''
-                                    } else {
-                                        Head = m.Killer.Equipment.Head.Type
-                                    }
-                                    if (m.Killer.Equipment.Armor == null) {
-                                        Armor = ''
-                                    } else {
-                                        Armor = m.Killer.Equipment.Armor.Type
-                                    }
-                                    if (m.Killer.Equipment.Shoes == null) {
-                                        Shoes = ''
-                                    } else {
-                                        Shoes = m.Killer.Equipment.Shoes.Type
-                                    }
-                                    let person = events.players[m.Killer.Id]
-                                    const time = (param) => {
-                                        let z = new Date(param)
-                                        let timeFix = z.toLocaleTimeString()
-                                        let dateFix = z.toLocaleDateString()
-                                        let final = dateFix + ' ' + timeFix
-                                        return final;
-                                    }
-                                    const embed = new Discord.MessageEmbed()
-                                    .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
-                                    .setColor('RED')
-                                    .setTitle('Bad ZvZ Build!')
-                                    .setDescription(`Bad ZvZ build detected! Battle: ${events.id} \n**Reason:** Not using proper ZvZ Build`)
-                                    .addFields(
-                                    {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Killer.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
-                                    { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
-                                     )
-                                    .setFooter('Singapore on top', client.user.displayAvatarURL())
-                                    .setTimestamp(new Date())
-                                    .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                                    message.channel.send(embed)
-                                } else if (parseInt(m.Killer.AverageItemPower) < 1100) {
-                                    hasTriggered = false
-                                    console.log(test)
-                                    let MainHand;
-                                    let OffHand;
-                                    let Head;
-                                    let Armor;
-                                    let Shoes;
-                                    if (m.Killer.Equipment.MainHand == null) {
-                                        MainHand = ''
-                                    } else {
-                                        MainHand = m.Killer.Equipment.MainHand.Type
-                                    }
-                                    if (m.Killer.Equipment.OffHand == null) {
-                                        OffHand = ''
-                                    } else {
-                                        OffHand = m.Killer.Equipment.OffHand.Type
-                                    }
-                                    if (m.Killer.Equipment.Head == null) {
-                                        Head = ''
-                                    } else {
-                                        Head = m.Killer.Equipment.Head.Type
-                                    }
-                                    if (m.Killer.Equipment.Armor == null) {
-                                        Armor = ''
-                                    } else {
-                                        Armor = m.Killer.Equipment.Armor.Type
-                                    }
-                                    if (m.Killer.Equipment.Shoes == null) {
-                                        Shoes = ''
-                                    } else {
-                                        Shoes = m.Killer.Equipment.Shoes.Type
-                                    }
-                                    let person = events.players[m.Killer.Id]
-                                    const time = (param) => {
-                                        let z = new Date(param)
-                                        let timeFix = z.toLocaleTimeString()
-                                        let dateFix = z.toLocaleDateString()
-                                        let final = dateFix + ' ' + timeFix
-                                        return final;
-                                    }
-                                    const embed = new Discord.MessageEmbed()
-                                    .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
-                                    .setColor('RED')
-                                    .setTitle('Bad ZvZ Build!')
-                                    .setDescription(`Bad ZvZ build detected! Battle: ${events.id} \n**Reason:** Low IP`)
-                                    .addFields(
-                                    {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Killer.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
-                                    { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
-                                     )
-                                    .setFooter('Singapore on top', client.user.displayAvatarURL())
-                                    .setTimestamp(new Date())
-                                    .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                                    message.channel.send(embed)
-                                } else {
-                                    if (compareSet(gear.MainHand, gear.OffHand, gear.Head, gear.Armor, gear.Shoes) == true) {
-                                        hasTriggered = false
-                                        let MainHand;
-                                    let OffHand;
-                                    let Head;
-                                    let Armor;
-                                    let Shoes;
-                                    if (m.Killer.Equipment.MainHand == null) {
-                                        MainHand = ''
-                                    } else {
-                                        MainHand = m.Killer.Equipment.MainHand.Type
-                                    }
-                                    if (m.Killer.Equipment.OffHand == null) {
-                                        OffHand = ''
-                                    } else {
-                                        OffHand = m.Killer.Equipment.OffHand.Type
-                                    }
-                                    if (m.Killer.Equipment.Head == null) {
-                                        Head = ''
-                                    } else {
-                                        Head = m.Killer.Equipment.Head.Type
-                                    }
-                                    if (m.Killer.Equipment.Armor == null) {
-                                        Armor = ''
-                                    } else {
-                                        Armor = m.Killer.Equipment.Armor.Type
-                                    }
-                                    if (m.Killer.Equipment.Shoes == null) {
-                                        Shoes = ''
-                                    } else {
-                                        Shoes = m.Killer.Equipment.Shoes.Type
-                                    }
-                                    let person = events.players[m.Killer.Id]
-                                    const time = (param) => {
-                                        let z = new Date(param)
-                                        let timeFix = z.toLocaleTimeString()
-                                        let dateFix = z.toLocaleDateString()
-                                        let final = dateFix + ' ' + timeFix
-                                        return final;
-                                    }
-                                    const embed = new Discord.MessageEmbed()
-                                    .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
-                                    .setColor('RED')
-                                    .setTitle('Bad ZvZ Build!')
-                                    .setDescription(`Bad ZvZ build detected! Battle: ${events.id} \n**Reason:** Not using proper ZvZ Build`)
-                                    .addFields(
-                                    {name: '__**PLAYER INFO**__', value: `**Player Name:** ${person.name} \n**Guild:** ${person.guildName} \n**IP:** ${Math.round(m.Killer.AverageItemPower)} \n**Aliance:** ${person.allianceName} \n**Kills:** ${person.kills} | **Deaths:** ${person.deaths} \n**Killboard:** [click the link](https://albiononline.com/en/killboard/kill/${m.EventId})`, inline: true},
-                                    { name: '__**BATTLE INFO**__', value: `**Battleboard:** [${events.id}](https://kill-board.com/battles/${events.id}) \n**Start time:** ${time(events.startTime)} \n**End time:** ${time(events.startTime)} \n**Total kills:** ${events.totalKills} \n**Total fame:** ${events.totalFame}`, inline: true}
-                                     )
-                                    .setFooter('Singapore on top', client.user.displayAvatarURL())
-                                    .setTimestamp(new Date())
-                                    .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                                    message.channel.send(embed)
-                                    }
-        
-                                }
-                                
-                            
-                        })
+                        
                         
                     if (hasTriggered) {
-                        message.author.send('All clear!')
+                        message.author.send({
+                            content: 'All Clear!'
+                        })
                     }
                 })
             })
         })
         
     } else if (command === 'helpofficer') {
-        const embed = new Discord.MessageEmbed()
+        const embed = new MessageEmbed()
         .setAuthor('Singapore Police', client.user.displayAvatarURL())
         .setColor('ORANGE')
         .setDescription('List of admin commands for officers')
@@ -1281,10 +1027,14 @@ client.on('message', async (message) => {
         )
         .setFooter('If this is wrong please contact the officers', client.user.displayAvatarURL())
         .setTimestamp(new Date())
-        message.channel.send(embed)
+        message.channel.send({
+            embeds: [embed]
+        })
     } else if (command === 'ask') {
         let question = args.slice(0).join(' ')
-        if (!question) return message.reply("You didn't specify your question!")
+        if (!question) return message.reply({
+            content: "You didn't specify your question!"
+        })
         let responses = [
             'Yes definitely.',
             'Most likely',
@@ -1295,17 +1045,80 @@ client.on('message', async (message) => {
             'Better not tell you now.',
             'You may rely on it.'
         ]
-        let answer = responses[Math.floor(Math.random() * responses.length-1)]
-        message.reply(answer)
+        let answer = responses[Math.floor(Math.random() * responses.length)]
+        message.reply({
+            content: answer
+        })
     } else if (command === 'unblacklist') {
         await mongo().then(async mongoose => {
             let personName = args[0]
-            if (!personName) return message.reply('You must state the person')
+            if (!personName) return message.reply({
+                content: 'You must state the person'
+            })
             let isPersonBlacklisted = await blacklist.findOne({ blname: personName.toLowerCase()})
-            if (!isPersonBlacklisted) return message.reply(`I cannot find a person with \`${personName}\` inside the blacklist :D`)
+            if (!isPersonBlacklisted) return message.reply({
+                content: `I cannot find a person with \`${personName}\` inside the blacklist :D`
+            })
             await blacklist.findOneAndDelete({ blname: personName.toLowerCase()})
-            message.reply(`Player **${personName}** has been unblacklisted`)
+            message.reply({
+                content: `Player **${personName}** has been unblacklisted`
+            })
         })
+    } else if (command === 'attendance') {
+        if (!message.member.roles.cache.has('759793776439984170') | !message.member.roles.cache.has('855689169018814464')) return message.reply({
+            content: `I'm sorry but you don't have the right to execute this command`
+        })
+        let battleID = args[0]
+        if (!battleID) return message.reply('Please state the battle ID!')
+        axios.get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleID}`)
+        .then(async result => {
+            let event1 = result.data
+            const embed = new MessageEmbed()
+            .setColor('ORANGE')
+            .setAuthor('Singapore Police', client.user.displayAvatarURL())
+            .setDescription(`Player who attended ZvZ In Singapore for battle ${battleID}: \n ${Object.keys(event1.players).filter(m => event1.players[m].guildName === 'Singapore').map((m, i) => event1.players[m].name).join('\n')}`)
+            message.channel.send({
+                embeds: [embed]
+            })
+            
+        })
+    } else if (command == 'zvz-builds') {
+        if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
+            message.delete()
+            let deleteButton = new MessageButton()
+                .setStyle('DANGER')
+                .setCustomID('delete')
+                .setLabel('Delete')
+                .setEmoji('🚨')
+            await message.channel.send({
+                content: 'ZvZ build List! according to ARCH official zvz builds',
+                components: [row,tankRow, healRow, [deleteButton]]
+            })
+        } else {
+            const channel = message.guild.channels.cache.get('760731834354499585')
+            const embedz = new MessageEmbed()
+            .setColor('RED')
+            .setAuthor('Singapore Police', 'https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256')
+            .setDescription(`**ERROR** \nThis command is disabled in this channel to prevent clutter, please redo this command at ${channel}`)
+            .setFooter('If this is wrong please contact the officers :D')
+            message.reply({
+                embeds: [embedz]
+            })
+        }
+    } else if (command === 'deploy' && message.author.id === '694488949980135444') {
+        const data = 
+            [{
+                name: 'zvz-builds',
+                description: 'Shows you the list of approved zvz builds according to ARCH main discord'
+            }, 
+            {
+                name: 'hi',
+                description: 'saying hi lol'
+            }]
+            
+        
+        const command = await client.application?.commands.set(data)
+        console.log(command)
     }
 }) 
 const emojis = {
@@ -1377,7 +1190,216 @@ client.on('guildMemberAdd', (member) => {
    **fatmeowbutthin#4147**
    **Fatmeow#3662**`)
 })
-
+client.on('interaction',async  interaction => {
+    if (interaction.isButton()) {
+        if (interaction.customID === 'back') {
+            if (interaction.replied) {
+                interaction.editReply({
+                    content: 'ZvZ build list! According to ARCH main zvz gears',
+                    components: [row, tankRow, healRow]
+                })
+            } else {
+                let deleteButton = new MessageButton()
+                .setStyle('DANGER')
+                .setCustomID('delete')
+                .setLabel('Delete')
+                .setEmoji('🚨')
+                interaction.update({
+                    content: 'ZvZ build list! According to ARCH main zvz gears',
+                    components: [row, tankRow, healRow, [deleteButton]],
+                    embeds: []
+                })
+                
+            }
+        } else if (interaction.customID === 'delete') {
+            interaction.message.delete()
+        }
+        
+    } else if (interaction.isSelectMenu()) {
+        if (interaction.customID === 'dps') {
+            let dpsList = {
+                'siegebow': ['https://i.imgur.com/s5kBpr1.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101093', 'https://discord.com/channels/200746010102726657/807319001234407504/807658296416665621'],
+                'permafrost': ['https://i.imgur.com/VY91AFv.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101097', 'https://discord.com/channels/200746010102726657/807319001234407504/807675958097477672'],
+                'avabow': ['https://i.imgur.com/MMIyALt.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101099', 'https://discord.com/channels/200746010102726657/807319001234407504/807679039275139102'],
+                'energyshaper': ['https://i.imgur.com/qDdKBSB.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101101', 'https://discord.com/channels/200746010102726657/807319001234407504/807700941457063986'],
+                'brimstone': ['https://i.imgur.com/1k8FJlp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101179', 'https://discord.com/channels/200746010102726657/807319001234407504/807675595797823488'],
+                'dawnsong': ['https://i.imgur.com/61o9SVr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101102', 'https://discord.com/channels/200746010102726657/807319001234407504/807701098026106930'],
+                'halberd': ['https://i.imgur.com/Z66GRfX.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101103', 'https://discord.com/channels/200746010102726657/807319001234407504/807781638494486548'],
+                'realmbreaker': ['https://i.imgur.com/oOUnwKo.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101106', 'https://discord.com/channels/200746010102726657/807319001234407504/807781876571308042'],
+                'daybreaker': ['https://i.imgur.com/KAag4qz.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101108', 'https://discord.com/channels/200746010102726657/807319001234407504/807782187550244884'],
+                'galatine': ['https://i.imgur.com/cU4Y1Og.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101109', 'https://discord.com/channels/200746010102726657/807319001234407504/807786585302368266'],
+                'clarent': ['https://i.imgur.com/p8ElKkd.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101112', 'https://discord.com/channels/200746010102726657/807319001234407504/808048332256968714'],
+                'spirithunter': ['https://i.imgur.com/rxFjtVy.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101113', 'https://discord.com/channels/200746010102726657/807319001234407504/808051545865715722'],
+                'dualswords': ['https://i.imgur.com/9jDIX7D.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101116', 'https://discord.com/channels/200746010102726657/807319001234407504/808053999471034368'],
+                'bridled': ['https://i.imgur.com/ylc2jgp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101147', 'https://discord.com/channels/200746010102726657/807319001234407504/816410289292967947'],
+                'greataxe': ['https://i.imgur.com/jD5hSJ0.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101150', 'https://discord.com/channels/200746010102726657/807319001234407504/843587604413808680'],
+                'damnation': ['https://i.imgur.com/SoSgWnJ.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101125', 'https://discord.com/channels/200746010102726657/807319001234407504/808440044594659389'],
+                'shadowcaller': ['https://i.imgur.com/LUAPvmA.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101138', 'https://discord.com/channels/200746010102726657/807319001234407504/815692980673445888'],
+                'cursedskull': ['https://i.imgur.com/jePPweD.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101152', 'https://discord.com/channels/200746010102726657/807319001234407504/843590654676303942']
+            }
+            Object.keys(dpsList).forEach((m, i) => {
+                if (interaction.values.includes(m)) {
+                    let embed = new MessageEmbed()
+                .setColor('ORANGE')
+                .setAuthor('\'zl [SING] LongLiveLuai', client.user.displayAvatarURL())
+                .setImage(dpsList[m][0])
+                .setFooter('According to ARCH main discord zvz gears')
+                let button = new MessageButton()
+                .setStyle('LINK')
+                .setURL(dpsList[m][1])
+                .setLabel('Link to the Website')
+                let buttonback = new MessageButton()
+                .setStyle('SUCCESS')
+                .setCustomID('back')
+                .setLabel('Back to the List')
+                .setEmoji('🚀')
+                let deleteButton = new MessageButton()
+                .setStyle('DANGER')
+                .setCustomID('delete')
+                .setLabel('Delete this message')
+                .setEmoji('🚨')
+                let referenceButton = new MessageButton()
+                .setStyle('LINK')
+                .setURL(dpsList[m][2])
+                .setLabel('ARCH main discord reference')
+                if (interaction.replied) {
+                    interaction.editReply({
+                        content: 'Hold on',
+                        components: [[button, buttonback, referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                } else {
+                    interaction.update({
+                        content: 'Hold on',
+                        components: [[button, buttonback, referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                }
+                }
+            })
+            
+        } else if (interaction.customID === 'tanks') {
+            let list = {
+                'grailseeker': ['https://i.imgur.com/p3e1S9u.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101137', 'https://discord.com/channels/200746010102726657/807319001234407504/810357183257509898'],
+                'soulscythe': ['https://i.imgur.com/zbIHNd4.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101140', 'https://discord.com/channels/200746010102726657/807319001234407504/810356814134509589'],
+                'grovekeeper': ['https://i.imgur.com/C0t25qT.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101146', 'https://discord.com/channels/200746010102726657/807319001234407504/810356518288490496'],
+                'morningstar': ['https://i.imgur.com/S9JfLza.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101151', 'https://discord.com/channels/200746010102726657/807319001234407504/810356339485835296'],
+                'camlann': ['https://i.imgur.com/Pwlqi2E.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101156', 'https://discord.com/channels/200746010102726657/807319001234407504/810356123470921749']
+            }
+            Object.keys(list).forEach((m, i) => {
+                if (interaction.values.includes(m)) {
+                    let embed = new MessageEmbed()
+                .setColor('ORANGE')
+                .setAuthor('\'zl [SING] LongLiveLuai', client.user.displayAvatarURL())
+                .setImage(list[m][0])
+                .setFooter('According to ARCH main discord zvz gears')
+                let button = new MessageButton()
+                .setStyle('LINK')
+                .setURL(list[m][1])
+                .setLabel('Link to the Website')
+                let buttonback = new MessageButton()
+                .setStyle('SUCCESS')
+                .setCustomID('back')
+                .setLabel('Back to the List')
+                .setEmoji('🚀')
+                let deleteButton = new MessageButton()
+                .setStyle('DANGER')
+                .setCustomID('delete')
+                .setLabel('Delete this message')
+                .setEmoji('🚨')
+                let referenceButton = new MessageButton()
+                .setStyle('LINK')
+                .setURL(list[m][2])
+                .setLabel('ARCH main discord reference')
+                if (interaction.replied) {
+                    interaction.editReply({
+                        content: 'Hold on',
+                        components: [[button, buttonback, referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                } else {
+                    interaction.update({
+                        content: 'Hold on',
+                        components: [[button, buttonback, referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                }
+                }
+            })
+        } else if (interaction.customID === 'heals') {
+            let healList = {
+                'occult': ['https://i.imgur.com/iqEZaeO.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101117', 'https://discord.com/channels/200746010102726657/807319001234407504/808320638447124500'],
+                'enigmatic': ['https://i.imgur.com/4Ixgf2O.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101120', 'https://discord.com/channels/200746010102726657/807319001234407504/808324352961544223'],
+                'locus': ['https://i.imgur.com/BV3fNwg.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101121', 'https://discord.com/channels/200746010102726657/807319001234407504/808337336198889472'],
+                'arcane': ['https://i.imgur.com/RDJRDw5.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101124', 'https://discord.com/channels/200746010102726657/807319001234407504/808382611004719134'],
+                'fallen': ['https://i.imgur.com/voOcedm.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101129', 'https://discord.com/channels/200746010102726657/807319001234407504/809525705406808115'],
+                'greatholy': ['https://i.imgur.com/qA4VqIr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101132', 'https://discord.com/channels/200746010102726657/807319001234407504/809525850487259156'],
+                'wildstaff': ['https://i.imgur.com/7c1HlRw.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101133', 'https://discord.com/channels/200746010102726657/807319001234407504/809526032712335370'],
+                'rampant': ['https://i.imgur.com/laJJaSW.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101135', 'https://discord.com/channels/200746010102726657/807319001234407504/809526200036622386']
+            }
+            Object.keys(healList).forEach((m, i) => {
+                if (interaction.values.includes(m)) {
+                    let embed = new MessageEmbed()
+                .setColor('ORANGE')
+                .setAuthor('\'zl [SING] LongLiveLuai', client.user.displayAvatarURL())
+                .setImage(healList[m][0])
+                .setFooter('According to ARCH main discord zvz gears')
+                let button = new MessageButton()
+                .setStyle('LINK')
+                .setURL(healList[m][1])
+                .setLabel('Link to the Website')
+                let buttonback = new MessageButton()
+                .setStyle('SUCCESS')
+                .setCustomID('back')
+                .setLabel('Back to the List')
+                .setEmoji('🚀')
+                let deleteButton = new MessageButton()
+                .setStyle('DANGER')
+                .setCustomID('delete')
+                .setLabel('Delete this message')
+                .setEmoji('🚨')
+                let referenceButton = new MessageButton()
+                .setStyle('LINK')
+                .setURL(healList[m][2])
+                .setLabel('ARCH main discord reference')
+                if (interaction.replied) {
+                    interaction.editReply({
+                        content: 'Hold on',
+                        components: [[button, buttonback,referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                } else {
+                    interaction.update({
+                        content: 'Hold on',
+                        components: [[button, buttonback, referenceButton, deleteButton]],
+                        embeds: [embed]
+                    })
+                    
+                }
+                }
+            })
+        }
+    } else if (interaction.isCommand()) {
+        if (interaction.commandName === 'zvz-builds') {
+            if (interaction.channel.id === '760731834354499585' | interaction.channel.id === '779514684797091850' | interaction.member.roles.cache.has('759793776439984170') | interaction.member.permissions.has('ADMINISTRATOR')){
+                let deleteButton = new MessageButton()
+                    .setStyle('DANGER')
+                    .setCustomID('delete')
+                    .setLabel('Delete')
+                    .setEmoji('🚨')
+                await interaction.reply({
+                    content: 'ZvZ build List! according to ARCH official zvz builds',
+                    components: [row,tankRow, healRow, [deleteButton]]
+                })
+        }
+    }
+    }
+})
 client.on('channelDelete',async  (channel) => {
     const channelId = channel.id
     await mongo().then(async mongoose => {
@@ -1397,7 +1419,7 @@ client.on('ready', () => {
     setInterval(() => {
         if (index === statusArray.length) index = 0;
         const status = statusArray[index];
-        client.user.setActivity(status, { type: 'WATCHING'}).catch(console.error)
+        client.user.setActivity(status, { type: 'WATCHING'})
         index++;
     }, 3000);
 })

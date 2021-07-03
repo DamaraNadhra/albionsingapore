@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
     "mongoose": "^5.11.14",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
