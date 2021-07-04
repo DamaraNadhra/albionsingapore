@@ -1247,7 +1247,7 @@ client.on('interaction',async  interaction => {
         .setStyle('PRIMARY')
             let role = interaction.guild.roles.cache.get('706471167971557447')
             let recruitRole = interaction.guild.roles.cache.get('849947414508863519')
-            let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+            let botCommandChannel = interaction.guild.channels.cache.get('760731834354499585')
             if (interaction.member.roles.cache.has('849947414508863519')) {
                 interaction.member.roles.add(role)
                 interaction.member.roles.remove(recruitRole)
