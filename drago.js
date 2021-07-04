@@ -1065,9 +1065,7 @@ client.on('message', async (message) => {
             })
         })
     } else if (command === 'attendance') {
-        if (!message.member.roles.cache.has('759793776439984170') | !message.member.roles.cache.has('855689169018814464')) return message.reply({
-            content: `I'm sorry but you don't have the right to execute this command`
-        })
+        if (message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855689169018814464')) {
         let battleID = args[0]
         if (!battleID) return message.reply('Please state the battle ID!')
         axios.get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleID}`)
@@ -1082,6 +1080,10 @@ client.on('message', async (message) => {
             })
             
         })
+    } else {
+        return message.reply({
+            content: `I'm sorry but you don't have the right to execute this command`})
+    }
     } else if (command == 'zvz-builds') {
         if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
             message.delete()
