@@ -1119,6 +1119,25 @@ client.on('message', async (message) => {
         
         const command = await client.application?.commands.set(data)
         console.log(command)
+    } else if (command === 'application') {
+        let guildRulesChannel = message.guild.channels.cache.get('841918364863430666')
+        let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+        let registerButton = new MessageButton()
+        .setCustomID('register')
+        .setStyle('SUCCESS')
+        .setEmoji('✅')
+        .setLabel('I have read all the rules')
+        message.channel.send({
+            content: `Congratulations on joining the SINGAPORE Guild, we're happy to have you here! \nPlease take note and act on the following. \n\n> **1.** Join the Alliance Discord with this invite. \nhttps://discord.gg/TQcgeFjyw3`
+        }).then(() => message.channel.send({
+            content: `> **2.** Type '!register' here in the #register-here channel.`,
+            files: ['https://media.discordapp.net/attachments/849925701988515851/849926763818778644/unknown.png']
+        })).then(() => {
+            message.channel.send({
+                content: `> **3.** Read ${guildRulesChannel}. \n\n> **4.** ZvZ builds can be found in the Arch alliance discord or just simply type \`!zvz-builds\` in ${botCommandChannel}. \n\n> **5.** Please click the button below once you have read the rules to have access to all the server channels.`,
+                components: [[registerButton]]
+            })
+        })
     }
 }) 
 const emojis = {
@@ -1213,6 +1232,30 @@ client.on('interaction',async  interaction => {
             }
         } else if (interaction.customID === 'delete') {
             interaction.message.delete()
+        } else if (reaksi.customID === 'register') {
+            let registerButton = new MessageButton()
+        .setCustomID('register')
+        .setStyle('SUCCESS')
+        .setEmoji('✅')
+        .setLabel('I have read all the rules')
+        let permissionGiven = new MessageButton()
+        .setLabel('Permission Given!')
+        .setCustomID('permissiongiven')
+        .setDisabled(true)
+        .setEmoji('🔓')
+        .setStyle('PRIMARY')
+            let role = reaksi.guild.roles.cache.get('706471167971557447')
+            let recruitRole = reaksi.guild.roles.cache.get('849947414508863519')
+            reaksi.member.roles.add(role)
+            reaksi.member.roles.remove(recruitRole)
+            reaksi.update({
+                components: [[permissionGiven]]
+            })
+            setTimeout(() => {
+                reaksi.editReply({
+                    components: [[registerButton]]
+                })
+            }, 1500);
         }
         
     } else if (interaction.isSelectMenu()) {
