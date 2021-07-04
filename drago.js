@@ -1232,7 +1232,7 @@ client.on('interaction',async  interaction => {
             }
         } else if (interaction.customID === 'delete') {
             interaction.message.delete()
-        } else if (reaksi.customID === 'register') {
+        } else if (interaction.customID === 'register') {
             let registerButton = new MessageButton()
         .setCustomID('register')
         .setStyle('SUCCESS')
@@ -1244,15 +1244,15 @@ client.on('interaction',async  interaction => {
         .setDisabled(true)
         .setEmoji('🔓')
         .setStyle('PRIMARY')
-            let role = reaksi.guild.roles.cache.get('706471167971557447')
-            let recruitRole = reaksi.guild.roles.cache.get('849947414508863519')
-            reaksi.member.roles.add(role)
-            reaksi.member.roles.remove(recruitRole)
-            reaksi.update({
+            let role = interaction.guild.roles.cache.get('706471167971557447')
+            let recruitRole = interaction.guild.roles.cache.get('849947414508863519')
+            interaction.member.roles.add(role)
+            interaction.member.roles.remove(recruitRole)
+            interaction.update({
                 components: [[permissionGiven]]
             })
             setTimeout(() => {
-                reaksi.editReply({
+                interaction.editReply({
                     components: [[registerButton]]
                 })
             }, 1500);
