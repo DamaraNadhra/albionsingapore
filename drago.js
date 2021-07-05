@@ -179,6 +179,92 @@ const compareSet = (mainHand, offHand, head, armor, shoes) => {
         }
     }
 }
+let list = {
+    'ava-realmbreaker': {
+        pic: 'https://i.imgur.com/iU9Lh1c.jpg',
+        string: `Don't use your E during the arcane. \nYou may use roast pork for more survivability, but beef stew is preferrable \nFor bosses change to Q1 and W1 \n\nWhen fighting the **Knight Captain** Boss, you sholdn't use your E except when it's channeling for explosion or reflect \n\nOther melee DPS builds viable in ava: **Spirit hunter, Bearpaws** \nKeep in Note that melee dps is for experienced raiders of maximum of 2 per raid \nThe second Melee dps can use druid robe instead of specter jacket `,
+        name: 'Realmbreaker',
+        icon: 'https://i.imgur.com/pGPQtCf.png'
+    },
+    'ava-weeping': {
+        pic: 'https://i.imgur.com/oH0BPwv.jpg',
+        string: `This build is designed for **AOE damage** so your focus is to drop your damage on as many mobs as you possible. \nUse Druid robe to gain damage stacks, you need to keep on eye on your Q stacks, and maximize your _Well Prepared_ passive skill \n\nYou can switch to dodging shoes **Royal Shoes, Assassin Shoes**, etc if you are not comfortable with dodging the mobs or bosses skill \n\nPlease eat **Beef stew** for higher damage as you don't depend on cast speed`,
+        name: 'Weeping Repeater',
+        icon: 'https://i.imgur.com/CwCxNhV.png'
+    },
+    'ava-lightcrossbow': {
+        pic: 'https://i.imgur.com/HeYMK8E.png',
+        string: `This build is designed for **AOE damage** so your focus is to drop your damage on as many mobs as you possible. \nUse Druid robe to gain damage stacks, you need to keep on eye on your Q stacks, and maximize your _Well Prepared_ passive skill \n\nYou can switch to dodging shoes **Royal Shoes, Assassin Shoes**, etc if you are not comfortable with dodging the mobs or bosses skill \n\nPlease eat **Beef stew** for higher damage as you don't depend on cast speed \n\n**It's mandatory** to use **Cryptcandle** as the offhand of this build to boost the damage`,
+        name: 'Light Crossbow',
+        icon: 'https://i.imgur.com/LRfKUZX.jpg'
+    },
+    'ava-mainhealer': {
+        pic: 'https://i.imgur.com/xDKltW9.jpg',
+        string: 'Your role as **Main Healer** is to keep the **Raid Leader (Main Tank)** alive. This means main responsibility is to heal the Raid Leader, **not the party**. \nYou will also be responsible to use **Holy Blessing (W)** on Raid Leader. This role should be played at high spec and by experienced raiders. \n\n**Note:** use **Holy Blessing** on mobs, **Holy Beam** on bosses and **Reawaken** for Dancing Queen(Archmage Boss)',
+        name: 'Main Healer',
+        icon: 'https://i.imgur.com/oP8x7o3.png'
+    },
+    'ava-partyhealer': {
+        pic: 'https://i.imgur.com/MZxbFVw.jpg',
+        string: 'Your role as **Party Healer** is to keep all dps and supports alive. You may be designated to heal Off Tank in addition to the party. \nYou are **not allowed** to heal **Main Tank** at all, because it will cause healing sickness. \nParty Healer is also responsible to use Reawaken on bosses so lvl 85 mastery is expected. \n\n**Note:** Royal robe with Druid cowl is preferred for heals \n\nOne party healer might also be designated to heal the specter jacket \n\nPlease eat **Pork omelette** for cooldown and cast speed',
+        name: 'Party Healer',
+        icon: 'https://i.imgur.com/ce3OT8s.png'
+    },
+    'ava-permafrost': {
+        pic: 'https://i.imgur.com/wIJUVEX.jpg',
+        string: '**Permafrost** is high magic burst weapon, and its focus mainly on **AOE damage**, thus your focus should be to drop your damage on as many mobs as possible. \nThis build focuses on **2 burst combo:** \n1. Use your E ability to activate morgana cape and Q spam with Royal Cowl active. \n2. Use Scholar robe to continue Q spam. \n\n**Note:** \n1. Perma E **must not be used** before the **Raid Leader stun**, because it will fuck up the cc \n2. **Dont use** Scholar robe when the Morgana cape is proc \n\nPlease eat **Pork omelette** for cooldowns and cast speed',
+        name: 'Permafrost prism',
+        icon: 'https://i.imgur.com/S8Mk6S6.png'
+    },
+    'ava-frost': {
+        pic: 'https://i.imgur.com/uQMhVvx.jpg',
+        string: '**Frost Staves** is high magic burst weapon, and its focus mainly on **AOE damage**, thus your focus should be to drop your damage on as many mobs as possible. \nThis build focuses on **2 burst combo:** \n1. Use your E ability to activate morgana cape and Q spam with Royal Cowl active. \n2. Use Scholar robe to continue Q spam. \n\n**Note:** \n1. Exception for **Hoarfrost Staff** dont ever ever try to touch your E keyboard when killing mobs \n2. **Dont use** Scholar robe when the Morgana cape is proc \n\nPlease eat **Pork omelette** for cooldowns and cast speed',
+        name: 'Frost Staves',
+        icon: 'https://i.imgur.com/a1iCHcW.png'
+    },
+    'ava-blazing': {
+        pic: 'https://i.imgur.com/mwp5Jd1.jpg',
+        string: '**Blazing** is high burst fire DPS \nYou will become **highest DPS** if you play correctly and you will need **2 Separate** build \n\n**Note:** \n1. **Time your E** on final boss so as not to get reflected and die \n2. The spell **changes** during bosses \n\nPlease eat **Beef stew** for more damage',
+        name: 'Blazing Staff',
+        icon: 'https://i.imgur.com/jqNg3Ai.png'
+    },
+    'ava-ironroot': {
+        pic: 'https://i.imgur.com/XC6pTTG.jpg',
+        name: 'Ironroot Support',
+        icon: 'https://i.imgur.com/K82Lc9m.png',
+        string: 'Your role as a **Ironroot** is to link mobs together. \nYou should always linked by using E then use **Royal jacket** and **Assassin hood** to reset cooldowns, you will generate so much aggro - use **Shoes of Tenacity** to get rid of the aggro. \nThis role should be played by **Experienced players** because mobs clearing speed is depending on how good is the **ironroot** in linking mobs \n\n**Note:** \n1. Swap weapons for bosses is **mandatory** as you can\'t link the boss to any mob ' 
+    },
+    'ava-arcane': {
+        pic: 'https://i.imgur.com/dx5E354.jpg',
+        name: 'Arcane',
+        icon: 'https://i.imgur.com/uUm8ip7.png',
+        string: 'Your role as **Great Arcane** is to use E when called for by **Raid leader**. \nOnce you use your E - use **Royal jacket** and **Assassin hood** to reset cooldowns and get ready for the **next arcane call**. \nIf second arcane has **Judicator armor** it can be used if rotation is missed or any other case mobs may cast spells. \nYou will be designated as first or second arcane by Raid Leader based on **gear and/or experience**. \n\nFor final boss Arcane is responsible to **use Enigmatic staff** to shield the party member chosen by beam or if swords spawn on party. \n\n**Note:** \n1. Any debuffs **won\'t work** during the Timefreeze (Great Arcane\'s E) \n2. Always bring **Occult staff** for Lizard boss and **Enigmatic staff** \n3. First arcane always on **Cleanse** and second arcane on **Frazzle** \n\nPlease eat **Pork Omelette** for cooldowns'
+    },
+    'ava-shadowcaller': {
+        pic: 'https://i.imgur.com/schEIU9.jpg',
+        name: 'Cursed Staff Support',
+        icon: 'https://i.imgur.com/hGFf2KE.png',
+        string: '**Cursed Support** job is to debuff mobs to increase their damage received. \nUse all the debuffs (Stalker hood, W, and E) after the **second arcane** or in between **first and second arcane** \n\n**HP Cut:** \n1. **Final boss HP cut** \nHP cut is something that is very important to do at final boss. \nSo basically, you are preventing the **Last boss** from healing himself to Max HP, instruction: \na. **Demonic staff** E should be used at about **50% channel**. \nb. **Hood of Tenacity** sholuld be used at about **80% channel** \n\n2. **High Priestess HP Cut** \nyou will  hp cut when 2nd tank air compresses all the shadows out and takes them out and they vanish. \n\n**Note:** \n1. **Hood of Tenacity** is self area cast so you should proc it near the boss \n2. **Cursed support players** are expected to be able to **bait the swords** at final boss. \n3. If you are using **Shadowcaller** always pop E on the **Plate armor** user \n\nPlease eat **Pork omelette** for cooldowns'
+    },
+    'ava-bms': {
+        pic: 'https://i.imgur.com/ohQhKwW.jpg',
+        name: 'Blackmonk (BMS)',
+        icon: 'https://i.imgur.com/XLf6QF2.png',
+        string: 'Your job as **Blackmonk** is to **fix the pulls** and **reduce damage dealt by mobs**. \nAlso during the Spearmen jump, you need to go **TOWARDS** the person on which spearman about to jump, and then **use ENFEEBLE first** then either **Q** or **W** to cancel the jump \n\n**Dancing Queen (Archmage)** \nOn dancing queen blackmonk is doing the reduce damage for the laser, **instruction:** \n1. **Main tank\'s** blades (for opening). \n2. **Blackmonk** blades. \n3. **Blackmonk** enfeeble \n4. **Second tank** enfeeble \n5. Back to **Blackmonk** blades and repeat. \n\n**Note:** \n1. Please bring **Knight and Guardian Helmet** \n2. Pop your knight helmet on dancing queen when you\'re using enfeeble \n\nPlease eat **Pork omelette** for cooldowns'
+    },
+    'ava-secondtank': {
+        pic: 'https://i.imgur.com/YuFJ30S.jpg',
+        name: "Second Tank | Off Tank",
+        icon: 'https://i.imgur.com/OAovFtV.png',
+        string: 'Your main job as **Second tank** is to **Taunt** the mobs and use **Sacred ground** to silence the mobs. \n **Listen** to the **Raid Leader\'s call** when to drop silence and Taunt any mob that **may walk out of the silence.** \nOff Tank is also **responsible to Taunt any mobs that may switch agro** (drones, warrior, knight, archer). \nYou will use **Blackmonk Staff** for some bosses for **damage reduction** or to **slow auto attack speed** with **forceful swing**. \n\n**PS:** Second tank can use any plate armor nowadays since they only expected to taunt the mobs \n\nPlease eat **Pork omelette** for cooldowns'
+    },
+    'ava-maintank': {
+        pic: 'https://i.imgur.com/qEPy5BE.jpg',
+        name: 'Main Tank | Raid Leader',
+        icon: 'https://i.imgur.com/cyejSwC.png',
+        string: 'This build is **exclusively** for **Raid Leaders**. \nYou will play **1 handed Hammer + Leering Cane** for mob pulls with all armor on **Authority passive (more cc duration)** and swap to **Blackmonk Stave** for bosses \n\nPlease eat **River Sturgeon fish** for more CC duration'
+    }
+}
 const row = new MessageActionRow()
         .addComponents(
             new MessageSelectMenu()
@@ -387,6 +473,74 @@ const row = new MessageActionRow()
                     description: 'Arcane support, gives AOE shield to allies',
                     value: 'enigmatic',
                     emoji: '<:enigmatic:860822901184004146>'
+                },
+            ])
+        )
+        const avaRow = new MessageActionRow()
+        .addComponents(
+            new MessageSelectMenu()
+            .setCustomID('avabuilds')
+            .setPlaceholder('Ava builds list')
+            .addOptions([
+                {
+                    label: 'Realmbreaker',
+                    description: 'Melee dps, reduces mobs health percentage',
+                    value: 'ava-realmbreaker',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Weeping Repeater',
+                    description: 'Ranged dps, big magic dmg burst on the E',
+                    value: 'ava-weeping',
+                    emoji: '🎋'
+                },
+                {
+                    label: 'Light Crossbow',
+                    description: 'Ranged dps, big dps if know the combo',
+                    value: 'ava-lightcrossbow',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Permafrost',
+                    description: 'Ranged magic dps, big magic dmg burst on the E',
+                    value: 'ava-permafrost',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Frost staves',
+                    description: 'Ranged magic dps.',
+                    value: 'ava-frost',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Blazing Staff',
+                    description: 'Ranged magic dps, big dps if have big brain',
+                    value: 'ava-blazing',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Ironroot',
+                    description: 'Support dps, link mobs together',
+                    value: 'ava-ironroot',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Shadowcaller',
+                    description: 'Curse support, reduces mobs resistance',
+                    value: 'ava-shadowcaller',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Arcane',
+                    description: 'Arcane support, timefreeze the mob',
+                    value: 'ava-arcane',
+                    emoji: '🎉'
+                },
+                {
+                    label: 'Realmbreaker',
+                    description: 'Melee dps, reduces mobs health percentage',
+                    value: 'ava-realmbreaker',
+                    emoji: '🎉'
                 },
             ])
         )
@@ -1140,26 +1294,68 @@ client.on('message', async (message) => {
                 components: [[registerButton]]
             })
         })
-    }
+    } else if (command === 'ava-help') {
+        let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+            if (message.channel.id ==! '760731834354499585') {
+                return message.reply({
+                    content: `Please redo this command at ${botCommandChannel}`
+                })
+            } else if (message.member.permissions.has('ADMINISTRATOR') | message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855689169018814464')) {
+                return true
+            }
+        message.delete()
+        const listButton = new MessageButton()
+        .setCustomID('avabuildsbutton')
+        .setEmoji('🚀')
+        .setLabel('Ava builds')
+        .setStyle('SUCCESS')
+        const closeButton = new MessageButton()
+        .setCustomID('closebutton')
+        .setEmoji('❌')
+        .setLabel('Close')
+        .setStyle('DANGER')
+        let embed = new MessageEmbed()
+        .setColor('ORANGE')
+        .setAuthor('Singapore Ava Slave', robot.user.displayAvatarURL())
+        .setTitle('Introduction...')
+        .setDescription(`Avalonian Elite Dungeon is a difficult dungeon which can only be finished with 20 men. \nYou can only find the **Avalonian Elite Dungeon** around the outlands, you can also find **Avalonian Elite Dungeon** inside the Avalonian Roads as well. The tier starts from T6. \n\nHowever, finding a natural spawn dungeon is a little bit difficult, that's why people used to pop it from a map. \nIn Singapore guild we always do **8.2+ Avalonian Elite Dungeon** that's why you are expected to wear **8.3 gears** and hit at least **1650 IP**. \n\nAs for the shape of the dungeon entrance is like the image below `)
+        .setImage('https://i.imgur.com/vjQoBtm.png')
+        .setFooter('Singapore', robot.user.displayAvatarURL())
+        message.channel.send({
+            embeds: [embed],
+            components: [[listButton, closeButton]]
+        })
+    } Object.keys(list).forEach((m, i) => {
+        if (command.includes(m)) {
+            let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+            if (message.channel.id ==! '760731834354499585') {
+                return message.reply({
+                    content: `Please redo this command at ${botCommandChannel}`
+                })
+            } else if (message.member.permissions.has('ADMINISTRATOR') | message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855689169018814464')) {
+                return true
+            }
+                let listButton = new MessageButton()
+                .setCustomID('listbutton')
+                .setStyle('SUCCESS')
+                .setLabel('Looks for more builds!')
+                .setEmoji('<:jennielove:844893922634235904>')
+                let embed = new MessageEmbed()
+                .setAuthor(list[m].name, list[m].icon)
+                .setColor('ORANGE')
+                .setImage(list[m].pic)
+                .setDescription(list[m].string)
+                .setFooter(`Requested by ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+                message.channel.send({
+                    content: 'Processing...',
+                    embeds: [embed],
+                    components: [[listButton]]
+                })
+            
+        }
+    })
 }) 
-const emojis = {
-    white_check_mark: 'Recruit'
-}
-const handleReactions = (reaction, user, add) => {
-    if (user.id === '805976602864386059') {
-        return
-    }
-    const emoji = reaction._emoji.name
-    const { guild } = reaction.message
 
-    const roleName = 'Recruit'
-    const role = guild.roles.cache.find(role => role.name === roleName)
-    const member = guild.members.cache.find(member => member.id === user.id)
-    if (add) {
-        member.roles.remove(role)
-    } 
-
-}
 client.on('guildMemberAdd', (member) => {
    member.send(`**[ARCH] Singapore are recruiting for S13**
    Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
@@ -1266,6 +1462,60 @@ client.on('interaction',async  interaction => {
                     components: [[registerButton]]
                 })
             }, 1500);
+        } else if (interaction.customID === 'avabuildsbutton') {
+            const closeButton = new MessageButton()
+        .setCustomID('closebutton')
+        .setEmoji('❌')
+        .setLabel('Close')
+        .setStyle('DANGER')
+        const homeButton = new MessageButton()
+        .setCustomID('home')
+        .setEmoji('🏘️')
+        .setLabel('Home')
+        .setStyle('PRIMARY')
+            interaction.update({
+                embeds: [],
+                content: 'Listing avalonian builds...',
+                components: [row, [homeButton, closeButton]]
+            })
+        } else if (interaction.customID === 'closebutton') {
+            interaction.message.delete()
+        } else if (interaction.customID === 'home') {
+            const listButton = new MessageButton()
+        .setCustomID('avabuildsbutton')
+        .setEmoji('🚀')
+        .setLabel('Ava builds')
+        .setStyle('SUCCESS')
+        const closeButton = new MessageButton()
+        .setCustomID('closebutton')
+        .setEmoji('❌')
+        .setLabel('Close')
+        .setStyle('DANGER')
+        let embed = new MessageEmbed()
+        .setColor('ORANGE')
+        .setAuthor('Singapore Ava Slave', robot.user.displayAvatarURL())
+        .setTitle('Introduction...')
+        .setDescription(`Avalonian Elite Dungeon is a difficult dungeon which can only be finished with 20 men. \nYou can only find the **Avalonian Elite Dungeon** around the outlands, you can also find **Avalonian Elite Dungeon** inside the Avalonian Roads as well. The tier starts from T6. \n\nHowever, finding a natural spawn dungeon is a little bit difficult, that's why people used to pop it from a map. \nIn Singapore guild we always do **8.2+ Avalonian Elite Dungeon** that's why you are expected to wear **8.3 gears** and hit at least **1650 IP**. \n\nAs for the shape of the dungeon entrance is like the image below `)
+        .setImage('https://i.imgur.com/vjQoBtm.png')
+        .setFooter('Singapore', robot.user.displayAvatarURL())
+            interaction.update({
+                embeds: [embed],
+                components: [[listButton, closeButton]]
+            })
+        } else if (interaction.customID === 'listbutton') {
+            const closeButton = new MessageButton()
+        .setCustomID('closebutton')
+        .setEmoji('❌')
+        .setLabel('Close')
+        .setStyle('DANGER')
+        const homeButton = new MessageButton()
+        .setCustomID('home')
+        .setEmoji('🏘️')
+        .setLabel('Home')
+        .setStyle('PRIMARY')
+            interaction.update({
+                components: [row, [closeButton]]
+            })
         }
         
     } else if (interaction.isSelectMenu()) {
@@ -1434,6 +1684,21 @@ client.on('interaction',async  interaction => {
                     })
                     
                 }
+                }
+            })
+        } else if (interaction.customID === 'avabuilds') {
+            Object.keys(list).forEach((m, i) => {
+                if (interaction.values.includes(m)) {
+                    let embed = new MessageEmbed()
+                    .setAuthor(list[m].name, list[m].icon)
+                    .setColor('ORANGE')
+                    .setImage(list[m].pic)
+                    .setDescription(list[m].string)
+                    .setFooter(`Requested by ${Boolean(interaction.guild.members.cache.get(interaction.user.id).nickname) ? interaction.guild.members.cache.get(interaction.user.id).nickname : interaction.user.username}`, interaction.user.displayAvatarURL())
+                    interaction.update({
+                        content: 'Processing...',
+                        embeds: [embed]
+                    })
                 }
             })
         }
