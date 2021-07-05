@@ -179,6 +179,98 @@ const compareSet = (mainHand, offHand, head, armor, shoes) => {
         }
     }
 }
+const AvArow = new MessageActionRow()
+.addComponents(
+    new MessageSelectMenu()
+    .setCustomID('avabuilds')
+    .setPlaceholder('Search ava builds')
+    .addOptions([
+        {
+            label: 'Realmbreaker',
+            description: 'Melee dps, reduces mobs health percentage',
+            value: 'ava-realmbreaker',
+            emoji: '<:realmbreaker:861440819689291796>'
+        },
+        {
+            label: 'Weeping Repeater',
+            description: 'Ranged dps, big magic dmg burst on the E',
+            value: 'ava-weeping',
+            emoji: '<:weeping:861440820531560448>'
+        },
+        {
+            label: 'Light Crossbow',
+            description: 'Ranged dps, big dps if know the combo',
+            value: 'ava-lightcrossbow',
+            emoji: '<:lightcrossbow:861440820287504404>'
+        },
+        {
+            label: 'Permafrost',
+            description: 'Ranged magic dps, big magic dmg burst on the E',
+            value: 'ava-permafrost',
+            emoji: '<:permafrost:861440819747356672>'
+        },
+        {
+            label: 'Frost staves',
+            description: 'Ranged magic dps.',
+            value: 'ava-frost',
+            emoji: '<:greatfrost:861440817746411532>'
+        },
+        {
+            label: 'Blazing Staff',
+            description: 'Ranged magic dps, big dps if have big brain',
+            value: 'ava-blazing',
+            emoji: '<:blazingstaff:861440820040564746>'
+        },
+        {
+            label: 'Ironroot',
+            description: 'Support dps, link mobs together',
+            value: 'ava-ironroot',
+            emoji: '<:ironroot:861440822700146688>'
+        },
+        {
+            label: 'Cursed Staff',
+            description: 'Curse support, reduces mobs resistance',
+            value: 'ava-shadowcaller',
+            emoji: '<:shadowcaller:861440816568336404>'
+        },
+        {
+            label: 'Arcane',
+            description: 'Arcane support, timefreeze the mob',
+            value: 'ava-arcane',
+            emoji: '<:arcane:861440815284355073>'
+        },
+        {
+            label: 'Party Healer',
+            description: 'Holy healer, heal the party',
+            value: 'ava-partyhealer',
+            emoji: '<:fallenstaff:861440819805421579>'
+        },
+        {
+            label: 'Main Healer',
+            description: 'Holy healer, heal the party',
+            value: 'ava-mainhealer',
+            emoji: '<:holystaff:861440820250935338>'
+        },
+        {
+            label: 'Blackmonk',
+            description: 'Quarterstaff support, kick mobs and reduce dmg',
+            value: 'ava-bms',
+            emoji: '<:bms:861440820124581928>'
+        },
+        {
+            label: 'Second Tank/Off Tank',
+            description: 'Second tank, taunt and pull mobs',
+            value: 'ava-secondtank',
+            emoji: '<:incubus:861440822489776159>'
+        },
+        {
+            label: 'Main Tank',
+            description: 'Person who leads the Ava',
+            value: 'ava-maintank',
+            emoji: '<:hammer:861440821735718932>'
+        },
+    ])
+)
 let list = {
     'ava-realmbreaker': {
         pic: 'https://i.imgur.com/iU9Lh1c.jpg',
@@ -1465,7 +1557,7 @@ client.on('interaction',async  interaction => {
             interaction.update({
                 embeds: [],
                 content: 'Listing avalonian builds...',
-                components: [row, [homeButton, closeButton]]
+                components: [AvArow, [homeButton, closeButton]]
             })
         } else if (interaction.customID === 'closebutton') {
             interaction.message.delete()
@@ -1503,7 +1595,7 @@ client.on('interaction',async  interaction => {
         .setLabel('Home')
         .setStyle('PRIMARY')
             interaction.update({
-                components: [row, [closeButton]]
+                components: [AvArow, [closeButton]]
             })
         }
         
