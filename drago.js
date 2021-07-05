@@ -1296,13 +1296,7 @@ client.on('message', async (message) => {
         })
     } else if (command === 'ava-help') {
         let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
-            if (message.channel.id ==! '760731834354499585') {
-                return message.reply({
-                    content: `Please redo this command at ${botCommandChannel}`
-                })
-            } else if (message.member.permissions.has('ADMINISTRATOR') | message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855689169018814464')) {
-                return true
-            }
+        if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')) {
         message.delete()
         const listButton = new MessageButton()
         .setCustomID('avabuildsbutton')
@@ -1325,16 +1319,11 @@ client.on('message', async (message) => {
             embeds: [embed],
             components: [[listButton, closeButton]]
         })
+    }
     } Object.keys(list).forEach((m, i) => {
         if (command.includes(m)) {
             let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
-            if (message.channel.id ==! '760731834354499585') {
-                return message.reply({
-                    content: `Please redo this command at ${botCommandChannel}`
-                })
-            } else if (message.member.permissions.has('ADMINISTRATOR') | message.member.roles.cache.has('759793776439984170') | message.member.roles.cache.has('855689169018814464')) {
-                return true
-            }
+            if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
                 let listButton = new MessageButton()
                 .setCustomID('listbutton')
                 .setStyle('SUCCESS')
@@ -1351,7 +1340,7 @@ client.on('message', async (message) => {
                     embeds: [embed],
                     components: [[listButton]]
                 })
-            
+            }
         }
     })
 }) 
