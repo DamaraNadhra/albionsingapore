@@ -1391,7 +1391,7 @@ client.on('message', async (message) => {
                 .setLabel('Look for more builds!')
                 .setEmoji('<:jennielove:844893922634235904>')
                 let embed = new MessageEmbed()
-                .setAuthor(avalist[m].name, list[m].icon)
+                .setAuthor(avalist[m].name, avalist[m].icon)
                 .setColor('ORANGE')
                 .setImage(avalist[m].pic)
                 .setDescription(avalist[m].string)
