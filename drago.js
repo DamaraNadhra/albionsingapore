@@ -271,7 +271,7 @@ const AvArow = new MessageActionRow()
         },
     ])
 )
-let list = {
+let avalist = {
     'ava-realmbreaker': {
         pic: 'https://i.imgur.com/iU9Lh1c.jpg',
         string: `Don't use your E during the arcane. \nYou may use roast pork for more survivability, but beef stew is preferrable \nFor bosses change to Q1 and W1 \n\nWhen fighting the **Knight Captain** Boss, you sholdn't use your E except when it's channeling for explosion or reflect \n\nOther melee DPS builds viable in ava: **Spirit hunter, Bearpaws** \nKeep in Note that melee dps is for experienced raiders of maximum of 2 per raid \nThe second Melee dps can use druid robe instead of specter jacket `,
@@ -285,10 +285,10 @@ let list = {
         icon: 'https://i.imgur.com/CwCxNhV.png'
     },
     'ava-lightcrossbow': {
-        pic: 'https://i.imgur.com/HeYMK8E.png',
+        pic: 'https://i.imgur.com/LRfKUZX.jpg',
         string: `This build is designed for **AOE damage** so your focus is to drop your damage on as many mobs as you possible. \nUse Druid robe to gain damage stacks, you need to keep on eye on your Q stacks, and maximize your _Well Prepared_ passive skill \n\nYou can switch to dodging shoes **Royal Shoes, Assassin Shoes**, etc if you are not comfortable with dodging the mobs or bosses skill \n\nPlease eat **Beef stew** for higher damage as you don't depend on cast speed \n\n**It's mandatory** to use **Cryptcandle** as the offhand of this build to boost the damage`,
         name: 'Light Crossbow',
-        icon: 'https://i.imgur.com/LRfKUZX.jpg'
+        icon: 'https://i.imgur.com/HeYMK8E.png'
     },
     'ava-mainhealer': {
         pic: 'https://i.imgur.com/xDKltW9.jpg',
@@ -366,109 +366,109 @@ const row = new MessageActionRow()
                 {
                     label: 'Dual Swords',
                     description: 'Melee dps build, good for clumps',
-                    value: 'dualswords',
+                    value: 'zvz-dualswords',
                     emoji: '<:dualswords:860679052309299210>'
                 },
                 {
                     label: 'Permafrost Prism',
                     description: 'Ranged magic dps build, good for escaping',
-                    value: 'permafrost',
+                    value: 'zvz-permafrost',
                     emoji: '<:perma:860679051617107968>'
                 },
                 {
                     label: 'Halberd',
                     description: 'Melee dps build, spread the healing sickness',
-                    value: 'halberd',
+                    value: 'zvz-halberd',
                     emoji: '<:halberd:860679050468917258>'
                 },
                 {
                     label: 'Energy Shaper',
                     description: 'Ranged dps build, same party lazer doesnt stack',
-                    value: 'energyshaper',
+                    value: 'zvz-energyshaper',
                     emoji: '<:shaper:860679052142182400>'
                 },
                 {
                     label: 'Mistpiercer',
                     description: 'Ranged magic dps build, straight line narrow aoe',
-                    value: 'avabow',
+                    value: 'zvz-mistpiercer',
                     emoji: '<:avabow:860679049973465098>'
                 },
                 {
                     label: 'Clarent Blade',
                     description: 'Melee dps build, huge round AoE',
-                    value: 'clarent',
+                    value: 'zvz-clarent',
                     emoji: '<:clarent:860679051445796895>'
                 },
                 {
                     label: 'Realmbreaker',
                     description: 'Melee dps build, clap enemy and reduce their hp %',
-                    value: 'realmbreaker',
+                    value: 'zvz-realmbreaker',
                     emoji: '<:realmbreaker:860679051667701810>'
                 },
                 {
                     label: 'Daybreaker',
                     description: 'Melee dps build, straight AoE purge',
-                    value: 'daybreaker',
+                    value: 'zvz-daybreaker',
                     emoji: '<:daybreaker:860679051353915482>'
                 },
                 {
                     label: 'Galatine Pair',
                     description: 'Melee dps build, this build CLAPS PPL',
-                    value: 'galatine',
+                    value: 'zvz-galatine',
                     emoji: '<:galatine:860679051038556160>'
                 },
                 {
                     label: 'Brimstone',
                     description: 'Ranged magic build, medium size circle AoE BIG DPS',
-                    value: 'brimstone',
+                    value: 'zvz-brimstone',
                     emoji: '<:brimstone:860679049901637633>'
                 },
                 {
                     label: 'Siegebow',
                     description: 'Ranged dps build, huge AoE weapon',
-                    value: 'siegebow',
+                    value: 'zvz-siegebow',
                     emoji: '<:siegebow:860679051786453052>'
                 },
                 {
                     label: 'Spirithunter',
                     description: 'Melee dps build, reduce enemy\'s resistance',
-                    value: 'spirithunter',
+                    value: 'zvz-spirithunter',
                     emoji: '<:spirithunter:860679050363142155>'
                 },
                 {
                     label: 'Shadowcaller',
                     description: 'Ranged magic support dps, shed enemies',
-                    value: 'shadowcaller',
+                    value: 'zvz-shadowcaller',
                     emoji: '<:shadowcaller:860813033105915945>'
                 },
                 {
                     label: 'Dawnsong',
                     description: 'Ranged magic dps, big fire AoE',
-                    value: 'dawnsong',
+                    value: 'zvz-dawnsong',
                     emoji: '<:dawnsong:860679051295326208>'
                 },
                 {
                     label: 'Bridled Fury',
                     description: 'Melee magic dps, hit and run CLAP',
-                    value: 'bridled',
+                    value: 'zvz-bridled',
                     emoji: '<:bridledfury:860687946868981820>'
                 },
                 {
                     label: 'Cursed Skull',
                     description: 'Ranged magic dps, huge circle true damage AoE',
-                    value: 'cursedskull',
+                    value: 'zvz-cursedskull',
                     emoji: '<:cursedskull:860687944960835624>'
                 },
                 {
                     label: 'Damnation',
                     description: 'Ranged magic semi support dps, HUGE AoE shred',
-                    value: 'damnation',
+                    value: 'zvz-damnation',
                     emoji: '<:damnation:860687946905812992>'
                 },
                 {
                     label: 'Greataxe',
                     description: 'Harcore melee dps, uninterruptable high dps spin',
-                    value: 'greataxe',
+                    value: 'zvz-greataxe',
                     emoji: '<:greataxe:860687945119563786>'
                 },
             ]),
@@ -483,31 +483,31 @@ const row = new MessageActionRow()
                 {
                     label: 'Camlaann',
                     description: 'Melee tank build, good for initiating clump',
-                    value: 'camlann',
+                    value: 'zvz-camlann',
                     emoji: '<:camlann:860681322879385621>'
                 },
                 {
                     label: 'Grailseeker',
                     description: 'Melee tank build, hold enemy engages',
-                    value: 'grailseeker',
+                    value: 'zvz-grailseeker',
                     emoji: '<:grailseeker:860691643971665921>'
                 },
                 {
                     label: 'Soulscythe',
                     description: 'Melee tank build, good for initiating engage',
-                    value: 'soulscythe',
+                    value: 'zvz-soulscythe',
                     emoji: '<:soulscythe:860691644211134484>'
                 },
                 {
                     label: 'Grovekeeper',
                     description: 'Melee tank build, big aoe stun',
-                    value: 'grovekeeper',
+                    value: 'zvz-grovekeeper',
                     emoji: '<:grovekeeper:860691643593523200>'
                 },
                 {
                     label: 'Morningstar',
                     description: 'Melee tank build, roots enemy in long duration',
-                    value: 'morningstar',
+                    value: 'zvz-morningstar',
                     emoji: '<:morningstar:860691643250638928>'
                 },
             ])
@@ -521,121 +521,90 @@ const row = new MessageActionRow()
                 {
                     label: 'Fallen Staff',
                     description: 'Casual holy healer, big pp circle + cleanse heal',
-                    value: 'fallen',
+                    value: 'zvz-fallen',
                     emoji: '<:Fallen:860679051308171266>'
                 },
                 {
                     label: 'Wild Staff',
                     description: 'Nature healer, big AOE circle heal',
-                    value: 'wildstaff',
+                    value: 'zvz-wildstaff',
                     emoji: '<:wildstaff:860693853652910100>'
                 },
                 {
                     label: 'Great Holy',
                     description: 'Holy Healer, increase allies resistance',
-                    value: 'greatholy',
+                    value: 'zvz-greatholy',
                     emoji: '<:greatholy:860693852611411999>'
                 },
                 {
                     label: 'Rampant',
                     description: 'Nature Healer, straight narrow line AOE heals',
-                    value: 'rampant',
+                    value: 'zvz-rampant',
                     emoji: '<:rampant:860693853849518100>'
                 },
                 {
                     label: 'Malevolent Locus',
                     description: 'Arcane support, used to cleanse allies',
-                    value: 'locus',
+                    value: 'zvz-locus',
                     emoji: '<:locus:860822902547283969>'
                 },
                 {
                     label: 'One Handed Arcane',
                     description: 'Arcane support, silences and purges enemies in AOE',
-                    value: 'arcane',
+                    value: 'zvz-arcane',
                     emoji: '<:onehandarcane:860822902134538250>'
                 },
                 {
                     label: 'Occult Staff',
                     description: 'Arcane support, increase allies movement speed',
-                    value: 'occult',
+                    value: 'zvz-occult',
                     emoji: '<:occult:860823088475013131>'
                 },
                 {
                     label: 'Enigmatic Staff',
                     description: 'Arcane support, gives AOE shield to allies',
-                    value: 'enigmatic',
+                    value: 'zvz-enigmatic',
                     emoji: '<:enigmatic:860822901184004146>'
                 },
             ])
         )
-        const avaRow = new MessageActionRow()
-        .addComponents(
-            new MessageSelectMenu()
-            .setCustomID('avabuilds')
-            .setPlaceholder('Ava builds list')
-            .addOptions([
-                {
-                    label: 'Realmbreaker',
-                    description: 'Melee dps, reduces mobs health percentage',
-                    value: 'ava-realmbreaker',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Weeping Repeater',
-                    description: 'Ranged dps, big magic dmg burst on the E',
-                    value: 'ava-weeping',
-                    emoji: '🎋'
-                },
-                {
-                    label: 'Light Crossbow',
-                    description: 'Ranged dps, big dps if know the combo',
-                    value: 'ava-lightcrossbow',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Permafrost',
-                    description: 'Ranged magic dps, big magic dmg burst on the E',
-                    value: 'ava-permafrost',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Frost staves',
-                    description: 'Ranged magic dps.',
-                    value: 'ava-frost',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Blazing Staff',
-                    description: 'Ranged magic dps, big dps if have big brain',
-                    value: 'ava-blazing',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Ironroot',
-                    description: 'Support dps, link mobs together',
-                    value: 'ava-ironroot',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Shadowcaller',
-                    description: 'Curse support, reduces mobs resistance',
-                    value: 'ava-shadowcaller',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Arcane',
-                    description: 'Arcane support, timefreeze the mob',
-                    value: 'ava-arcane',
-                    emoji: '🎉'
-                },
-                {
-                    label: 'Realmbreaker',
-                    description: 'Melee dps, reduces mobs health percentage',
-                    value: 'ava-realmbreaker',
-                    emoji: '🎉'
-                },
-            ])
-        )
+        let dpsList = {
+            'zvz-siegebow': ['https://i.imgur.com/s5kBpr1.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101093', 'https://discord.com/channels/200746010102726657/807319001234407504/807658296416665621'],
+            'zvz-permafrost': ['https://i.imgur.com/VY91AFv.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101097', 'https://discord.com/channels/200746010102726657/807319001234407504/807675958097477672'],
+            'zvz-mistpiercer': ['https://i.imgur.com/MMIyALt.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101099', 'https://discord.com/channels/200746010102726657/807319001234407504/807679039275139102'],
+            'zvz-energyshaper': ['https://i.imgur.com/qDdKBSB.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101101', 'https://discord.com/channels/200746010102726657/807319001234407504/807700941457063986'],
+            'zvz-brimstone': ['https://i.imgur.com/1k8FJlp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101179', 'https://discord.com/channels/200746010102726657/807319001234407504/807675595797823488'],
+            'zvz-dawnsong': ['https://i.imgur.com/61o9SVr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101102', 'https://discord.com/channels/200746010102726657/807319001234407504/807701098026106930'],
+            'zvz-halberd': ['https://i.imgur.com/Z66GRfX.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101103', 'https://discord.com/channels/200746010102726657/807319001234407504/807781638494486548'],
+            'zvz-realmbreaker': ['https://i.imgur.com/oOUnwKo.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101106', 'https://discord.com/channels/200746010102726657/807319001234407504/807781876571308042'],
+            'zvz-daybreaker': ['https://i.imgur.com/KAag4qz.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101108', 'https://discord.com/channels/200746010102726657/807319001234407504/807782187550244884'],
+            'zvz-galatine': ['https://i.imgur.com/cU4Y1Og.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101109', 'https://discord.com/channels/200746010102726657/807319001234407504/807786585302368266'],
+            'zvz-clarent': ['https://i.imgur.com/p8ElKkd.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101112', 'https://discord.com/channels/200746010102726657/807319001234407504/808048332256968714'],
+            'zvz-spirithunter': ['https://i.imgur.com/rxFjtVy.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101113', 'https://discord.com/channels/200746010102726657/807319001234407504/808051545865715722'],
+            'zvz-dualswords': ['https://i.imgur.com/9jDIX7D.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101116', 'https://discord.com/channels/200746010102726657/807319001234407504/808053999471034368'],
+            'zvz-bridled': ['https://i.imgur.com/ylc2jgp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101147', 'https://discord.com/channels/200746010102726657/807319001234407504/816410289292967947'],
+            'zvz-greataxe': ['https://i.imgur.com/jD5hSJ0.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101150', 'https://discord.com/channels/200746010102726657/807319001234407504/843587604413808680'],
+            'zvz-damnation': ['https://i.imgur.com/SoSgWnJ.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101125', 'https://discord.com/channels/200746010102726657/807319001234407504/808440044594659389'],
+            'zvz-shadowcaller': ['https://i.imgur.com/LUAPvmA.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101138', 'https://discord.com/channels/200746010102726657/807319001234407504/815692980673445888'],
+            'zvz-cursedskull': ['https://i.imgur.com/jePPweD.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101152', 'https://discord.com/channels/200746010102726657/807319001234407504/843590654676303942']
+        }
+        let healList = {
+            'zvz-occult': ['https://i.imgur.com/iqEZaeO.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101117', 'https://discord.com/channels/200746010102726657/807319001234407504/808320638447124500'],
+            'zvz-enigmatic': ['https://i.imgur.com/4Ixgf2O.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101120', 'https://discord.com/channels/200746010102726657/807319001234407504/808324352961544223'],
+            'zvz-locus': ['https://i.imgur.com/BV3fNwg.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101121', 'https://discord.com/channels/200746010102726657/807319001234407504/808337336198889472'],
+            'zvz-arcane': ['https://i.imgur.com/RDJRDw5.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101124', 'https://discord.com/channels/200746010102726657/807319001234407504/808382611004719134'],
+            'zvz-fallen': ['https://i.imgur.com/voOcedm.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101129', 'https://discord.com/channels/200746010102726657/807319001234407504/809525705406808115'],
+            'zvz-greatholy': ['https://i.imgur.com/qA4VqIr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101132', 'https://discord.com/channels/200746010102726657/807319001234407504/809525850487259156'],
+            'zvz-wildstaff': ['https://i.imgur.com/7c1HlRw.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101133', 'https://discord.com/channels/200746010102726657/807319001234407504/809526032712335370'],
+            'zvz-rampant': ['https://i.imgur.com/laJJaSW.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101135', 'https://discord.com/channels/200746010102726657/807319001234407504/809526200036622386']
+        }
+        let list = {
+            'zvz-grailseeker': ['https://i.imgur.com/p3e1S9u.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101137', 'https://discord.com/channels/200746010102726657/807319001234407504/810357183257509898'],
+            'zvz-soulscythe': ['https://i.imgur.com/zbIHNd4.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101140', 'https://discord.com/channels/200746010102726657/807319001234407504/810356814134509589'],
+            'zvz-grovekeeper': ['https://i.imgur.com/C0t25qT.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101146', 'https://discord.com/channels/200746010102726657/807319001234407504/810356518288490496'],
+            'zvz-morningstar': ['https://i.imgur.com/S9JfLza.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101151', 'https://discord.com/channels/200746010102726657/807319001234407504/810356339485835296'],
+            'zvz-camlann': ['https://i.imgur.com/Pwlqi2E.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101156', 'https://discord.com/channels/200746010102726657/807319001234407504/810356123470921749']
+        }
 client.on('message', async (message) => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -1412,27 +1381,116 @@ client.on('message', async (message) => {
             components: [[listButton, closeButton]]
         })
     }
-    } Object.keys(list).forEach((m, i) => {
+    } Object.keys(avalist).forEach((m, i) => {
         if (command.includes(m)) {
             let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
             if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
                 let listButton = new MessageButton()
                 .setCustomID('listbutton')
                 .setStyle('SUCCESS')
-                .setLabel('Looks for more builds!')
+                .setLabel('Look for more builds!')
                 .setEmoji('<:jennielove:844893922634235904>')
                 let embed = new MessageEmbed()
-                .setAuthor(list[m].name, list[m].icon)
+                .setAuthor(avalist[m].name, list[m].icon)
                 .setColor('ORANGE')
-                .setImage(list[m].pic)
-                .setDescription(list[m].string)
+                .setImage(avalist[m].pic)
+                .setDescription(avalist[m].string)
                 .setFooter(`Requested by ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
                 message.channel.send({
                     content: 'Processing...',
                     embeds: [embed],
                     components: [[listButton]]
                 })
+            } else {
+                message.reply(`Please redo this command at ${botCommandChannel}`)
             }
+        }
+    })
+     Object.keys(list).forEach((m, i) => {
+         if (command.includes(m)) {
+            let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+            if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
+                let zvzlistButton = new MessageButton()
+                .setCustomID('listbuttonzvz')
+                .setStyle('SUCCESS')
+                .setLabel('Look for more builds!')
+                .setEmoji('<:jennielove:844893922634235904>')
+                let referenceButton = new MessageButton()
+                .setStyle('LINK')
+                .setURL(list[m][2])
+                .setLabel('ARCH main discord reference')
+                let embed = new MessageEmbed()
+                .setAuthor(`'zl [SING] ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+                .setColor('ORANGE')
+                .setImage(list[m][0])
+                .setDescription('You must reach at least 1100 IP')
+                .setFooter(`Requested by ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+                message.channel.send({
+                    content: 'Processing...',
+                    embeds: [embed],
+                    components: [[zvzlistButton, referenceButton]]
+                })
+            } else {
+                message.reply(`Please redo this command at ${botCommandChannel}`)
+            }
+         }
+     })
+     Object.keys(dpsList).forEach((m, i) => {
+        if (command.includes(m)) {
+           let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+           if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
+               let zvzlistButton = new MessageButton()
+               .setCustomID('listbuttonzvz')
+               .setStyle('SUCCESS')
+               .setLabel('Look for more builds!')
+               .setEmoji('<:jennielove:844893922634235904>')
+               let referenceButton = new MessageButton()
+               .setStyle('LINK')
+               .setURL(dpsList[m][2])
+               .setLabel('ARCH main discord reference')
+               let embed = new MessageEmbed()
+               .setAuthor(`'zl [SING] ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+               .setColor('ORANGE')
+               .setImage(dpsList[m][0])
+               .setDescription('You must reach at least 1100 IP')
+               .setFooter(`Requested by ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+               message.channel.send({
+                   content: 'Processing...',
+                   embeds: [embed],
+                   components: [[zvzlistButton, referenceButton]]
+               })
+           } else {
+               message.reply(`Please redo this command at ${botCommandChannel}`)
+           }
+        }
+    })
+    Object.keys(healList).forEach((m, i) => {
+        if (command.includes(m)) {
+           let botCommandChannel = message.guild.channels.cache.get('760731834354499585')
+           if (message.channel.id === '760731834354499585' | message.channel.id === '779514684797091850' | message.member.roles.cache.has('759793776439984170') | message.member.permissions.has('ADMINISTRATOR')){
+               let zvzlistButton = new MessageButton()
+               .setCustomID('listbuttonzvz')
+               .setStyle('SUCCESS')
+               .setLabel('Look for more builds!')
+               .setEmoji('<:jennielove:844893922634235904>')
+               let referenceButton = new MessageButton()
+               .setStyle('LINK')
+               .setURL(healList[m][2])
+               .setLabel('ARCH main discord reference')
+               let embed = new MessageEmbed()
+               .setAuthor(`'zl [SING] ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+               .setColor('ORANGE')
+               .setImage(healList[m][0])
+               .setDescription('You must reach at least 1100 IP')
+               .setFooter(`Requested by ${Boolean(message.guild.members.cache.get(message.author.id).nickname) ? message.guild.members.cache.get(message.author.id).nickname : message.author.username}`, message.author.displayAvatarURL())
+               message.channel.send({
+                   content: 'Processing...',
+                   embeds: [embed],
+                   components: [[zvzlistButton, referenceButton]]
+               })
+           } else {
+               message.reply(`Please redo this command at ${botCommandChannel}`)
+           }
         }
     })
 }) 
@@ -1601,26 +1659,6 @@ client.on('interaction',async  interaction => {
         
     } else if (interaction.isSelectMenu()) {
         if (interaction.customID === 'dps') {
-            let dpsList = {
-                'siegebow': ['https://i.imgur.com/s5kBpr1.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101093', 'https://discord.com/channels/200746010102726657/807319001234407504/807658296416665621'],
-                'permafrost': ['https://i.imgur.com/VY91AFv.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101097', 'https://discord.com/channels/200746010102726657/807319001234407504/807675958097477672'],
-                'avabow': ['https://i.imgur.com/MMIyALt.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101099', 'https://discord.com/channels/200746010102726657/807319001234407504/807679039275139102'],
-                'energyshaper': ['https://i.imgur.com/qDdKBSB.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101101', 'https://discord.com/channels/200746010102726657/807319001234407504/807700941457063986'],
-                'brimstone': ['https://i.imgur.com/1k8FJlp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101179', 'https://discord.com/channels/200746010102726657/807319001234407504/807675595797823488'],
-                'dawnsong': ['https://i.imgur.com/61o9SVr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101102', 'https://discord.com/channels/200746010102726657/807319001234407504/807701098026106930'],
-                'halberd': ['https://i.imgur.com/Z66GRfX.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101103', 'https://discord.com/channels/200746010102726657/807319001234407504/807781638494486548'],
-                'realmbreaker': ['https://i.imgur.com/oOUnwKo.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101106', 'https://discord.com/channels/200746010102726657/807319001234407504/807781876571308042'],
-                'daybreaker': ['https://i.imgur.com/KAag4qz.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101108', 'https://discord.com/channels/200746010102726657/807319001234407504/807782187550244884'],
-                'galatine': ['https://i.imgur.com/cU4Y1Og.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101109', 'https://discord.com/channels/200746010102726657/807319001234407504/807786585302368266'],
-                'clarent': ['https://i.imgur.com/p8ElKkd.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101112', 'https://discord.com/channels/200746010102726657/807319001234407504/808048332256968714'],
-                'spirithunter': ['https://i.imgur.com/rxFjtVy.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101113', 'https://discord.com/channels/200746010102726657/807319001234407504/808051545865715722'],
-                'dualswords': ['https://i.imgur.com/9jDIX7D.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101116', 'https://discord.com/channels/200746010102726657/807319001234407504/808053999471034368'],
-                'bridled': ['https://i.imgur.com/ylc2jgp.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101147', 'https://discord.com/channels/200746010102726657/807319001234407504/816410289292967947'],
-                'greataxe': ['https://i.imgur.com/jD5hSJ0.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101150', 'https://discord.com/channels/200746010102726657/807319001234407504/843587604413808680'],
-                'damnation': ['https://i.imgur.com/SoSgWnJ.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101125', 'https://discord.com/channels/200746010102726657/807319001234407504/808440044594659389'],
-                'shadowcaller': ['https://i.imgur.com/LUAPvmA.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101138', 'https://discord.com/channels/200746010102726657/807319001234407504/815692980673445888'],
-                'cursedskull': ['https://i.imgur.com/jePPweD.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101152', 'https://discord.com/channels/200746010102726657/807319001234407504/843590654676303942']
-            }
             Object.keys(dpsList).forEach((m, i) => {
                 if (interaction.values.includes(m)) {
                     let embed = new MessageEmbed()
@@ -1665,13 +1703,6 @@ client.on('interaction',async  interaction => {
             })
             
         } else if (interaction.customID === 'tanks') {
-            let list = {
-                'grailseeker': ['https://i.imgur.com/p3e1S9u.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101137', 'https://discord.com/channels/200746010102726657/807319001234407504/810357183257509898'],
-                'soulscythe': ['https://i.imgur.com/zbIHNd4.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101140', 'https://discord.com/channels/200746010102726657/807319001234407504/810356814134509589'],
-                'grovekeeper': ['https://i.imgur.com/C0t25qT.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101146', 'https://discord.com/channels/200746010102726657/807319001234407504/810356518288490496'],
-                'morningstar': ['https://i.imgur.com/S9JfLza.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101151', 'https://discord.com/channels/200746010102726657/807319001234407504/810356339485835296'],
-                'camlann': ['https://i.imgur.com/Pwlqi2E.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101156', 'https://discord.com/channels/200746010102726657/807319001234407504/810356123470921749']
-            }
             Object.keys(list).forEach((m, i) => {
                 if (interaction.values.includes(m)) {
                     let embed = new MessageEmbed()
@@ -1715,16 +1746,6 @@ client.on('interaction',async  interaction => {
                 }
             })
         } else if (interaction.customID === 'heals') {
-            let healList = {
-                'occult': ['https://i.imgur.com/iqEZaeO.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101117', 'https://discord.com/channels/200746010102726657/807319001234407504/808320638447124500'],
-                'enigmatic': ['https://i.imgur.com/4Ixgf2O.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101120', 'https://discord.com/channels/200746010102726657/807319001234407504/808324352961544223'],
-                'locus': ['https://i.imgur.com/BV3fNwg.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101121', 'https://discord.com/channels/200746010102726657/807319001234407504/808337336198889472'],
-                'arcane': ['https://i.imgur.com/RDJRDw5.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101124', 'https://discord.com/channels/200746010102726657/807319001234407504/808382611004719134'],
-                'fallen': ['https://i.imgur.com/voOcedm.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101129', 'https://discord.com/channels/200746010102726657/807319001234407504/809525705406808115'],
-                'greatholy': ['https://i.imgur.com/qA4VqIr.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101132', 'https://discord.com/channels/200746010102726657/807319001234407504/809525850487259156'],
-                'wildstaff': ['https://i.imgur.com/7c1HlRw.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101133', 'https://discord.com/channels/200746010102726657/807319001234407504/809526032712335370'],
-                'rampant': ['https://i.imgur.com/laJJaSW.jpg', 'https://albiononline.com/en/characterbuilder/solo-builds/view/101135', 'https://discord.com/channels/200746010102726657/807319001234407504/809526200036622386']
-            }
             Object.keys(healList).forEach((m, i) => {
                 if (interaction.values.includes(m)) {
                     let embed = new MessageEmbed()
