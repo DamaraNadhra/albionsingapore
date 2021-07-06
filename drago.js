@@ -1789,13 +1789,13 @@ client.on('interaction',async  interaction => {
                 }
             })
         } else if (interaction.customID === 'avabuilds') {
-            Object.keys(list).forEach((m, i) => {
+            Object.keys(avalist).forEach((m, i) => {
                 if (interaction.values.includes(m)) {
                     let embed = new MessageEmbed()
-                    .setAuthor(list[m].name, list[m].icon)
+                    .setAuthor(avalist[m].name, avalist[m].icon)
                     .setColor('ORANGE')
-                    .setImage(list[m].pic)
-                    .setDescription(list[m].string)
+                    .setImage(avalist[m].pic)
+                    .setDescription(avalist[m].string)
                     .setFooter(`Requested by ${Boolean(interaction.guild.members.cache.get(interaction.user.id).nickname) ? interaction.guild.members.cache.get(interaction.user.id).nickname : interaction.user.username}`, interaction.user.displayAvatarURL())
                     interaction.update({
                         content: 'Processing...',
