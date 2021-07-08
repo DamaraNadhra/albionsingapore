@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu } = require('discord.js')
-const client = new Discord.Client({ "intents": ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"], "partials": ["MESSAGE", "CHANNEL", "REACTION"]});
+const client = new Discord.Client({ "intents": ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", 'GUILD_MEMBERS'], "partials": ["MESSAGE", "CHANNEL", "REACTION"]});
 const mongo = require('./mongo')
 const splitz = require('./models/split-schema')
 const person = require('./models/person')
