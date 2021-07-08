@@ -1506,56 +1506,7 @@ client.on('message', async (message) => {
 }) 
 
 client.on('guildMemberAdd', (member) => {
-   member.send(`**[ARCH] Singapore are recruiting for S13**
-   Do apply now on our discord at application: https://discord.gg/2UvYbWc7m3
-   
-   
-   We are an **established guild** for [ARCH] who has **Achieved Silver rank in S11** and are looking forward to keeping up the momentum in **S12.**
-   
-   
-   Singapore is not only open to Singaporeans if you're wondering and we're looking for players from all over the WORLD who would like to look for content within Albion during 12 and 15 UTC.
-   
-   
-   We mainly speak English in game but we do speak other languages as well as we have players across SEA.
-   
-   **What we offer:**
-   
-   :one:Fame Farming efficiently in T8 Zones (solo, group and ava dungeons)
-   :two:Provide :free: Maps for new members for fame farming.
-   :three:Safe Gathering Zones with multiple hideouts in the black zone.
-   :four:Daily Avalonian Buff, Full Clear 8.2+
-   :five:Hideout in T8 Zone
-   :six:Gathering Contents in Royals & Roads
-   :seven:Organized Faction Fights
-   :eight:Organized Scrims for Practice
-   :nine:Tax Rebate for HCE players
-   :one::zero: Weekly Give Away : 8.3 Gears & Mounts
-   
-   
-   **Min Requirements:**
-   2M PvE Fame
-   Mature
-   Willing to Learn
-   Able to speak and understand basic English
-   :heart:
-   
-   Contact our friendly officers in game for more information:
-   **LongLiveLuai**
-   **Gnamo**
-   **Kuukimonster**
-   **LightDragneel**
-   **Aruthal**
-   **MrGremory**
-   **Fatmeow**
-   
-   Discord:
-   **LongLiveLuai#9032**
-   **Gnamo#8066**
-   **scorpion0378#4436**
-   **Lohit#5260**
-   **Leiz#9629**
-   **fatmeowbutthin#4147**
-   **Fatmeow#3662**`)
+   member.send(`**[ARCH] Singapore are recruiting for S13** \nSingapore is not only open to Singaporeans if you're wondering and we're looking for players from all over the WORLD who would like to look for content within Albion during all time zone. **12 to 15 UTC** is our prime time. We mainly speak English in game but we do speak other languages as well as we have players across SEA. \n\n**What we offer:** \n**PvE Content:** \n:one: Fame Farming efficiently in T8 Zones (solo, group and ava dungeons). \n:two: Safe Gathering Zones with multiple hideouts in the black zone. \n:three: Daily Avalonian Buff, Full Clear 8.2+ \n:four: Hideout in T8 Zone. \n:five: Gathering Contents in Royals & Roads. \n:six: Tax Rebate for HCE players. \n:free: Weekly Give Away : **8.3 Gears & Mounts** \n\n**PvP Content:** \n\👍 Daily Police & Ganking Sessions \n\👍 Organized Faction Fights \n\👍 Organized Scrims for Practice \n\👍 Mandatory ZvZ when needed \n\n**Minimum Requirements:** \n:heart: 5M PvE Fame \n:heart:Mature \n:heart:Willing to Learn \n:heart:Able to speak and understand basic English \n\n**Do join our discord at** https://discord.gg/yXRWK8WDct \nApply at application and read rules & react after being accepted. \n**Thank you very much!**`)
 })
 client.on('interaction',async  interaction => {
     if (interaction.isButton()) {
