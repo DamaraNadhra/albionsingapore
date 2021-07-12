@@ -1808,5 +1808,5 @@ client.on('ready', () => {
         index++;
     }, 3000);
 })
-client.login(process.env.token)
+client.login('ODA1OTc2NjAyODY0Mzg2MDU5.YBiuNA.HELs5xcyba9B_vbu5sD3-lw25QU')
 

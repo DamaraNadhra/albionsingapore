@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
-    "mongoose": "^5.11.14",
+    "mongoose": "^5.13.2",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.5.0"
