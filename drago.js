@@ -1788,6 +1788,10 @@ client.on('channelDelete',async  (channel) => {
     })
 
 })
+client.on('guildMemberRemove', (member) => {
+    let logchannel = member.guild.channels.cache.get('703862691608920118')
+    logchannel.send(`${member.user.tag} has left the server <:stare:861994964137541653>`)
+})
 
 client.on('ready', () => {
     const statusArray = [
