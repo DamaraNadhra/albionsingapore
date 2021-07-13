@@ -1286,10 +1286,11 @@ client.on('message', async (message) => {
             })
             if (message.mentions.members.first()) {
                 let person = message.mentions.members.first()
+                let personNickname = message.guild.members.cache.get(person.id).nickname
                 isPersonHasReputation = await rep.findOne({ id: person.id })
                 if (!isPersonHasReputation) {
                     message.channel.send({
-                        content: `**${isPersonHasReputation.name}**: 0 **Rep** (#**#ω**)`
+                        content: `**${personNickname}**: 0 **Rep** (#**#ω**)`
                     })
                 } else {
                     let blabla = await (await rep.find().sort({ rep: -1 })).findIndex(i => i.id === person.id) + 1
@@ -1308,7 +1309,7 @@ client.on('message', async (message) => {
                 }
             }
         })
-    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx')) {
+    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
             if (recentlyRan.includes(message.author.id)) {
