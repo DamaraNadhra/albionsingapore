@@ -1274,7 +1274,7 @@ client.on('message', async (message) => {
             setTimeout(() => {
                 recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                 console.log(`After: ${recentlyRan}`)
-            }, 7000);
+            }, 420000);
         })
     } else if (command === 'rep') {
         await mongo().then(async mongoose => {
@@ -1307,7 +1307,7 @@ client.on('message', async (message) => {
                 }
             }
         })
-    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thank you') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
+    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
             if (recentlyRan.includes(message.author.id)) {
@@ -1356,7 +1356,7 @@ client.on('message', async (message) => {
                         })
                         setTimeout(() => {
                             recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
-                        }, 7000);
+                        }, 420000);
                     })
                 } else {
                     console.log('adakah')
