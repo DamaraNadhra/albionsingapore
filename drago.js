@@ -1290,7 +1290,7 @@ client.on('message', async (message) => {
                 isPersonHasReputation = await rep.findOne({ id: person.id })
                 if (!isPersonHasReputation) {
                     message.channel.send({
-                        content: `**${personNickname}**: 0 **Rep** (#**#ω**)`
+                        content: `**${nicknameMaker(message, person.id)}**: 0 **Rep** (#**#ω**)`
                     })
                 } else {
                     let blabla = await (await rep.find().sort({ rep: -1 })).findIndex(i => i.id === person.id) + 1
