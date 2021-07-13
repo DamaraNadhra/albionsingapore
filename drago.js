@@ -1253,7 +1253,7 @@ client.on('message', async (message) => {
                 if (person.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>` })
                 personID = person.id;
                 guildNickname = message.guild.members.cache.get(person.id).user.username
-                isPersonHasRep = await rep.findOne({ name: person.nickname })
+                isPersonHasRep = await rep.findOne({ id: person.id })
             }
             if (isPersonHasRep) {
                 await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1 })
