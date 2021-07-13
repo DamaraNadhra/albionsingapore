@@ -1305,7 +1305,7 @@ client.on('message', async (message) => {
                 }
             }
         })
-    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thank you') | message.content.toLowerCase().includes('thx')) {
+    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thank you') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
             if (recentlyRan.includes(message.author.id)) {
@@ -1382,7 +1382,8 @@ client.on('message', async (message) => {
         })
     } else if (command === 'leaderboard') {
         await mongo().then(async mongoose => {
-            let datta = await rep.find().sort({ rep: -1}).limit(10)
+            if (message.channel.id === '864389467975974943' | message.member.permissions.has('MANAGE_MESSAGES')) {
+                let datta = await rep.find().sort({ rep: -1}).limit(10)
             let pointsMap = datta.map(m => m.rep).join('\n')
             let nameMap = datta.map(m => m.name).join('\n')
             let rankMap = datta.map(function(element, index) {
@@ -1395,7 +1396,7 @@ client.on('message', async (message) => {
             .setLabel('Refresh')
             const embed = new MessageEmbed()
             .setColor('ORANGE')
-            .setDescription('Leaderboard for reputations in Singapore')
+            .setDescription('**Reputation Leaderboard!** \n\nSyntax: \n`!+rep [playerMention]` \n`!giverep [playerMention]` \n`thanks/thx/ty/thankyou [playerMentionS]`')
             .setAuthor('Singapore Love Guardian', client.user.displayAvatarURL())
             .setThumbnail('https://i.imgur.com/GHJ9FLw.png')
             .addFields(
@@ -1408,6 +1409,7 @@ client.on('message', async (message) => {
                 embeds: [embed],
                 components: [[thisbutton]]
             })
+            }
         })
     }
     Object.keys(avalist).forEach((m, i) => {
