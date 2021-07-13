@@ -1321,69 +1321,70 @@ client.on('message', async (message) => {
             if (mentionsNumber.includes(message.author.id)) {
                 message.reply({ content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>`})
                 return
-            }
-            if (mentionsNumber.length > 1) {
-                let theMap = message.mentions.members
-                let mentionArray = [];
-                let array = theMap.map(m => m.user.id )
-                var bar = new Promise((resolve, reject) => {
-                    array.forEach(async (m, index) => {
-                        console.log(m)
-                        let guildNickname = message.guild.members.cache.get(m).user.username
-                        isPersonHasRep = await rep.findOne({ id: m})
+            } else {
+                if (mentionsNumber.length > 1) {
+                    let theMap = message.mentions.members
+                    let mentionArray = [];
+                    let array = theMap.map(m => m.user.id )
+                    var bar = new Promise((resolve, reject) => {
+                        array.forEach(async (m, index) => {
+                            console.log(m)
+                            let guildNickname = message.guild.members.cache.get(m).user.username
+                            isPersonHasRep = await rep.findOne({ id: m})
+                    
+                            if (isPersonHasRep) {
+                            await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
+                            } else {
+                            console.log(guildNickname)
+                            await rep.create({
+                            name: guildNickname,
+                            id: m,
+                            rep: '1'
+                        })
+                        }
+                        let personData = await rep.findOne({ id: m})
+                        mentionArray.push(personData.name)
+                        console.log(m, mentionArray, theMap.map(m => m.id).length, index, )
+                        if (index === array.length -1) resolve()
+                        })
+                    })
+                    bar.then(async () => {
+                        let finalString = mentionArray.map(m => '**' + m + '**').join(', ')
+                        console.log(finalString)
+                        message.channel.send({
+                            content: `Gave \`1\` **Rep** to ${finalString} at the same time!`
+                        })
+                        setTimeout(() => {
+                            recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
+                        }, 7000);
+                    })
+                } else {
+                    console.log('adakah')
+                    let firstArgument = args[0]
+                    let person = message.mentions.members.first().user
+                    guildNickname = nicknameMaker(message, person.id)
+                    personID = person.id
+                    isPersonHasRep = await rep.findOne({ id: person.id})
                 
-                        if (isPersonHasRep) {
-                        await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
-                        } else {
-                        console.log(guildNickname)
-                        await rep.create({
-                        name: guildNickname,
-                        id: m,
+                if (isPersonHasRep) {
+                    await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
+                } else {
+                    await rep.create({
+                        name: guildNickname.toLowerCase(),
+                        id: personID,
                         rep: '1'
                     })
-                    }
-                    let personData = await rep.findOne({ id: m})
-                    mentionArray.push(personData.name)
-                    console.log(m, mentionArray, theMap.map(m => m.id).length, index, )
-                    if (index === array.length -1) resolve()
-                    })
+                }
+                let personData = await rep.findOne({ id: personID})
+                let blabla = await (await rep.find().sort({ rep: -1})).findIndex(i => i.id === personID) + 1
+                recentlyRan.push(message.author.id)
+                message.channel.send({
+                    content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
                 })
-                bar.then(async () => {
-                    let finalString = mentionArray.map(m => '**' + m + '**').join(', ')
-                    console.log(finalString)
-                    message.channel.send({
-                        content: `Gave \`1\` **Rep** to ${finalString} at the same time!`
-                    })
-                    setTimeout(() => {
-                        recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
-                    }, 7000);
-                })
-            } else {
-                console.log('adakah')
-                let firstArgument = args[0]
-                let person = message.mentions.members.first().user
-                guildNickname = nicknameMaker(message, person.id)
-                personID = person.id
-                isPersonHasRep = await rep.findOne({ id: person.id})
-            
-            if (isPersonHasRep) {
-                await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
-            } else {
-                await rep.create({
-                    name: guildNickname.toLowerCase(),
-                    id: personID,
-                    rep: '1'
-                })
-            }
-            let personData = await rep.findOne({ id: personID})
-            let blabla = await (await rep.find().sort({ rep: -1})).findIndex(i => i.id === personID) + 1
-            recentlyRan.push(message.author.id)
-            message.channel.send({
-                content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
-            })
-            setTimeout(() => {
-                recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
-            }, 7000);
+                setTimeout(() => {
+                    recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
+                }, 7000);
+                }
             }
         })
     } else if (command === 'leaderboard') {
