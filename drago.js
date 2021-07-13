@@ -1420,12 +1420,14 @@ client.on('message', async (message) => {
             }
         })
     } else if (command === 'hardtime') {
-        message.delete().then(() => {
-            message.channel.send({
-                content: 'If you are having a hardtime, please remember this AnCeo guy',
-                files: ['https://i.imgur.com/UgKlq3J.png']
+        if (message.author.id === '694488949980135444') {
+            message.delete().then(() => {
+                message.channel.send({
+                    content: 'If you are having a hardtime, please remember this AnCeo guy',
+                    files: ['https://i.imgur.com/UgKlq3J.png']
+                })
             })
-        })
+        }
     }
     Object.keys(avalist).forEach((m, i) => {
         if (command.includes(m)) {
