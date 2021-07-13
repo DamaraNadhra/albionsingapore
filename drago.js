@@ -1259,7 +1259,7 @@ client.on('message', async (message) => {
                 await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1 })
             } else {
                 await rep.create({
-                    name: guildNickname,
+                    name: nicknameMaker(message, personID),
                     id: personID,
                     rep: '1'
                 })
@@ -1267,7 +1267,7 @@ client.on('message', async (message) => {
             let personData = await rep.findOne({ id: personID })
             let blabla = await (await rep.find().sort({ rep: -1 })).findIndex(i => i.id === personID) + 1
             message.channel.send({
-                content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
+                content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
             })
             console.log(await rep.find().sort({ rep: -1 }))
             recentlyRan.push(message.author.id)
