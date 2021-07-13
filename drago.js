@@ -1240,6 +1240,7 @@ client.on('message', async (message) => {
             })
             if (message.mentions.members.first()) {
                 let person = message.mentions.members.first().user
+                if (person.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`})
                 guildNickname = message.guild.members.cache.get(person.id).user.username
                 personID = person.id
                 isPersonHasRep = await rep.findOne({ id: person.id})
@@ -1248,6 +1249,7 @@ client.on('message', async (message) => {
                 if (!person) return message.reply({
                     content: 'I couldn\'t find this person inside this server'
                 })
+                if (person.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`})
                 personID = person.id;
                 guildNickname = message.guild.members.cache.get(person.id).user.username
                 isPersonHasRep = await rep.findOne({ name: person.nickname})
@@ -1314,9 +1316,10 @@ client.on('message', async (message) => {
             let personID;
             let isPersonHasRep;
             let guildNickname;
-            let mentionsNumber = message.mentions.members.map(e => e.user.id).length
-            console.log(mentionsNumber)
-            if (mentionsNumber > 1) {
+            let mentionsNumber = message.mentions.members.map(e => e.user.id)
+            console.log(mentionsNumber.length)
+            if (mentionsNumber.includes(message.author.id)) return message.reply({ content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>`})
+            if (mentionsNumber.length > 1) {
                 let theMap = message.mentions.members
                 let mentionArray = [];
                 let array = theMap.map(m => m.user.id )
