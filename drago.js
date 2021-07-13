@@ -1652,7 +1652,7 @@ client.on('interaction',async  interaction => {
                 .setLabel('Refresh')
                 const embed = new MessageEmbed()
                 .setColor('ORANGE')
-                .setDescription('Leaderboard for reputations in Singapore')
+                .setDescription('**Reputation Leaderboard!** \n\nSyntax: \n`!+rep [playerMention]` \n`!giverep [playerMention]` \n`thanks/thx/ty/thankyou [playerMentionS]`')
                 .setAuthor('Singapore Love Guardian', client.user.displayAvatarURL())
                 .setThumbnail('https://i.imgur.com/GHJ9FLw.png')
                 .addFields(
