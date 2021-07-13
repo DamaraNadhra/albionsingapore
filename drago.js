@@ -1310,8 +1310,9 @@ client.on('message', async (message) => {
         })
     } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
         await mongo().then(async mongoose => {
+            if (!message.mentions.members.first()) return
             if (recentlyRan.includes(message.author.id)) {
-                return message.reply('This command is on cooldown')
+                return message.channel.send('This command is on cooldown')
             }
             let personID;
             let isPersonHasRep;
