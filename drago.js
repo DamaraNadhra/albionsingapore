@@ -1322,6 +1322,7 @@ client.on('message', async (message) => {
                 message.reply({ content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>` })
                 return
             } else {
+                if (mentionsNumber.length > 2) return 
                 if (mentionsNumber.length > 1) {
                     let theMap = message.mentions.members
                     let mentionArray = [];
