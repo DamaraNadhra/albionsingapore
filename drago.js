@@ -1384,7 +1384,7 @@ client.on('message', async (message) => {
                     })
                     setTimeout(() => {
                         recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
-                    }, 7000);
+                    }, 420000);
                 }
             }
         })
