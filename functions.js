@@ -167,8 +167,27 @@ const dateMaker = (date) => {
     let final = dateFix + ' ' + timeFix
     return final;
 }
+const billboard = async (id, param) => {
+    var sortSelection = { points: 1 };
+    let existable = await param.find().sort(sortSelection).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result)
+    })
+    
+}
+const nicknameMaker = (message, userID) => {
+    let isPersonHasNickname = message.guild.members.cache.get(userID).nickname 
+    if (isPersonHasNickname) {
+        return isPersonHasNickname
+    } else {
+        let username = message.guild.members.cache.get(userID).user.username
+        return username
+    }
+}
 
 module.exports = {
+    nicknameMaker,
+    billboard,
     compareSet,
     sets,
     dateMaker

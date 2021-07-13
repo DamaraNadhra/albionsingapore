@@ -11,7 +11,8 @@ const axios = require('axios');
 const prefix = '!'
 const blacklist = require('./models/blacklist')
 const rep = require('./models/reputation')
-const { dateMaker, compareSet, sets } = require('./functions')
+const { dateMaker, compareSet, sets, billboard, nicknameMaker } = require('./functions')
+let recentlyRan = [];
 
 const AvArow = new MessageActionRow()
 .addComponents(
@@ -443,7 +444,7 @@ client.on('message', async (message) => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
-    if (!message.content.startsWith(prefix)) return;
+    //if (!message.content.startsWith(prefix)) return;
 
     
 
@@ -1227,6 +1228,9 @@ client.on('message', async (message) => {
         })
     } else if (command === '+rep' | command === 'giverep') {
         await mongo().then(async mongoose => {
+            if (recentlyRan.includes(message.author.id)) {
+                return message.reply('This command is on cooldown')
+            }
             let personID;
             let isPersonHasRep;
             let guildNickname;
@@ -1234,19 +1238,22 @@ client.on('message', async (message) => {
             if (!firstArgument) return message.reply({
                 content: 'Please state the person name or his mention'
             })
-            if (firstArgument === message.mentions.members.first()) {
+            if (message.mentions.members.first()) {
                 let person = message.mentions.members.first().user
-                guildNickname = message.guild.members.cache.get(person.id)
+                guildNickname = message.guild.members.cache.get(person.id).user.username
                 personID = person.id
                 isPersonHasRep = await rep.findOne({ id: person.id})
             } else {
                 let person = message.guild.members.cache.find(i => i.nickname === firstArgument)
+                if (!person) return message.reply({
+                    content: 'I couldn\'t find this person inside this server'
+                })
                 personID = person.id;
-                guildNickname = person.nickname
+                guildNickname = message.guild.members.cache.get(person.id).user.username
                 isPersonHasRep = await rep.findOne({ name: person.nickname})
             }
             if (isPersonHasRep) {
-                await isPersonHasRep.update({ rep: isPersonHasRep.rep + 1})
+                await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
             } else {
                 await rep.create({
                     name: guildNickname,
@@ -1254,6 +1261,153 @@ client.on('message', async (message) => {
                     rep: '1'
                 })
             }
+            let personData = await rep.findOne({ id: personID})
+            let blabla = await (await rep.find().sort({ rep: -1})).findIndex(i => i.id === personID) + 1
+            message.channel.send({
+                content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
+            })
+            console.log(await rep.find().sort({ rep: -1}))
+            recentlyRan.push(message.author.id)
+            console.log(`Before: ${recentlyRan}`)
+            setTimeout(() => {
+                recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
+                console.log(`After: ${recentlyRan}`)
+            }, 7000);
+        })
+    } else if (command === 'rep') {
+        await mongo().then(async mongoose => {
+            let firstArgument = args[0]
+            let isPersonHasReputation;
+            if (!firstArgument) return message.reply({
+                content: 'State the person mentions or his nickname'
+            })
+            if (message.mentions.members.first()) {
+                let person = message.mentions.members.first()
+                isPersonHasReputation = await rep.findOne({ id: person.id})
+                if (!isPersonHasReputation) {
+                    message.channel.send({
+                        content: `**${isPersonHasReputation.name}**: 0 **Rep** (#**#ω**)`
+                    })
+                } else {
+                    let blabla = await (await rep.find().sort({ rep: -1})).findIndex(i => i.id === person.id) + 1
+                    message.channel.send({
+                        content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`
+                    })
+                }
+            } else {
+                let hisID = message.guild.members.cache.find(i => i.nickname === firstArgument)
+                if (!hisID) return message.reply(`I couldn\'t find a person with \`${firstArgument}\` nickname`)
+                isPersonHasReputation = await rep.findOne({ name: firstArgument})
+                if (!isPersonHasReputation) {
+                    message.channel.send({
+                        content: `**${nicknameMaker(message, hisID.id)}**: 0 **Rep** (#**#ω**)`
+                    })
+                }
+            }
+        })
+    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thank you') | message.content.toLowerCase().includes('thx')) {
+        await mongo().then(async mongoose => {
+            if (!message.mentions.members.first()) return
+            if (recentlyRan.includes(message.author.id)) {
+                return message.channel.send('This command is on cooldown')
+            }
+            let personID;
+            let isPersonHasRep;
+            let guildNickname;
+            let mentionsNumber = message.mentions.members.map(e => e.user.id).length
+            console.log(mentionsNumber)
+            if (mentionsNumber > 1) {
+                let theMap = message.mentions.members
+                let mentionArray = [];
+                let array = theMap.map(m => m.user.id )
+                var bar = new Promise((resolve, reject) => {
+                    array.forEach(async (m, index) => {
+                        console.log(m)
+                        let guildNickname = message.guild.members.cache.get(m).user.username
+                        isPersonHasRep = await rep.findOne({ id: m})
+                
+                        if (isPersonHasRep) {
+                        await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
+                        } else {
+                        console.log(guildNickname)
+                        await rep.create({
+                        name: guildNickname,
+                        id: m,
+                        rep: '1'
+                    })
+                    }
+                    let personData = await rep.findOne({ id: m})
+                    mentionArray.push(personData.name)
+                    console.log(m, mentionArray, theMap.map(m => m.id).length, index, )
+                    if (index === array.length -1) resolve()
+                    })
+                })
+                bar.then(async () => {
+                    let finalString = mentionArray.map(m => '**' + m + '**').join(', ')
+                    console.log(finalString)
+                    message.channel.send({
+                        content: `Gave \`1\` **Rep** to ${finalString} at the same time!`
+                    })
+                    setTimeout(() => {
+                        recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
+                    }, 7000);
+                })
+            } else {
+                console.log('adakah')
+                let firstArgument = args[0]
+                let person = message.mentions.members.first().user
+                guildNickname = nicknameMaker(message, person.id)
+                personID = person.id
+                isPersonHasRep = await rep.findOne({ id: person.id})
+            
+            if (isPersonHasRep) {
+                await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1})
+            } else {
+                await rep.create({
+                    name: guildNickname.toLowerCase(),
+                    id: personID,
+                    rep: '1'
+                })
+            }
+            let personData = await rep.findOne({ id: personID})
+            let blabla = await (await rep.find().sort({ rep: -1})).findIndex(i => i.id === personID) + 1
+            recentlyRan.push(message.author.id)
+            message.channel.send({
+                content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
+            })
+            setTimeout(() => {
+                recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
+            }, 7000);
+            }
+        })
+    } else if (command === 'leaderboard') {
+        await mongo().then(async mongoose => {
+            let datta = await rep.find().sort({ rep: -1}).limit(10)
+            let pointsMap = datta.map(m => m.rep).join('\n')
+            let nameMap = datta.map(m => m.name).join('\n')
+            let rankMap = datta.map(function(element, index) {
+                return "**" + '#' + (parseInt(index)+1)  + "**"
+            }).join('\n')
+            let thisbutton = new MessageButton()
+            .setStyle('PRIMARY')
+            .setEmoji('🔄')
+            .setCustomID('refreshbutton')
+            .setLabel('Refresh')
+            const embed = new MessageEmbed()
+            .setColor('ORANGE')
+            .setDescription('Leaderboard for reputations in Singapore')
+            .setAuthor('Singapore Love Guardian', client.user.displayAvatarURL())
+            .setThumbnail('https://i.imgur.com/GHJ9FLw.png')
+            .addFields(
+                {name: '**Rank**', value: rankMap, inline: true},
+                {name: '**Name**', value: nameMap, inline: true},
+                {name: "**Points**", value: pointsMap, inline: true}
+            )
+            .setFooter('Click the refresh button below to refresh the list!')
+            message.channel.send({
+                embeds: [embed],
+                components: [[thisbutton]]
+            })
         })
     }
     Object.keys(avalist).forEach((m, i) => {
@@ -1480,6 +1634,35 @@ client.on('interaction',async  interaction => {
         .setStyle('PRIMARY')
             interaction.update({
                 components: [AvArow, [closeButton]]
+            })
+        } else if (interaction.customID === 'refreshbutton') {
+            await mongo().then(async mongoose => {
+                let datta = await rep.find().sort({ rep: -1}).limit(10)
+                let pointsMap = datta.map(m => m.rep).join('\n')
+                let nameMap = datta.map(m => m.name).join('\n')
+                let rankMap = datta.map(function(element, index) {
+                    return "**" + '#' + (parseInt(index)+1)  + "**"
+                }).join('\n')
+                let thisbutton = new MessageButton()
+                .setStyle('PRIMARY')
+                .setEmoji('🔄')
+                .setCustomID('refreshbutton')
+                .setLabel('Refresh')
+                const embed = new MessageEmbed()
+                .setColor('ORANGE')
+                .setDescription('Leaderboard for reputations in Singapore')
+                .setAuthor('Singapore Love Guardian', client.user.displayAvatarURL())
+                .setThumbnail('https://i.imgur.com/GHJ9FLw.png')
+                .addFields(
+                    {name: '**Rank**', value: rankMap, inline: true},
+                    {name: '**Name**', value: nameMap, inline: true},
+                    {name: "**Points**", value: pointsMap, inline: true}
+                )
+                .setFooter('Click the refresh button below to refresh the list!')
+                interaction.update({
+                    embeds: [embed],
+                    components: [[thisbutton]]
+                })
             })
         }
         
