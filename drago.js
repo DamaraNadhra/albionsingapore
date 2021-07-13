@@ -1308,7 +1308,7 @@ client.on('message', async (message) => {
                 }
             }
         })
-    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx') | message.content.toLowerCase().includes('ty')) {
+    } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx')) {
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
             if (recentlyRan.includes(message.author.id)) {
