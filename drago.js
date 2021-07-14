@@ -1261,7 +1261,7 @@ client.on('message', async (message) => {
                 if (nickname) {
                     person = nickname
                 } else if (!nickname) {
-                    person = message.guild.members.cache.find(i => i.user.username === firstArgument).user
+                    person = message.guild.members.cache.find(i => i.user.username === firstArgument)
                 } else {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
@@ -1318,11 +1318,16 @@ client.on('message', async (message) => {
                 }
             } else {
                 let hisID = message.guild.members.cache.find(i => i.nickname === firstArgument)
-                if (!hisID) return message.reply(`I couldn\'t find a person with \`${firstArgument}\` nickname`)
-                isPersonHasReputation = await rep.findOne({ name: firstArgument })
+                if (!hisID) hisID = message.guild.members.cache.find(b => b.user.username === firstArgument)
+                isPersonHasReputation = await rep.findOne({ id: hisID.id })
                 if (!isPersonHasReputation) {
                     message.channel.send({
                         content: `**${nicknameMaker(message, hisID.id)}**: 0 **Rep** (#**#ω**)`
+                    })
+                } else {
+                    let blabla = await (await rep.find().sort({ rep: -1 })).findIndex(i => i.id === hisID.id) + 1
+                    message.channel.send({
+                        content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`
                     })
                 }
             }
