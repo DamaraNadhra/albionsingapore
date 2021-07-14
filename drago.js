@@ -1237,6 +1237,7 @@ client.on('message', async (message) => {
             embeds: [embed]
         })
     } else if (command === '+rep' | command === 'giverep') {
+        if (message.channel.id === '722753194496753745') return
         await mongo().then(async mongoose => {
             if (recentlyRan.includes(message.author.id)) {
                 return message.reply('This command is on cooldown')
@@ -1290,6 +1291,7 @@ client.on('message', async (message) => {
             })
         })
     } else if (command === 'rep') {
+        if (message.channel.id === '722753194496753745') return
         await mongo().then(async mongoose => {
             let firstArgument = args[0]
             let isPersonHasReputation;
@@ -1330,6 +1332,7 @@ client.on('message', async (message) => {
             }
         })
     } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thank you') | message.content.toLowerCase().includes('thx')) {
+        if (message.channel.id === '722753194496753745') return
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
             let logChannel = message.guild.channels.cache.get('864669032811331584')
