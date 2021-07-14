@@ -1417,7 +1417,7 @@ client.on('message', async (message) => {
     } else if (command === 'leaderboard') {
         await mongo().then(async mongoose => {
             if (message.channel.id === '864389467975974943' | message.member.permissions.has('MANAGE_MESSAGES')) {
-                let datta = await rep.find().sort((a, b) => parseInt(b.rep) - parseInt(a.rep)).limit(15)
+                let datta = await rep.find().sort({rep: -1}).limit(15)
                 let pointsMap = datta.map(m => m.rep).join('\n')
                 let nameMap = datta.map(m => m.name).join('\n')
                 let rankMap = datta.map(function (element, index) {
@@ -1682,7 +1682,7 @@ client.on('interaction', async interaction => {
             })
         } else if (interaction.customID === 'refreshbutton') {
             await mongo().then(async mongoose => {
-                let datta = await rep.find().sort((a, b) => parseInt(b.rep) - parseInt(a.rep)).limit(10)
+                let datta = await rep.find().sort({ rep: -1}).limit(10)
                 let pointsMap = datta.map(m => m.rep).join('\n')
                 let nameMap = datta.map(m => m.name).join('\n')
                 let rankMap = datta.map(function (element, index) {

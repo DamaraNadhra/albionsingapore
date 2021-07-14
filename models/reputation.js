@@ -8,7 +8,10 @@ const reqString = {
 const testSchema = mongoose.Schema({
     name: reqString,
     id: reqString,
-    rep: reqString,
+    rep: {
+        type: Number,
+        required: false,
+    },
 })
 
 module.exports = mongoose.model('reputation', testSchema)
