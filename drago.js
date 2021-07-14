@@ -1249,7 +1249,7 @@ client.on('message', async (message) => {
                 personID = person.id
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
-                let person = message.guild.members.cache.find(i => i.nickname === firstArgument)
+                let person = message.guild.members.cache.find(i => i.nickname === firstArgument | i.user.username === firstArgument)
                 if (!person) return message.reply({
                     content: 'I couldn\'t find this person inside this server'
                 })
