@@ -1249,10 +1249,17 @@ client.on('message', async (message) => {
                 personID = person.id
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
-                let person = message.guild.members.cache.find(i => i.nickname === firstArgument | i.user.username === firstArgument)
-                if (!person) return message.reply({
-                    content: 'I couldn\'t find this person inside this server'
-                })
+                let person;
+                let nickname = message.guild.members.cache.find(i => i.nickname === firstArgument)
+                if (nickname) {
+                    person = nickname
+                } else if (!nickname) {
+                    person = message.guild.members.cache.find(i => i.user.username === firstArgument)
+                } else {
+                    return message.reply({
+                        content: 'I couldn\'t find this person inside this server'
+                    })
+                }
                 if (person.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>` })
                 personID = person.id;
                 guildNickname = message.guild.members.cache.get(person.id).user.username
