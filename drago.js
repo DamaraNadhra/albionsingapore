@@ -1232,6 +1232,7 @@ client.on('message', async (message) => {
             if (recentlyRan.includes(message.author.id)) {
                 return message.reply('This command is on cooldown')
             }
+            let logChannel = message.guild.channels.cache.get('864669032811331584')
             let personID;
             let isPersonHasRep;
             let guildNickname;
@@ -1276,6 +1277,9 @@ client.on('message', async (message) => {
                 recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                 console.log(`After: ${recentlyRan}`)
             }, 420000);
+            logChannel.send({
+                content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+            })
         })
     } else if (command === 'rep') {
         await mongo().then(async mongoose => {
@@ -1312,6 +1316,7 @@ client.on('message', async (message) => {
     } else if (message.content.toLowerCase().includes('thanks') | message.content.toLowerCase().includes('thankyou') | message.content.toLowerCase().includes('thx')) {
         await mongo().then(async mongoose => {
             if (!message.mentions.members.first()) return
+            let logChannel = message.guild.channels.cache.get('864669032811331584')
             if (recentlyRan.includes(message.author.id)) return
             let personID;
             let isPersonHasRep;
@@ -1358,9 +1363,11 @@ client.on('message', async (message) => {
                         setTimeout(() => {
                             recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                         }, 420000);
+                        logChannel.send({
+                            content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+                        })
                     })
                 } else {
-                    console.log('adakah')
                     let firstArgument = args[0]
                     let person = message.mentions.members.first().user
                     guildNickname = nicknameMaker(message, person.id)
@@ -1385,6 +1392,9 @@ client.on('message', async (message) => {
                     setTimeout(() => {
                         recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                     }, 420000);
+                    logChannel.send({
+                        content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+                    })
                 }
             }
         })
