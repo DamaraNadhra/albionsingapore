@@ -1315,6 +1315,8 @@ client.on('message', async (message) => {
             } else {
                 let hisID = message.guild.members.cache.find(i => i.nickname === firstArgument)
                 let usernameID = message.guild.members.cache.find(b => b.user.username === firstArgument)
+                console.log(hisID)
+                console.log(usernameID)
                 if (!hisID && !usernameID) return message.reply({
                     content: `I couldnt find a person with \`${firstArgument}\` nickname`
                 })
