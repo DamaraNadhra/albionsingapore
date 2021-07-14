@@ -942,7 +942,7 @@ client.on('message', async (message) => {
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention.id}>` : `<@${lohit.id}>`,
+                                        content: Boolean(personMention) ? `<@${personMention.user.id}>` : `<@${lohit.id}>`,
                                         embeds: [embed]
                                     })
                             } else if (parseInt(m.Victim.AverageItemPower) < 1100) {
@@ -1000,7 +1000,7 @@ client.on('message', async (message) => {
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention.id}>` : `<@${lohit.id}>`,
+                                        content: Boolean(personMention) ? `<@${personMention.user.id}>` : `<@${lohit.id}>`,
                                         embeds: [embed]
                                     })
                             }
@@ -1059,7 +1059,7 @@ client.on('message', async (message) => {
                                         .setTimestamp(new Date())
                                         .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention.id}>` : `<@${lohit.id}>`,
+                                        content: Boolean(personMention) ? `<@${personMention.user.id}>` : `<@${lohit.id}>`,
                                         embeds: [embed]
                                     })//done lol ez
                                 }
