@@ -870,6 +870,7 @@ client.on('message', async (message) => {
             })
         }
     } else if (command === 'checkbattle') {
+        let lohit = message.guild.members.cache.get('694488949980135444')
         let battleId = args[0];
         if (!battleId) return message.reply({
             content: 'You must state the battle Id!'
@@ -927,6 +928,7 @@ client.on('message', async (message) => {
                                     let final = dateFix + ' ' + timeFix
                                     return final;
                                 }
+                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
                                 const embed = new MessageEmbed()
                                     .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                     .setColor('RED')
@@ -939,9 +941,10 @@ client.on('message', async (message) => {
                                     .setFooter('Singapore on top', client.user.displayAvatarURL())
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                                message.channel.send({
-                                    embeds: [embed]
-                                })
+                                    message.channel.send({
+                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
+                                        embeds: [embed]
+                                    })
                             } else if (parseInt(m.Victim.AverageItemPower) < 1100) {
                                 hasTriggered = false
                                 console.log(test)
@@ -983,6 +986,7 @@ client.on('message', async (message) => {
                                     let final = dateFix + ' ' + timeFix
                                     return final;
                                 }
+                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
                                 const embed = new MessageEmbed()
                                     .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                     .setColor('RED')
@@ -995,9 +999,10 @@ client.on('message', async (message) => {
                                     .setFooter('Singapore on top', client.user.displayAvatarURL())
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
-                                message.channel.send({
-                                    embeds: [embed]
-                                })
+                                    message.channel.send({
+                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
+                                        embeds: [embed]
+                                    })
                             }
                             else {
                                 if (compareSet(gear.MainHand, gear.OffHand, gear.Head, gear.Armor, gear.Shoes) == true) {
@@ -1040,6 +1045,7 @@ client.on('message', async (message) => {
                                         let final = dateFix + ' ' + timeFix
                                         return final;
                                     }
+                                    let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
                                     const embed = new MessageEmbed()
                                         .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                         .setColor('RED')
@@ -1053,8 +1059,9 @@ client.on('message', async (message) => {
                                         .setTimestamp(new Date())
                                         .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
+                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
                                         embeds: [embed]
-                                    })
+                                    })//done lol ez
                                 }
 
                             }
