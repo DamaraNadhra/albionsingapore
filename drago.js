@@ -1257,11 +1257,11 @@ client.on('message', async (message) => {
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
                 var person;
-                let nickname = message.guild.members.cache.find(i => i.nickname === firstArgument)
+                let nickname = message.guild.members.cache.find(i => i.nickname.toLowerCase() === firstArgument.toLowerCase)
                 if (nickname) {
                     person = nickname
                 } else if (!nickname) {
-                    person = message.guild.members.cache.find(i => i.user.username === firstArgument)
+                    person = message.guild.members.cache.find(i => i.user.username.toLowerCase() === firstArgument.toLowerCase())
                 } else {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
@@ -1317,8 +1317,8 @@ client.on('message', async (message) => {
                     })
                 }
             } else {
-                let hisID = message.guild.members.cache.find(i => i.nickname === firstArgument)
-                if (!hisID) hisID = message.guild.members.cache.find(b => b.user.username === firstArgument)
+                let hisID = message.guild.members.cache.find(i => i.nickname.toLowerCase() === firstArgument.toLowerCase())
+                if (!hisID) hisID = message.guild.members.cache.find(b => b.user.username.toLowerCase() === firstArgument.toLowerCase())
                 isPersonHasReputation = await rep.findOne({ id: hisID.id })
                 if (!isPersonHasReputation) {
                     message.channel.send({
