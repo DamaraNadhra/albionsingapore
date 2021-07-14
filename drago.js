@@ -1258,7 +1258,7 @@ client.on('message', async (message) => {
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
                 var person;
-                let nickname = message.guild.members.cache.find(i => i.displayName === firstArgument)
+                let nickname = (await message.guild.members.fetch()).find(user => user.displayName === firstArgument)
                 if (!nickname)  {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
@@ -1314,7 +1314,7 @@ client.on('message', async (message) => {
                 }
             } else {
                 console.log(firstArgument)
-                let hisID = message.guild.members.cache.find(user => user.displayName === firstArgument)
+                let hisID = (await message.guild.members.fetch()).find(user => user.displayName === firstArgument)
                 if (!hisID) return message.reply({
                     content: `I couldnt find a person with \`${firstArgument}\` nickname`
                 })
