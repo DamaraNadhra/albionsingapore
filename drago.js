@@ -1249,7 +1249,7 @@ client.on('message', async (message) => {
                 personID = person.id
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
-                let person;
+                var person;
                 let nickname = message.guild.members.cache.find(i => i.nickname === firstArgument)
                 if (nickname) {
                     person = nickname
