@@ -1247,6 +1247,7 @@ client.on('message', async (message) => {
             let isPersonHasRep;
             let guildNickname;
             let firstArgument = args[0]
+            let argument = args.slice(0).join(' ')
             if (!firstArgument) return message.reply({
                 content: 'Please state the person name or his mention'
             })
@@ -1258,7 +1259,7 @@ client.on('message', async (message) => {
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
                 var person;
-                let nickname = (await message.guild.members.fetch()).find(user => user.displayName === firstArgument)
+                let nickname = (await message.guild.members.fetch()).find(user => user.displayName === argument)
                 if (!nickname)  {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
@@ -1294,6 +1295,7 @@ client.on('message', async (message) => {
         if (message.channel.id === '722753194496753745') return
         await mongo().then(async mongoose => {
             let firstArgument = args[0]
+            let argument = args.slice(0).join(' ')
             let isPersonHasReputation;
             if (!firstArgument) return message.reply({
                 content: 'State the person mentions or his nickname'
@@ -1313,10 +1315,9 @@ client.on('message', async (message) => {
                     })
                 }
             } else {
-                console.log(firstArgument)
-                let hisID = (await message.guild.members.fetch()).find(user => user.displayName === firstArgument)
+                let hisID = (await message.guild.members.fetch()).find(user => user.displayName === argument)
                 if (!hisID) return message.reply({
-                    content: `I couldnt find a person with \`${firstArgument}\` nickname`
+                    content: `I couldnt find a person with \`${argument}\` nickname`
                 })
                 isPersonHasReputation = await rep.findOne({ id: hisID.id})
                 if (!isPersonHasReputation) {
