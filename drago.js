@@ -1396,7 +1396,7 @@ client.on('message', async (message) => {
                 let nameMap = datta.map(m => m.name).join('\n')
                 let rankMap = datta.map(function (element, index) {
                     return "**" + '#' + (parseInt(index) + 1) + "**"
-                }).join('\n')
+                }).splice(0, 1, '🥇').splice(1, 1, '🥈').splice(2, 1, '🥉').join('\n')
                 let thisbutton = new MessageButton()
                     .setStyle('PRIMARY')
                     .setEmoji('🔄')
@@ -1661,7 +1661,7 @@ client.on('interaction', async interaction => {
                 let nameMap = datta.map(m => m.name).join('\n')
                 let rankMap = datta.map(function (element, index) {
                     return "**" + '#' + (parseInt(index) + 1) + "**"
-                }).join('\n')
+                }).splice(0, 1, '🥇').splice(1, 1, '🥈').splice(2, 1, '🥉').join('\n')
                 let thisbutton = new MessageButton()
                     .setStyle('PRIMARY')
                     .setEmoji('🔄')
