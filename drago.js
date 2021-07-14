@@ -870,7 +870,7 @@ client.on('message', async (message) => {
             })
         }
     } else if (command === 'checkbattle') {
-        let lohit = message.guild.members.cache.get('694488949980135444')
+        let lohit = message.guild.members.cache.get('409717155035217922')
         let battleId = args[0];
         if (!battleId) return message.reply({
             content: 'You must state the battle Id!'
