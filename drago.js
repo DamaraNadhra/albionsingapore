@@ -1682,7 +1682,7 @@ client.on('interaction', async interaction => {
             })
         } else if (interaction.customID === 'refreshbutton') {
             await mongo().then(async mongoose => {
-                let datta = await rep.find().sort({ rep: -1}).limit(10)
+                let datta = await rep.find().sort({ rep: -1}).limit(15)
                 let pointsMap = datta.map(m => m.rep).join('\n')
                 let nameMap = datta.map(m => m.name).join('\n')
                 let rankMap = datta.map(function (element, index) {
