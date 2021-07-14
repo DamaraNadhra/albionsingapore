@@ -1261,7 +1261,7 @@ client.on('message', async (message) => {
                 if (nickname) {
                     person = nickname
                 } else if (!nickname) {
-                    person = message.guild.members.cache.find(i => i.user.username.toLowerCase() === firstArgument.toLowerCase())
+                    person = message.guild.members.cache.find(i => i.user.username.toString().toLowerCase() === firstArgument.toLowerCase())
                 } else {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
