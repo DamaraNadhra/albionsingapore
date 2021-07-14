@@ -1259,7 +1259,7 @@ client.on('message', async (message) => {
                 isPersonHasRep = await rep.findOne({ id: person.id })
             } else {
                 var person;
-                let nickname = (await message.guild.members.fetch()).find(user => user.displayName.toLowerCase() === argument.toLowerCase())
+                let nickname = (await message.guild.members.fetch()).find(user => user.displayName.toLowerCase().includes(args[0].toLowerCase()))
                 if (!nickname)  {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
@@ -1316,7 +1316,7 @@ client.on('message', async (message) => {
                     })
                 }
             } else {
-                let hisID = (await message.guild.members.fetch()).find(user => user.displayName.toLowerCase() === argument.toLowerCase())
+                let hisID = (await message.guild.members.fetch()).find(user => user.displayName.toLowerCase().includes(args[0].toLowerCase()))
                 if (!hisID) return message.reply({
                     content: `I couldnt find a person with \`${argument}\` nickname`
                 })
