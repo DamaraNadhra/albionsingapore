@@ -13,7 +13,9 @@ const blacklist = require('./models/blacklist')
 const rep = require('./models/reputation')
 const { dateMaker, compareSet, sets, billboard, nicknameMaker } = require('./functions')
 let recentlyRan = [];
-
+let repLogButton = new MessageButton()
+.setStyle('LINK')
+.setLabel('Message Link')
 const AvArow = new MessageActionRow()
     .addComponents(
         new MessageSelectMenu()
@@ -1270,15 +1272,13 @@ client.on('message', async (message) => {
             message.channel.send({
                 content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`
             })
-            console.log(await rep.find().sort({ rep: -1 }))
             recentlyRan.push(message.author.id)
-            console.log(`Before: ${recentlyRan}`)
             setTimeout(() => {
                 recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
-                console.log(`After: ${recentlyRan}`)
             }, 420000);
             logChannel.send({
-                content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+                content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`,
+                components: [[repLogButton.setURL(message.url)]]
             })
         })
     } else if (command === 'rep') {
@@ -1364,7 +1364,8 @@ client.on('message', async (message) => {
                             recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                         }, 420000);
                         logChannel.send({
-                            content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+                            content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`,
+                            components: [[repLogButton.setURL(message.url)]]
                         })
                     })
                 } else {
@@ -1393,7 +1394,8 @@ client.on('message', async (message) => {
                         recentlyRan = recentlyRan.filter((string) => string !== message.author.id)
                     }, 420000);
                     logChannel.send({
-                        content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`
+                        content: `**${nicknameMaker(message, message.author.id)}** has given \`1\` Rep to **${personData.name}** in <#${message.channel.id}> at ${dateMaker(new Date())}`,
+                        components: [[repLogButton.setURL(message.url)]]
                     })
                 }
             }
