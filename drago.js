@@ -1258,19 +1258,15 @@ client.on('message', async (message) => {
             } else {
                 var person;
                 let nickname = message.guild.members.cache.find(i => i.nickname === firstArgument)
-                if (nickname) {
-                    person = nickname
-                } else if (!nickname) {
-                    person = message.guild.members.cache.find(i => i.user.username === firstArgument)
-                } else {
+                let username =  message.guild.members.cache.find(i => i.user.username === firstArgument)
+                if (!nickname && !username)  {
                     return message.reply({
                         content: 'I couldn\'t find this person inside this server'
                     })
-                }
-                if (person.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>` })
-                personID = person.id;
+                }   
+                if (Boolean(nickname) ? nickname.id : username.id === message.author.id) return message.reply({ content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>` })
                 guildNickname = message.guild.members.cache.get(person.id).user.username
-                isPersonHasRep = await rep.findOne({ id: person.id })
+                isPersonHasRep = await rep.findOne({ id: Boolean(nickname) ? nickname.id : username.id })
             }
             if (isPersonHasRep) {
                 await isPersonHasRep.updateOne({ rep: parseInt(isPersonHasRep.rep) + 1 })
@@ -1318,8 +1314,11 @@ client.on('message', async (message) => {
                 }
             } else {
                 let hisID = message.guild.members.cache.find(i => i.nickname === firstArgument)
-                if (!hisID) hisID = message.guild.members.cache.find(b => b.user.username === firstArgument)
-                isPersonHasReputation = await rep.findOne({ id: hisID.id })
+                let usernameID = message.guild.members.cache.find(b => b.user.username === firstArgument)
+                if (!hisID && !usernameID) return message.reply({
+                    content: `I couldnt find a person with \`${firstArgument}\` nickname`
+                })
+                isPersonHasReputation = await rep.findOne({ id: Boolean(hisID) ? hisID.id : usernameID.id})
                 if (!isPersonHasReputation) {
                     message.channel.send({
                         content: `**${nicknameMaker(message, hisID.id)}**: 0 **Rep** (#**#ω**)`
