@@ -928,7 +928,7 @@ client.on('message', async (message) => {
                                     let final = dateFix + ' ' + timeFix
                                     return final;
                                 }
-                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
+                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name)
                                 const embed = new MessageEmbed()
                                     .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                     .setColor('RED')
@@ -942,7 +942,7 @@ client.on('message', async (message) => {
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
+                                        content: Boolean(personMention) ? `<@${personMention.id}>` : lohit,
                                         embeds: [embed]
                                     })
                             } else if (parseInt(m.Victim.AverageItemPower) < 1100) {
@@ -986,7 +986,7 @@ client.on('message', async (message) => {
                                     let final = dateFix + ' ' + timeFix
                                     return final;
                                 }
-                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
+                                let personMention = message.guild.members.cache.find(m => m.nickname === person.name)
                                 const embed = new MessageEmbed()
                                     .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                     .setColor('RED')
@@ -1000,7 +1000,7 @@ client.on('message', async (message) => {
                                     .setTimestamp(new Date())
                                     .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
+                                        content: Boolean(personMention) ? `<@${personMention.id}>` : lohit,
                                         embeds: [embed]
                                     })
                             }
@@ -1045,7 +1045,7 @@ client.on('message', async (message) => {
                                         let final = dateFix + ' ' + timeFix
                                         return final;
                                     }
-                                    let personMention = message.guild.members.cache.find(m => m.nickname === person.name).id
+                                    let personMention = message.guild.members.cache.find(m => m.nickname === person.name)
                                     const embed = new MessageEmbed()
                                         .setAuthor('SIngapore ZvZ Tool', client.user.displayAvatarURL())
                                         .setColor('RED')
@@ -1059,7 +1059,7 @@ client.on('message', async (message) => {
                                         .setTimestamp(new Date())
                                         .setImage(`https://aolootlog.com/api/api.php?image=yes&main=${MainHand}&off=${OffHand}&head=${Head}&armor=${Armor}&shoes=${Shoes}`)
                                     message.channel.send({
-                                        content: Boolean(personMention) ? `<@${personMention}>` : lohit,
+                                        content: Boolean(personMention) ? `<@${personMention.id}>` : lohit,
                                         embeds: [embed]
                                     })//done lol ez
                                 }
