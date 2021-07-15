@@ -603,10 +603,11 @@ client.on("message", async (message) => {
       let guildNickname;
       let mentionsNumber = message.mentions.members.map((e) => e.user.id);
       console.log(mentionsNumber.length);
-      if (mentionsNumber.includes(message.author.id))
+      if (mentionsNumber.includes(message.author.id)) {
         return message.reply({
           content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>`,
         });
+      }
       console.log("should be stopped here after the return statement");
       if (mentionsNumber.length > 2) return;
       console.log("Should be stopped");
