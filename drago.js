@@ -1402,7 +1402,7 @@ client.on("message", async (message) => {
                   return final;
                 };
                 let personMention = (await message.guild.members.fetch()).find(
-                  (m) => m.nickname === person.name
+                  (m) => m.displayName === person.name
                 );
                 const embed = new MessageEmbed()
                   .setAuthor(
@@ -1499,7 +1499,7 @@ client.on("message", async (message) => {
                   return final;
                 };
                 let personMention = (await message.guild.members.fetch()).find(
-                  (m) => m.nickname === person.name
+                  (m) => m.displayName === person.name
                 );
                 const embed = new MessageEmbed()
                   .setAuthor(
@@ -1605,7 +1605,7 @@ client.on("message", async (message) => {
                   };
                   let personMention = (
                     await message.guild.members.fetch()
-                  ).find((m) => m.nickname === person.name);
+                  ).find((m) => m.displayName === person.name);
                   const embed = new MessageEmbed()
                     .setAuthor(
                       "SIngapore ZvZ Tool",
