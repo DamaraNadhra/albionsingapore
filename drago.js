@@ -2079,12 +2079,10 @@ client.on("message", async (message) => {
   } else if (command === "deletecommand") {
     if (message.member.permissions.has("ADMINISTRATOR")) {
       if (!args[0]) return message.reply("Please state the command name");
-      let commandList = await (
-        await client.application?.commands.fetch()
-      ).get(args[0]);
+      let commandList = await client.application?.commands.fetch();
       console.log(await client.application?.commands.fetch());
       if (commandList) {
-        commandList.delete();
+        commandList.delete(args[0]);
         message.reply(`Command \`${args[0]}\` has been deleted`);
       } else {
         message.reply(`I couldn't find a command with \`${args[0]}\` name`);
