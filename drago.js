@@ -1314,7 +1314,7 @@ client.on("message", async (message) => {
       });
     }
   } else if (command === "checkbattle") {
-    let lohit = message.guild.members.cache.get("409717155035217922");
+    let lohit = (await message.guild.members.fetch()).get("409717155035217922");
     let battleId = args[0];
     if (!battleId)
       return message.reply({
