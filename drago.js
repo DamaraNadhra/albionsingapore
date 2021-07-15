@@ -607,92 +607,43 @@ client.on("message", async (message) => {
         message.reply({
           content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>`,
         });
-        return false;
-      } else {
-        if (mentionsNumber.length > 2) return;
-        if (mentionsNumber.length > 1) {
-          let theMap = message.mentions.members;
-          let mentionArray = [];
-          let array = theMap.map((m) => m.user.id);
-          var bar = new Promise((resolve, reject) => {
-            array.forEach(async (m, index) => {
-              console.log(m);
-              let guildNickname =
-                message.guild.members.cache.get(m).user.username;
-              isPersonHasRep = await rep.findOne({ id: m });
+        return;
+      }
+      if (mentionsNumber.length > 2) return;
+      if (mentionsNumber.length > 1) {
+        let theMap = message.mentions.members;
+        let mentionArray = [];
+        let array = theMap.map((m) => m.user.id);
+        var bar = new Promise((resolve, reject) => {
+          array.forEach(async (m, index) => {
+            console.log(m);
+            let guildNickname =
+              message.guild.members.cache.get(m).user.username;
+            isPersonHasRep = await rep.findOne({ id: m });
 
-              if (isPersonHasRep) {
-                await isPersonHasRep.updateOne({
-                  rep: parseInt(isPersonHasRep.rep) + 1,
-                });
-              } else {
-                console.log(guildNickname);
-                await rep.create({
-                  name: guildNickname,
-                  id: m,
-                  rep: "1",
-                });
-              }
-              let personData = await rep.findOne({ id: m });
-              mentionArray.push(personData.name);
-              console.log(
-                m,
-                mentionArray,
-                theMap.map((m) => m.id).length,
-                index
-              );
-              if (index === array.length - 1) resolve();
-            });
+            if (isPersonHasRep) {
+              await isPersonHasRep.updateOne({
+                rep: parseInt(isPersonHasRep.rep) + 1,
+              });
+            } else {
+              console.log(guildNickname);
+              await rep.create({
+                name: guildNickname,
+                id: m,
+                rep: "1",
+              });
+            }
+            let personData = await rep.findOne({ id: m });
+            mentionArray.push(personData.name);
+            console.log(m, mentionArray, theMap.map((m) => m.id).length, index);
+            if (index === array.length - 1) resolve();
           });
-          bar.then(async () => {
-            let finalString = mentionArray
-              .map((m) => "**" + m + "**")
-              .join(", ");
-            console.log(finalString);
-            message.channel.send({
-              content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
-            });
-            setTimeout(() => {
-              recentlyRan = recentlyRan.filter(
-                (string) => string !== message.author.id
-              );
-            }, 420000);
-            logChannel.send({
-              content: `**${nicknameMaker(
-                message,
-                message.author.id
-              )}** has given \`1\` Rep to **${personData.name}** in <#${
-                message.channel.id
-              }> at ${dateMaker(new Date())}`,
-              components: [[repLogButton.setURL(message.url)]],
-            });
-          });
-        } else {
-          let firstArgument = args[0];
-          let person = message.mentions.members.first().user;
-          guildNickname = nicknameMaker(message, person.id);
-          personID = person.id;
-          isPersonHasRep = await rep.findOne({ id: person.id });
-
-          if (isPersonHasRep) {
-            await isPersonHasRep.updateOne({
-              rep: parseInt(isPersonHasRep.rep) + 1,
-            });
-          } else {
-            await rep.create({
-              name: guildNickname.toLowerCase(),
-              id: personID,
-              rep: "1",
-            });
-          }
-          let personData = await rep.findOne({ id: personID });
-          let blabla =
-            (await (
-              await rep.find().sort({ rep: -1 })
-            ).findIndex((i) => i.id === personID)) + 1;
-          recentlyRan.push(message.author.id);
+        });
+        bar.then(async () => {
+          let finalString = mentionArray.map((m) => "**" + m + "**").join(", ");
+          console.log(finalString);
           message.channel.send({
-            content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+            content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
           });
           setTimeout(() => {
             recentlyRan = recentlyRan.filter(
@@ -708,7 +659,48 @@ client.on("message", async (message) => {
             }> at ${dateMaker(new Date())}`,
             components: [[repLogButton.setURL(message.url)]],
           });
+        });
+      } else {
+        let firstArgument = args[0];
+        let person = message.mentions.members.first().user;
+        guildNickname = nicknameMaker(message, person.id);
+        personID = person.id;
+        isPersonHasRep = await rep.findOne({ id: person.id });
+
+        if (isPersonHasRep) {
+          await isPersonHasRep.updateOne({
+            rep: parseInt(isPersonHasRep.rep) + 1,
+          });
+        } else {
+          await rep.create({
+            name: guildNickname.toLowerCase(),
+            id: personID,
+            rep: "1",
+          });
         }
+        let personData = await rep.findOne({ id: personID });
+        let blabla =
+          (await (
+            await rep.find().sort({ rep: -1 })
+          ).findIndex((i) => i.id === personID)) + 1;
+        recentlyRan.push(message.author.id);
+        message.channel.send({
+          content: `Gave \`1\` Rep to **${guildNickname}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+        });
+        setTimeout(() => {
+          recentlyRan = recentlyRan.filter(
+            (string) => string !== message.author.id
+          );
+        }, 420000);
+        logChannel.send({
+          content: `**${nicknameMaker(
+            message,
+            message.author.id
+          )}** has given \`1\` Rep to **${personData.name}** in <#${
+            message.channel.id
+          }> at ${dateMaker(new Date())}`,
+          components: [[repLogButton.setURL(message.url)]],
+        });
       }
     });
   }
