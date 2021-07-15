@@ -2644,10 +2644,11 @@ client.on("interaction", async (interaction) => {
         return;
       await mongo().then(async (mongoose) => {
         let isPersonHasReputation;
-        const { user } = interaction.options.get("user");
+        const blabla = interaction.options.get("user");
         console.log(Boolean(interaction.options.get("user")));
         console.log(interaction.options.get("user"));
         if (interaction.options.get("user")) {
+          const { user } = interaction.options.get("user");
           isPersonHasReputation = await rep.findOne({ id: user.id });
           if (!isPersonHasReputation) {
             interaction.reply({
