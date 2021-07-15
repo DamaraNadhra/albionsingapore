@@ -1394,7 +1394,7 @@ client.on("message", async (message) => {
                   let final = dateFix + " " + timeFix;
                   return final;
                 };
-                let personMention = message.guild.members.cache.find(
+                let personMention = (await message.guild.members.fetch()).find(
                   (m) => m.nickname === person.name
                 );
                 const embed = new MessageEmbed()
@@ -1491,7 +1491,7 @@ client.on("message", async (message) => {
                   let final = dateFix + " " + timeFix;
                   return final;
                 };
-                let personMention = message.guild.members.cache.find(
+                let personMention = (await message.guild.members.fetch()).find(
                   (m) => m.nickname === person.name
                 );
                 const embed = new MessageEmbed()
@@ -1596,9 +1596,9 @@ client.on("message", async (message) => {
                     let final = dateFix + " " + timeFix;
                     return final;
                   };
-                  let personMention = message.guild.members.cache.find(
-                    (m) => m.nickname === person.name
-                  );
+                  let personMention = (
+                    await message.guild.members.fetch()
+                  ).find((m) => m.nickname === person.name);
                   const embed = new MessageEmbed()
                     .setAuthor(
                       "SIngapore ZvZ Tool",
@@ -2645,8 +2645,6 @@ client.on("interaction", async (interaction) => {
       await mongo().then(async (mongoose) => {
         let isPersonHasReputation;
         const blabla = interaction.options.get("user");
-        console.log(Boolean(interaction.options.get("user")));
-        console.log(interaction.options.get("user"));
         if (interaction.options.get("user")) {
           const { user } = interaction.options.get("user");
           isPersonHasReputation = await rep.findOne({ id: user.id });
@@ -2698,7 +2696,6 @@ client.on("interaction", async (interaction) => {
         let logChannel =
           interaction.guild.channels.cache.get("864669032811331584");
         const { user } = interaction.options.get("user");
-        console.log(interaction.options.get("user"));
         if (user.id === interaction.member.id)
           return interaction.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
