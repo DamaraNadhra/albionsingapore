@@ -2696,7 +2696,7 @@ client.on("interaction", async (interaction) => {
       await mongo().then(async (mongoose) => {
         let logChannel =
           interaction.guild.channels.cache.get("864669032811331584");
-        let { person } = interaction.options.get("user");
+        const { person } = interaction.options.get("user");
         if (person.id === interaction.member.id)
           return message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
