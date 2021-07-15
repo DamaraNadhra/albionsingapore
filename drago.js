@@ -2076,6 +2076,17 @@ client.on("message", async (message) => {
     const commandz = await client.guilds.cache
       .get("703862691608920114")
       .commands.set(data);
+  } else if (command === "deletecommand") {
+    if (message.member.permissions.has("ADMINISTRATOR")) {
+      if (!args[0]) return message.reply("Please state the command name");
+      let commandList = client.application?.commands.cache.get(args[0]);
+      if (commandList) {
+        commandList.delete();
+        message.reply(`Command \`${args[0]}\` has been deleted`);
+      } else {
+        message.reply(`I couldn't find a command with \`${args[0]}\` name`);
+      }
+    }
   }
   Object.keys(avalist).forEach((m, i) => {
     if (command.includes(m)) {
