@@ -2697,14 +2697,14 @@ client.on("interaction", async (interaction) => {
       await mongo().then(async (mongoose) => {
         let logChannel =
           interaction.guild.channels.cache.get("864669032811331584");
-        const { person } = interaction.options.get("user");
+        const { user } = interaction.options.get("user");
         console.log(interaction.options.get("user"));
-        if (person.id === interaction.member.id)
+        if (user.id === interaction.member.id)
           return message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
           });
-        let isPersonHasRep = await rep.findOne({ id: person.id });
-        let personID = person.id;
+        let isPersonHasRep = await rep.findOne({ id: user.id });
+        let personID = user.id;
         if (isPersonHasRep) {
           await isPersonHasRep.updateOne({
             rep: parseInt(isPersonHasRep.rep) + 1,
