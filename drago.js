@@ -2049,6 +2049,7 @@ client.on("message", async (message) => {
       });
     }
   } else if (command === "deploy") {
+    const botPermission = message.channel.permissionsFor(message.guild.me);
     const data = [
       {
         name: "zvz-builds",
