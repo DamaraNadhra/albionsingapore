@@ -595,7 +595,7 @@ client.on("message", async (message) => {
   ) {
     if (message.channel.id === "722753194496753745") return;
     await mongo().then(async (mongoose) => {
-      if (!message.mentions.members.first()) return;
+      if (!message.mentions.members) return;
       let logChannel = message.guild.channels.cache.get("864669032811331584");
       if (recentlyRan.includes(message.author.id)) return;
       let personID;
