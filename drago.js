@@ -586,33 +586,33 @@ let list = {
     "https://discord.com/channels/200746010102726657/807319001234407504/810356123470921749",
   ],
 };
-client.on("message", async (message) => {
-  const data = [
-    {
-      name: "zvz-builds",
-      description:
-        "Shows you the list of the latest approved zvz builds according to ARCH main discord",
-    },
-    {
-      name: "rep",
-      description:
-        "Shows yours or the specified users current reputations and rank",
-      options: [
-        {
-          name: "user",
-          description:
-            "Shows yours or the specified users current reputations and rank",
-          type: "USER",
-          required: false,
-        },
-      ],
-    },
-  ];
+const data = [
+  {
+    name: "zvz-builds",
+    description:
+      "Shows you the list of the latest approved zvz builds according to ARCH main discord",
+  },
+  {
+    name: "rep",
+    description:
+      "Shows yours or the specified users current reputations and rank",
+    options: [
+      {
+        name: "user",
+        description:
+          "Shows yours or the specified users current reputations and rank",
+        type: "USER",
+        required: false,
+      },
+    ],
+  },
+];
 
-  const commandz = await client.guilds.cache
-    .get("703862691608920114")
-    .commands.set(data);
-  console.log(commandz);
+const commandz = await client.guilds.cache
+  .get("703862691608920114")
+  .commands.set(data);
+console.log(commandz);
+client.on("message", async (message) => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   //if (!message.content.startsWith(prefix)) return;
