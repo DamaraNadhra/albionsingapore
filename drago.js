@@ -1044,7 +1044,7 @@ client.on("message", async (message) => {
       message.channel.send({
         content:
           "Life is hard, but you must keep going <:godbless:824231355331510274> \n**Gato2021**",
-        files: ["https://i.imgur.com/UcKOUlE.jpg"],
+        files: [answer],
       });
     } else if (message.author.id === "209607795505496065") {
       message.delete();
