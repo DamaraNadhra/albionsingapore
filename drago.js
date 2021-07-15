@@ -611,7 +611,7 @@ client.on("message", async (message) => {
       console.log("should be stopped here after the return statement");
       if (mentionsNumber.length > 2) return;
       console.log("Should be stopped");
-      if (mentionsNumber.length > 1) {
+      if (mentionsNumber.length > 1 && mentionsNumber.length < 3) {
         let theMap = message.mentions.members;
         let mentionArray = [];
         let array = theMap.map((m) => m.user.id);
