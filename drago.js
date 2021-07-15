@@ -2082,7 +2082,7 @@ client.on("message", async (message) => {
       let commandList = await client.application?.commands.fetch();
       console.log(await client.application?.commands.fetch());
       if (commandList) {
-        commandList.delete(args[0]);
+        await client.application?.commands.delete(args[0]);
         message.reply(`Command \`${args[0]}\` has been deleted`);
       } else {
         message.reply(`I couldn't find a command with \`${args[0]}\` name`);
