@@ -612,6 +612,7 @@ client.on("message", async (message) => {
   const commandz = await client.guilds.cache
     .get("703862691608920114")
     .commands.set(data);
+  console.log(commandz);
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   //if (!message.content.startsWith(prefix)) return;
