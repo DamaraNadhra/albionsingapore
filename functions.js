@@ -719,9 +719,13 @@ const billboard = async (id, param) => {
     });
 };
 const nicknameMaker = (message, userID) => {
-  return (await message.guild.members.fetch()).find(
-    (user) => user.id === userID
-  ).displayName;
+  let isPersonHasNickname = message.guild.members.cache.get(userID).nickname;
+  if (isPersonHasNickname) {
+    return isPersonHasNickname;
+  } else {
+    let username = message.guild.members.cache.get(userID).user.username;
+    return username;
+  }
 };
 
 module.exports = {
