@@ -2700,7 +2700,7 @@ client.on("interaction", async (interaction) => {
         const { user } = interaction.options.get("user");
         console.log(interaction.options.get("user"));
         if (user.id === interaction.member.id)
-          return message.reply({
+          return interaction.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
           });
         let isPersonHasRep = await rep.findOne({ id: user.id });
@@ -2711,7 +2711,7 @@ client.on("interaction", async (interaction) => {
           });
         } else {
           await rep.create({
-            name: nicknameMaker(message, personID),
+            name: nicknameMaker(interaction, personID),
             id: personID,
             rep: 1,
           });
@@ -2735,7 +2735,7 @@ client.on("interaction", async (interaction) => {
             interaction,
             interaction.member.id
           )}** has given \`1\` Rep to **${personData.name}** in <#${
-            message.channel.id
+            interaction.channelID
           }> at ${dateMaker(new Date())}`,
         });
       });
