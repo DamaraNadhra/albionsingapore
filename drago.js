@@ -2079,8 +2079,8 @@ client.on("message", async (message) => {
   } else if (command === "deletecommand") {
     if (message.member.permissions.has("ADMINISTRATOR")) {
       if (!args[0]) return message.reply("Please state the command name");
-      let commandList = client.application?.commands.cache.get(args[0]);
-      console.log(client.application?.commands.fetch());
+      let commandList = await client.application?.commands.cache.get(args[0]);
+      console.log(await client.application?.commands.fetch());
       if (commandList) {
         commandList.delete();
         message.reply(`Command \`${args[0]}\` has been deleted`);
