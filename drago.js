@@ -2052,11 +2052,13 @@ client.on("message", async (message) => {
     const botPermission = message.channel.permissionsFor(message.guild.me);
     console.log(botPermission);
     const data = [
+      //zvz-build command
       {
         name: "zvz-builds",
         description:
           "Shows you the list of the latest approved zvz builds according to ARCH main discord",
       },
+      //command rep checking
       {
         name: "rep",
         description:
@@ -2068,6 +2070,19 @@ client.on("message", async (message) => {
               "Shows yours or the specified users current reputations and rank",
             type: "USER",
             required: false,
+          },
+        ],
+      },
+      //command giving rep
+      {
+        name: "giverep",
+        description: "Gives reputation to someone",
+        options: [
+          {
+            name: "user",
+            description: "Gives reputation to someone",
+            type: "USER",
+            required: true,
           },
         ],
       },
@@ -2629,6 +2644,7 @@ client.on("interaction", async (interaction) => {
       await mongo().then(async (mongoose) => {
         let isPersonHasReputation;
         const { user } = interaction.options.get("user");
+        console.log(Boolean(user));
         if (user) {
           isPersonHasReputation = await rep.findOne({ id: user.id });
           if (!isPersonHasReputation) {
@@ -2668,6 +2684,56 @@ client.on("interaction", async (interaction) => {
             });
           }
         }
+      });
+    } else if (interaction.commandName === "giverep") {
+      if (
+        (interaction.channelID === "722753194496753745") |
+        (interaction.channelID === "752110992405692456")
+      )
+        return;
+      await mongo().then(async (mongoose) => {
+        let logChannel =
+          interaction.guild.channels.cache.get("864669032811331584");
+        let { person } = interaction.options.get("user");
+        if (person.id === interaction.member.id)
+          return message.reply({
+            content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+          });
+        let isPersonHasRep = await rep.findOne({ id: person.id });
+        let personID = person.id;
+        if (isPersonHasRep) {
+          await isPersonHasRep.updateOne({
+            rep: parseInt(isPersonHasRep.rep) + 1,
+          });
+        } else {
+          await rep.create({
+            name: nicknameMaker(message, personID),
+            id: personID,
+            rep: 1,
+          });
+        }
+        let personData = await rep.findOne({ id: personID });
+        let blabla =
+          (await (
+            await rep.find().sort({ rep: -1 })
+          ).findIndex((i) => i.id === personID)) + 1;
+        interaction.reply({
+          content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+        });
+        recentlyRan.push(interaction.member.id);
+        setTimeout(() => {
+          recentlyRan = recentlyRan.filter(
+            (string) => string !== interaction.member.id
+          );
+        }, 420000);
+        logChannel.send({
+          content: `**${nicknameMaker(
+            interaction,
+            interaction.member.id
+          )}** has given \`1\` Rep to **${personData.name}** in <#${
+            message.channel.id
+          }> at ${dateMaker(new Date())}`,
+        });
       });
     }
   }
