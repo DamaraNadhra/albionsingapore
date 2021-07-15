@@ -607,7 +607,7 @@ client.on("message", async (message) => {
         message.reply({
           content: `You can't thank yourself LOL, but nice try tho <:weirdchamp:839890533244862474>`,
         });
-        return;
+        return false;
       } else {
         if (mentionsNumber.length > 2) return;
         if (mentionsNumber.length > 1) {
