@@ -2080,7 +2080,7 @@ client.on("message", async (message) => {
     if (message.member.permissions.has("ADMINISTRATOR")) {
       if (!args[0]) return message.reply("Please state the command name");
       let commandList = client.application?.commands.cache.get(args[0]);
-      console.log(commandList);
+      console.log(client.application?.commands.fetch());
       if (commandList) {
         commandList.delete();
         message.reply(`Command \`${args[0]}\` has been deleted`);
