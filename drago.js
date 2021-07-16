@@ -640,8 +640,9 @@ client.on("message", async (message) => {
         bar.then(async () => {
           let finalString = mentionArray.map((m) => "**" + m + "**").join(", ");
           console.log(finalString);
-          message.channel.send({
+          message.reply({
             content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
+            ephemeral: true
           });
           recentlyRan.push(message.author.id);
           setTimeout(() => {
@@ -1901,6 +1902,7 @@ client.on("message", async (message) => {
         if (nickname.id === message.author.id)
           return message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+            ephemeral: true
           });
         isPersonHasRep = await rep.findOne({ id: nickname.id });
         personID = nickname.id;
@@ -1921,8 +1923,9 @@ client.on("message", async (message) => {
         (await (
           await rep.find().sort({ rep: -1 })
         ).findIndex((i) => i.id === personID)) + 1;
-      message.channel.send({
+      message.reply({
         content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+        ephemeral: true,
       });
       recentlyRan.push(message.author.id);
       setTimeout(() => {
