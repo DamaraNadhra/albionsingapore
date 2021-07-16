@@ -19,6 +19,7 @@ const axios = require("axios");
 const prefix = "!";
 const blacklist = require("./models/blacklist");
 const rep = require("./models/reputation");
+const 
 const {
   dateMaker,
   compareSet,
@@ -642,6 +643,7 @@ client.on("message", async (message) => {
           message.channel.send({
             content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
           });
+          recentlyRan.push(message.author.id);
           setTimeout(() => {
             recentlyRan = recentlyRan.filter(
               (string) => string !== message.author.id
@@ -651,7 +653,7 @@ client.on("message", async (message) => {
             content: `**${nicknameMaker(
               message,
               message.author.id
-            )}** has given \`1\` Rep to **${personData.name}** in <#${
+            )}** has given \`1\` Rep to **${finalString}** in <#${
               message.channel.id
             }> at ${dateMaker(new Date())}`,
             components: [[repLogButton.setURL(message.url)]],
