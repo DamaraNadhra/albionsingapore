@@ -19,7 +19,6 @@ const axios = require("axios");
 const prefix = "!";
 const blacklist = require("./models/blacklist");
 const rep = require("./models/reputation");
-const 
 const {
   dateMaker,
   compareSet,
@@ -642,7 +641,7 @@ client.on("message", async (message) => {
           console.log(finalString);
           message.reply({
             content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
-            ephemeral: true
+            ephemeral: true,
           });
           recentlyRan.push(message.author.id);
           setTimeout(() => {
@@ -1902,7 +1901,7 @@ client.on("message", async (message) => {
         if (nickname.id === message.author.id)
           return message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-            ephemeral: true
+            ephemeral: true,
           });
         isPersonHasRep = await rep.findOne({ id: nickname.id });
         personID = nickname.id;
