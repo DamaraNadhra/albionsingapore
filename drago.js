@@ -641,7 +641,6 @@ client.on("message", async (message) => {
           console.log(finalString);
           message.reply({
             content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
-            ephemeral: true,
           });
           recentlyRan.push(message.author.id);
           setTimeout(() => {
@@ -1866,7 +1865,14 @@ client.on("message", async (message) => {
     if (message.channel.id === "722753194496753745") return;
     await mongo().then(async (mongoose) => {
       if (recentlyRan.includes(message.author.id)) {
-        return message.reply("This command is on cooldown");
+        let cooldownMessage = await message.reply(
+          "This command is on cooldown"
+        );
+        setTimeout(() => {
+          cooldownMessage.delete();
+          message.delete();
+        }, 7000);
+        return;
       }
       let logChannel = message.guild.channels.cache.get("864669032811331584");
       let personID;
@@ -1880,10 +1886,16 @@ client.on("message", async (message) => {
         });
       if (message.mentions.members.first()) {
         let person = message.mentions.members.first().user;
-        if (person.id === message.author.id)
-          return message.reply({
+        if (person.id === message.author.id) {
+          let returnMessage = await message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
           });
+          setTimeout(() => {
+            returnMessage.delete();
+            message.delete();
+          }, 7000);
+          return;
+        }
         guildNickname = message.guild.members.cache.get(person.id).user
           .username;
         personID = person.id;
@@ -1901,7 +1913,6 @@ client.on("message", async (message) => {
         if (nickname.id === message.author.id)
           return message.reply({
             content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-            ephemeral: true,
           });
         isPersonHasRep = await rep.findOne({ id: nickname.id });
         personID = nickname.id;
@@ -1924,7 +1935,6 @@ client.on("message", async (message) => {
         ).findIndex((i) => i.id === personID)) + 1;
       message.reply({
         content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
-        ephemeral: true,
       });
       recentlyRan.push(message.author.id);
       setTimeout(() => {
