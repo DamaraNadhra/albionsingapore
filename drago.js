@@ -605,9 +605,9 @@ client.on("message", async (message) => {
       console.log(mentionsNumber.length);
       if (mentionsNumber.includes(message.author.id)) return;
       console.log("should be stopped here after the return statement");
-      if (mentionsNumber.length > 2) return;
+      if (mentionsNumber.length > 3) return;
       console.log("Should be stopped");
-      if (mentionsNumber.length > 1 && mentionsNumber.length < 3) {
+      if (mentionsNumber.length > 1 && mentionsNumber.length < 4) {
         let theMap = message.mentions.members;
         let mentionArray = [];
         let array = theMap.map((m) => m.user.id);
@@ -1906,17 +1906,28 @@ client.on("message", async (message) => {
           user.displayName.toLowerCase().includes(args[0].toLowerCase())
         );
         if (!nickname) {
-          return message.reply({
+          let called = await message.reply({
             content: "I couldn't find this person inside this server",
           });
+          setTimeout(() => {
+            called.delete();
+            message.delete();
+          }, 7000);
+          return;
         }
-        if (nickname.id === message.author.id)
-          return message.reply({
-            content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-          });
-        isPersonHasRep = await rep.findOne({ id: nickname.id });
-        personID = nickname.id;
       }
+      if (nickname.id === message.author.id) {
+        let returnMessage = await message.reply({
+          content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+        });
+        setTimeout(() => {
+          returnMessage.delete();
+          message.delete();
+        }, 7000);
+        return;
+      }
+      isPersonHasRep = await rep.findOne({ id: nickname.id });
+      personID = nickname.id;
       if (isPersonHasRep) {
         await isPersonHasRep.updateOne({
           rep: parseInt(isPersonHasRep.rep) + 1,
@@ -2358,18 +2369,23 @@ client.on("interaction", async (interaction) => {
       let role = interaction.guild.roles.cache.get("706471167971557447");
       let recruitRole = interaction.guild.roles.cache.get("849947414508863519");
       let botCommandChannel =
-        interaction.guild.channels.cache.get("760731834354499585");
-      if (interaction.member.roles.cache.has("849947414508863519")) {
-        interaction.member.roles.add(role);
-        interaction.member.roles.remove(recruitRole);
-        interaction.user.send({
-          content: `Permission Given!, Welcome to Singapore Guild \n\nYou can check zvz builds by typing \`!zvz-builds\` in ${botCommandChannel}`,
-          files: [
-            "https://media.discordapp.net/attachments/732059380685602857/861195481547931658/unknown.png",
-            "https://media.discordapp.net/attachments/732059380685602857/861195555543056384/unknown.png?width=646&height=498",
-          ],
+        interaction.guild.channels.cache.get("752110992405692456");
+      let welcomeChannel =
+        interaction.guild.channels.cache.get("742733429132754975");
+      interaction.member.roles.add(recruitRole);
+      if (
+        interaction.member.roles.cache.has("706471167971557447") |
+        interaction.member.roles.cache.has("849947414508863519")
+      ) {
+        return interaction.reply({
+          content: "You have already signed up! Please dont joke around!",
+          ephemeral: true,
         });
       }
+      interaction.user.send({
+        content: `Permission Given!, Please post your application at ${botCommandChannel} \nPlease refer to ${welcomeChannel} for application instruction!`,
+      });
+
       interaction.update({
         components: [[permissionGiven]],
       });
