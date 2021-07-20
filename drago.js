@@ -1896,8 +1896,6 @@ client.on("message", async (message) => {
           }, 7000);
           return;
         }
-        guildNickname = message.guild.members.cache.get(person.id).user
-          .username;
         personID = person.id;
         isPersonHasRep = await rep.findOne({ id: person.id });
       } else {
@@ -1915,8 +1913,10 @@ client.on("message", async (message) => {
           }, 7000);
           return;
         }
+        isPersonHasRep = await rep.findOne({ id: nickname.id });
+        personID = nickname.id;
       }
-      if (nickname.id === message.author.id) {
+      if (personID === message.author.id) {
         let returnMessage = await message.reply({
           content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
         });
@@ -1926,8 +1926,6 @@ client.on("message", async (message) => {
         }, 7000);
         return;
       }
-      isPersonHasRep = await rep.findOne({ id: nickname.id });
-      personID = nickname.id;
       if (isPersonHasRep) {
         await isPersonHasRep.updateOne({
           rep: parseInt(isPersonHasRep.rep) + 1,
