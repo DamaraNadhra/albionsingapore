@@ -1802,7 +1802,7 @@ client.on("message", async (message) => {
       })
       .then(() =>
         message.channel.send({
-          content: `> **2.** Type '!register' here in the #register-here channel.`,
+          content: `> **2.** Type \`!register\` in the #register-here channel, **after you have joined our guild!**`,
           files: ["https://i.imgur.com/9gsA1SO.png"],
         })
       )
@@ -2383,7 +2383,8 @@ client.on("interaction", async (interaction) => {
         });
       }
       interaction.user.send({
-        content: `Permission Given!, Please post your application at ${botCommandChannel} \nPlease refer to ${welcomeChannel} for application instruction!`,
+        content: `Permission Given!, Please post your application at ${botCommandChannel} \nPlease refer to ${welcomeChannel} for application instruction! \n\nPlease remember that **after you have joined the guild** you **MUST** register in ARCH Main Discord by typing \`!register\` in #register-here. If we found out that you were not registered, we will kick you :D`,
+        files: ["https://i.imgur.com/9gsA1SO.png"],
       });
 
       interaction.update({
