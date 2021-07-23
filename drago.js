@@ -121,7 +121,7 @@ const AvArow = new MessageActionRow().addComponents(
       },
     ])
 );
-let avalist = {
+const avalist = {
   "ava-realmbreaker": {
     pic: "https://i.imgur.com/iU9Lh1c.jpg",
     string: `Don't use your E during the arcane. \nYou may use roast pork for more survivability, but beef stew is preferrable \nFor bosses change to Q1 and W1 \n\nWhen fighting the **Knight Captain** Boss, you sholdn't use your E except when it's channeling for explosion or reflect \n\nOther melee DPS builds viable in ava: **Spirit hunter, Bearpaws** \nKeep in Note that melee dps is for experienced raiders of maximum of 2 per raid \nThe second Melee dps can use druid robe instead of specter jacket `,
@@ -425,7 +425,7 @@ const healRow = new MessageActionRow().addComponents(
       },
     ])
 );
-let dpsList = {
+const dpsList = {
   "zvz-siegebow": [
     "https://i.imgur.com/s5kBpr1.jpg",
     "https://albiononline.com/en/characterbuilder/solo-builds/view/101093",
@@ -517,7 +517,7 @@ let dpsList = {
     "https://discord.com/channels/200746010102726657/807319001234407504/843590654676303942",
   ],
 };
-let healList = {
+const healList = {
   "zvz-occult": [
     "https://i.imgur.com/iqEZaeO.jpg",
     "https://albiononline.com/en/characterbuilder/solo-builds/view/101117",
@@ -559,7 +559,7 @@ let healList = {
     "https://discord.com/channels/200746010102726657/807319001234407504/809526200036622386",
   ],
 };
-let list = {
+const list = {
   "zvz-grailseeker": [
     "https://i.imgur.com/p3e1S9u.jpg",
     "https://albiononline.com/en/characterbuilder/solo-builds/view/101137",
@@ -587,6 +587,20 @@ let list = {
   ],
 };
 client.on("message", async (message) => {
+  if (message.channel.id === "752110992405692456") {
+    if (
+      message.content.toLowerCase().includes("my in-game name:") |
+      message.content.toLowerCase().includes("ign")
+    ) {
+      let personIGN = message.content
+        .toLowerCase()
+        .slice("my in-game name:".length);
+      message.member.setNickname(personIGN);
+    } else if (message.content.toLowerCase().includes("ign")) {
+      let personIGN = message.content.toLowerCase().slice("ign:".length);
+      message.member.setNickname(personIGN);
+    }
+  }
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   if (
     message.content.toLowerCase().includes("thanks") |
@@ -2778,7 +2792,12 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on("ready", () => {
-  const statusArray = ["Gato #1", "Luai is rich but gay", "Ybibaboo my god"];
+  const statusArray = [
+    "Gato #1",
+    "Luai is rich but gay",
+    "Ybibaboo my god",
+    "current prefix is !",
+  ];
   console.log("The Bot is Online");
   let index = 0;
   setInterval(() => {
