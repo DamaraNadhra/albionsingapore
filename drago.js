@@ -2269,33 +2269,20 @@ client.on("message", async (message) => {
       }
     }
   } else if (command === "flip") {
-    if (message.member.permissions.has("ADMINISTRATOR")) {
-      let responses = ["HEAD", "TAIL"];
-      let answer = responses[Math.floor(Math.random() * responses.length)];
-      message.channel
-        .send({
-          content:
-            "After some consideration with my 70000 IQ brain for 100000 years.... <a:loading:867969408864243763> \nhttps://tenor.com/view/calculation-math-hangover-allen-zach-galifianakis-gif-6219070",
-        })
-        .then((msg) =>
-          setTimeout(() => {
-            msg.edit({
-              content: `The answer is **${answer}**`,
-            });
-          }, 6000)
-        );
-    } else {
-      message
-        .reply({
-          content: "This command is on growing phase",
-        })
-        .then((m) => {
-          setTimeout(() => {
-            m.delete();
-            message.delete();
-          }, 4000);
-        });
-    }
+    let responses = ["HEAD", "TAIL"];
+    let answer = responses[Math.floor(Math.random() * responses.length)];
+    message.channel
+      .send({
+        content:
+          "After some consideration with my 70000 IQ brain for 100000 years.... <a:loading:867969408864243763> \nhttps://tenor.com/view/calculation-math-hangover-allen-zach-galifianakis-gif-6219070",
+      })
+      .then((msg) =>
+        setTimeout(() => {
+          msg.edit({
+            content: `The answer is **${answer}**`,
+          });
+        }, 6000)
+      );
   }
   Object.keys(avalist).forEach((m, i) => {
     if (command.includes(m)) {
