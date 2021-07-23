@@ -1,5 +1,7 @@
 const rep = require("../models/reputation");
 const { nicknameMaker, dateMaker } = require("../functions");
+const blabla = require("../drago");
+let recentlyRan = blabla.cooldowns;
 module.exports = {
   name: "giverep",
   description: "gives reputation to provided player!",

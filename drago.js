@@ -43,6 +43,8 @@ let repLogButton = new MessageButton()
   .setLabel("Message Link");
 const fs = require("fs");
 client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
+const { cooldowns } = client;
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -194,7 +196,6 @@ client.on("message", async (message) => {
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
   //if (!client.commands.has(command)) return;
-
   try {
     client.commands.get(command).execute(message, args, client);
   } catch (error) {
@@ -941,5 +942,5 @@ client.on("ready", async () => {
     index++;
   }, 3000);
 });
-
+module.exports.cooldowns = recentlyRan;
 client.login(process.env.token);
