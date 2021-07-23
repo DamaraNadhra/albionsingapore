@@ -8,6 +8,7 @@ module.exports = {
    */
   async execute(message, args) {
     const blabla = await rep.findOne({ name: "ChengPoh" });
-    message.channel.send(blabla.rep);
+    console.log(blabla.rep);
+    message.channel.send(`${blabla.rep}`);
   },
 };
