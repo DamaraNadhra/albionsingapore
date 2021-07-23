@@ -739,7 +739,7 @@ client.on("message", async (message) => {
   const command = args.shift().toLowerCase();
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
-  if (!client.commands.has(command)) return;
+  //if (!client.commands.has(command)) return;
 
   try {
     client.commands.get(command).execute(message, args);
