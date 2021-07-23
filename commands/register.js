@@ -1,3 +1,5 @@
+const register = require("../models/register");
+const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "register",
   description: "Register to get permission to the Albion Singapore discord",
