@@ -2275,7 +2275,10 @@ client.on("message", async (message) => {
       message.channel
         .send({
           content:
-            "After some consideration with my 70000 IQ brain for 100000 years.... \nhttps://tenor.com/view/calculation-math-hangover-allen-zach-galifianakis-gif-6219070",
+            "After some consideration with my 70000 IQ brain for 100000 years.... <a:loading:867969408864243763>",
+          files: [
+            "https://tenor.com/view/calculation-math-hangover-allen-zach-galifianakis-gif-6219070",
+          ],
         })
         .then((msg) =>
           setTimeout(() => {
