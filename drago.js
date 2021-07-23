@@ -1911,15 +1911,23 @@ client.on("message", async (message) => {
         let mentionsNumber = message.mentions.members.map((e) => e.user.id);
         console.log(mentionsNumber.length);
         if (mentionsNumber.length > 3)
-          return message.reply({
-            content: `Max people you can give reputation to is \`3\`,`,
-          });
+          return message
+            .reply({
+              content: `Max people you can give reputation to is \`3\`, ||This message will self destruct in 5s||`,
+            })
+            .then((m) =>
+              setTimeout(() => {
+                m.delete();
+              }, 5000)
+            );
         if (mentionsNumber.length > 1 && mentionsNumber.length < 4) {
           let theMap = message.mentions.members;
           let mentionArray = [];
           let array = theMap.map((m) => m.user.id);
           if (array.includes(message.author.id)) {
-            array.filter((m) => m !== message.author.id);
+            array = array.filter((m) => {
+              return m !== message.author.id;
+            });
           }
           var bar = new Promise((resolve, reject) => {
             array.forEach(async (m, index) => {
