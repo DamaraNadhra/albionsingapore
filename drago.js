@@ -589,7 +589,7 @@ const list = {
 client.on("message", async (message) => {
   if (message.channel.id === "752110992405692456") {
     if (message.content.toLowerCase().includes("my in-game name:")) {
-      let personIGN = message.content.split(/ +/g);
+      let personIGN = message.content.replace("\n", " ").split(/ +/g);
       const startIndex =
         personIGN.findIndex((i) => i.toLowerCase() === "name:") + 1;
       const endIndex = startIndex + 1;
@@ -599,7 +599,7 @@ client.on("message", async (message) => {
         personIGN.slice(startIndex, endIndex).toString()
       );
     } else if (message.content.toLowerCase().includes("ign")) {
-      let personIGN = message.content.split(/ +/g);
+      let personIGN = message.content.replace("\n", " ").split(/ +/g);
       const startIndex =
         personIGN.findIndex((i) => i.toLowerCase() === "ign:") + 1;
       const endIndex = startIndex + 1;
