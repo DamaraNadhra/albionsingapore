@@ -590,16 +590,16 @@ client.on("message", async (message) => {
   if (message.channel.id === "752110992405692456") {
     if (message.content.toLowerCase().includes("my in-game name:")) {
       let personIGN = message.content.split(/ +/g);
-      const startIndex = personIGN.findIndex((i) => i === "name:") + 1;
+      const startIndex =
+        personIGN.findIndex((i) => i.toLowerCase() === "name:") + 1;
       const endIndex = startIndex + 1;
-      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
       message.member.setNickname(personIGN.slice(startIndex, endIndex));
     } else if (message.content.toLowerCase().includes("ign")) {
       let personIGN = message.content.split(/ +/g);
-      const startIndex = personIGN.findIndex((i) => i === "ign:") + 1;
+      const startIndex =
+        personIGN.findIndex((i) => i.toLowerCase() === "ign:") + 1;
       const endIndex = startIndex + 1;
-      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
       message.member.setNickname(personIGN.slice(startIndex, endIndex));
     }
