@@ -30,6 +30,16 @@ let recentlyRan = [];
 let repLogButton = new MessageButton()
   .setStyle("LINK")
   .setLabel("Message Link");
+const fs = require("fs");
+client.commands = new Discord.Collection();
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter((file) => file.endsWith(".js"));
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+
 const AvArow = new MessageActionRow().addComponents(
   new MessageSelectMenu()
     .setCustomID("avabuilds")
@@ -728,6 +738,13 @@ client.on("message", async (message) => {
   const command = args.shift().toLowerCase();
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(message, args);
+  } catch (error) {
+    console.log(error);
+  }
   if (command === "blacklist") {
     await mongo().then(async (mongoose) => {
       let personName = args[0];
