@@ -1,4 +1,5 @@
 const rep = require("../models/reputation");
+const { nicknameMaker } = require("../functions");
 module.exports = {
   name: "rep",
   description: "check someone's reputation!",
