@@ -18,6 +18,7 @@ const register = require("./models/register");
 const axios = require("axios");
 const prefix = "!";
 const blacklist = require("./models/blacklist");
+const database = require("mongoose");
 const rep = require("./models/reputation");
 const {
   dateMaker,
@@ -2970,4 +2971,16 @@ client.on("ready", () => {
     index++;
   }, 3000);
 });
+await database
+  .connect(
+    "mongodb+srv://damaradewa:damaradewa@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: true,
+    }
+  )
+  .then(() => {
+    console.log("Connected to the database");
+  });
 client.login(process.env.token);
