@@ -2282,7 +2282,7 @@ client.on("message", async (message) => {
             msg.edit({
               content: `The answer is **${answer}**`,
             });
-          }, 12000)
+          }, 6000)
         );
     } else {
       message
