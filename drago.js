@@ -592,12 +592,14 @@ client.on("message", async (message) => {
       let personIGN = message.content.split(/ +/g);
       const startIndex = personIGN.findIndex((i) => i === "name:") + 1;
       const endIndex = startIndex + 1;
+      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
       message.member.setNickname(personIGN.slice(startIndex, endIndex));
     } else if (message.content.toLowerCase().includes("ign")) {
       let personIGN = message.content.split(/ +/g);
       const startIndex = personIGN.findIndex((i) => i === "ign:") + 1;
       const endIndex = startIndex + 1;
+      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
       message.member.setNickname(personIGN.slice(startIndex, endIndex));
     }
