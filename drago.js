@@ -2955,7 +2955,7 @@ client.on("guildMemberRemove", (member) => {
   );
 });
 
-client.on("ready", () => {
+client.on("ready", async () => {
   const statusArray = [
     "Gato #1",
     "Luai is rich but gay",
@@ -2963,6 +2963,18 @@ client.on("ready", () => {
     "current prefix is !",
   ];
   console.log("The Bot is Online");
+  await database
+    .connect(
+      "mongodb+srv://damaradewa:damaradewa@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: true,
+      }
+    )
+    .then(() => {
+      console.log("Connected to the database");
+    });
   let index = 0;
   setInterval(() => {
     if (index === statusArray.length) index = 0;
@@ -2971,16 +2983,5 @@ client.on("ready", () => {
     index++;
   }, 3000);
 });
-await database
-  .connect(
-    "mongodb+srv://damaradewa:damaradewa@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: true,
-    }
-  )
-  .then(() => {
-    console.log("Connected to the database");
-  });
+
 client.login(process.env.token);
