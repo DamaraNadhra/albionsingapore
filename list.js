@@ -3,6 +3,7 @@ const {
   MessageActionRow,
   MessageSelectMenu,
 } = require("discord.js");
+const recentlyRan = [];
 const AvArow = new MessageActionRow().addComponents(
   new MessageSelectMenu()
     .setCustomID("avabuilds")
@@ -560,6 +561,7 @@ const list = {
   ],
 };
 module.exports = {
+  recentlyRan,
   AvArow,
   avalist,
   row,
