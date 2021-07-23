@@ -588,17 +588,18 @@ const list = {
 };
 client.on("message", async (message) => {
   if (message.channel.id === "752110992405692456") {
-    if (
-      message.content.toLowerCase().includes("my in-game name:") |
-      message.content.toLowerCase().includes("ign")
-    ) {
-      let personIGN = message.content
-        .toLowerCase()
-        .slice("my in-game name:".length);
-      message.member.setNickname(personIGN);
+    if (message.content.toLowerCase().includes("my in-game name:")) {
+      let personIGN = message.content.split(/ +/g);
+      const startIndex = personIGN.findIndex((i) => i === "name:") + 1;
+      const endIndex = startIndex + 1;
+      console.log(personIGN.slice(startIndex, endIndex));
+      message.member.setNickname(personIGN.slice(startIndex, endIndex));
     } else if (message.content.toLowerCase().includes("ign")) {
-      let personIGN = message.content.toLowerCase().slice("ign:".length);
-      message.member.setNickname(personIGN);
+      let personIGN = message.content.split(/ +/g);
+      const startIndex = personIGN.findIndex((i) => i === "ign:") + 1;
+      const endIndex = startIndex + 1;
+      console.log(personIGN.slice(startIndex, endIndex));
+      message.member.setNickname(personIGN.slice(startIndex, endIndex));
     }
   }
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
