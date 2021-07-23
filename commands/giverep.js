@@ -2,6 +2,9 @@ const rep = require("../models/reputation");
 const { nicknameMaker, dateMaker } = require("../functions");
 let { recentlyRan } = require("../cooldown");
 const { MessageButton, MessageEmbed } = require("discord.js");
+let repLogButton = new MessageButton()
+  .setStyle("LINK")
+  .setLabel("Message Link");
 module.exports = {
   name: "giverep",
   description: "gives reputation to provided player!",
