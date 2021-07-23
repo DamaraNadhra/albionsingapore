@@ -637,8 +637,9 @@ client.on("message", async (message) => {
         var bar = new Promise((resolve, reject) => {
           array.forEach(async (m, index) => {
             console.log(m);
-            let guildNickname =
-              message.guild.members.cache.get(m).user.username;
+            let guildNickname = (await message.guild.members.fetch()).get(
+              m
+            ).displayName;
             isPersonHasRep = await rep.findOne({ id: m });
 
             if (isPersonHasRep) {
@@ -646,7 +647,6 @@ client.on("message", async (message) => {
                 rep: parseInt(isPersonHasRep.rep) + 1,
               });
             } else {
-              console.log(guildNickname);
               await rep.create({
                 name: guildNickname,
                 id: m,
@@ -1910,19 +1910,23 @@ client.on("message", async (message) => {
       if (message.mentions.members.first()) {
         let mentionsNumber = message.mentions.members.map((e) => e.user.id);
         console.log(mentionsNumber.length);
-        if (mentionsNumber.includes(message.author.id)) {
-          mentionsNumber.filter((m) => m !== message.author.id);
-        }
-        if (mentionsNumber.length > 3) return;
+        if (mentionsNumber.length > 3)
+          return message.reply({
+            content: `Max people you can give reputation to is \`3\`,`,
+          });
         if (mentionsNumber.length > 1 && mentionsNumber.length < 4) {
           let theMap = message.mentions.members;
           let mentionArray = [];
           let array = theMap.map((m) => m.user.id);
+          if (array.includes(message.author.id)) {
+            array.filter((m) => m !== message.author.id);
+          }
           var bar = new Promise((resolve, reject) => {
             array.forEach(async (m, index) => {
               console.log(m);
-              let guildNickname =
-                message.guild.members.cache.get(m).user.username;
+              let guildNickname = (await message.guild.members.fetch()).get(
+                m
+              ).displayName;
               isPersonHasRep = await rep.findOne({ id: m });
 
               if (isPersonHasRep) {
@@ -1930,7 +1934,6 @@ client.on("message", async (message) => {
                   rep: parseInt(isPersonHasRep.rep) + 1,
                 });
               } else {
-                console.log(guildNickname);
                 await rep.create({
                   name: guildNickname,
                   id: m,
