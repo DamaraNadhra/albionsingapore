@@ -1977,7 +1977,7 @@ client.on("message", async (message) => {
               content: `**${nicknameMaker(
                 message,
                 message.author.id
-              )}** has given \`1\` Rep to **${finalString}** in <#${
+              )}** has given \`1\` Rep to ${finalString} in <#${
                 message.channel.id
               }> at ${dateMaker(new Date())}`,
               components: [[repLogButton.setURL(message.url)]],
