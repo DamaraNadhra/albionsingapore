@@ -675,7 +675,7 @@ client.on("message", async (message) => {
             content: `**${nicknameMaker(
               message,
               message.author.id
-            )}** has given \`1\` Rep to **${finalString}** in <#${
+            )}** has given \`1\` Rep to ${finalString} in <#${
               message.channel.id
             }> at ${dateMaker(new Date())}`,
             components: [[repLogButton.setURL(message.url)]],
@@ -1908,19 +1908,129 @@ client.on("message", async (message) => {
           content: "Please state the person name or his mention",
         });
       if (message.mentions.members.first()) {
-        let person = message.mentions.members.first().user;
-        if (person.id === message.author.id) {
-          let returnMessage = await message.reply({
-            content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-          });
-          setTimeout(() => {
-            returnMessage.delete();
-            message.delete();
-          }, 7000);
-          return;
+        let mentionsNumber = message.mentions.members.map((e) => e.user.id);
+        console.log(mentionsNumber.length);
+        if (mentionsNumber.includes(message.author.id)) {
+          mentionsNumber.filter((m) => m !== message.author.id);
         }
-        personID = person.id;
-        isPersonHasRep = await rep.findOne({ id: person.id });
+        if (mentionsNumber.length > 3) return;
+        if (mentionsNumber.length > 1 && mentionsNumber.length < 4) {
+          let theMap = message.mentions.members;
+          let mentionArray = [];
+          let array = theMap.map((m) => m.user.id);
+          var bar = new Promise((resolve, reject) => {
+            array.forEach(async (m, index) => {
+              console.log(m);
+              let guildNickname =
+                message.guild.members.cache.get(m).user.username;
+              isPersonHasRep = await rep.findOne({ id: m });
+
+              if (isPersonHasRep) {
+                await isPersonHasRep.updateOne({
+                  rep: parseInt(isPersonHasRep.rep) + 1,
+                });
+              } else {
+                console.log(guildNickname);
+                await rep.create({
+                  name: guildNickname,
+                  id: m,
+                  rep: "1",
+                });
+              }
+              let personData = await rep.findOne({ id: m });
+              mentionArray.push(personData.name);
+              console.log(
+                m,
+                mentionArray,
+                theMap.map((m) => m.id).length,
+                index
+              );
+              if (index === array.length - 1) resolve();
+            });
+          });
+          bar.then(async () => {
+            let finalString = mentionArray
+              .map((m) => "**" + m + "**")
+              .join(", ");
+            console.log(finalString);
+            message.reply({
+              content: `Gave \`1\` **Rep** to ${finalString} at the same time!`,
+            });
+            recentlyRan.push(message.author.id);
+            setTimeout(() => {
+              recentlyRan = recentlyRan.filter(
+                (string) => string !== message.author.id
+              );
+            }, 420000);
+            logChannel.send({
+              content: `**${nicknameMaker(
+                message,
+                message.author.id
+              )}** has given \`1\` Rep to **${finalString}** in <#${
+                message.channel.id
+              }> at ${dateMaker(new Date())}`,
+              components: [[repLogButton.setURL(message.url)]],
+            });
+          });
+        } else {
+          let person = message.mentions.members.first().user;
+          if (person.id === message.author.id) {
+            let returnMessage = await message.reply({
+              content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+            });
+            setTimeout(() => {
+              returnMessage.delete();
+              message.delete();
+            }, 7000);
+            return;
+          }
+          personID = person.id;
+          isPersonHasRep = await rep.findOne({ id: person.id });
+          if (personID === message.author.id) {
+            let returnMessage = await message.reply({
+              content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+            });
+            setTimeout(() => {
+              returnMessage.delete();
+              message.delete();
+            }, 7000);
+            return;
+          }
+          if (isPersonHasRep) {
+            await isPersonHasRep.updateOne({
+              rep: parseInt(isPersonHasRep.rep) + 1,
+            });
+          } else {
+            await rep.create({
+              name: nicknameMaker(message, personID),
+              id: personID,
+              rep: "1",
+            });
+          }
+          let personData = await rep.findOne({ id: personID });
+          let blabla =
+            (await (
+              await rep.find().sort({ rep: -1 })
+            ).findIndex((i) => i.id === personID)) + 1;
+          message.reply({
+            content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+          });
+          recentlyRan.push(message.author.id);
+          setTimeout(() => {
+            recentlyRan = recentlyRan.filter(
+              (string) => string !== message.author.id
+            );
+          }, 420000);
+          logChannel.send({
+            content: `**${nicknameMaker(
+              message,
+              message.author.id
+            )}** has given \`1\` Rep to **${personData.name}** in <#${
+              message.channel.id
+            }> at ${dateMaker(new Date())}`,
+            components: [[repLogButton.setURL(message.url)]],
+          });
+        }
       } else {
         var person;
         let nickname = (await message.guild.members.fetch()).find((user) =>
@@ -1938,51 +2048,51 @@ client.on("message", async (message) => {
         }
         isPersonHasRep = await rep.findOne({ id: nickname.id });
         personID = nickname.id;
-      }
-      if (personID === message.author.id) {
-        let returnMessage = await message.reply({
-          content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+        if (personID === message.author.id) {
+          let returnMessage = await message.reply({
+            content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
+          });
+          setTimeout(() => {
+            returnMessage.delete();
+            message.delete();
+          }, 7000);
+          return;
+        }
+        if (isPersonHasRep) {
+          await isPersonHasRep.updateOne({
+            rep: parseInt(isPersonHasRep.rep) + 1,
+          });
+        } else {
+          await rep.create({
+            name: nicknameMaker(message, personID),
+            id: personID,
+            rep: "1",
+          });
+        }
+        let personData = await rep.findOne({ id: personID });
+        let blabla =
+          (await (
+            await rep.find().sort({ rep: -1 })
+          ).findIndex((i) => i.id === personID)) + 1;
+        message.reply({
+          content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
         });
+        recentlyRan.push(message.author.id);
         setTimeout(() => {
-          returnMessage.delete();
-          message.delete();
-        }, 7000);
-        return;
-      }
-      if (isPersonHasRep) {
-        await isPersonHasRep.updateOne({
-          rep: parseInt(isPersonHasRep.rep) + 1,
-        });
-      } else {
-        await rep.create({
-          name: nicknameMaker(message, personID),
-          id: personID,
-          rep: "1",
+          recentlyRan = recentlyRan.filter(
+            (string) => string !== message.author.id
+          );
+        }, 420000);
+        logChannel.send({
+          content: `**${nicknameMaker(
+            message,
+            message.author.id
+          )}** has given \`1\` Rep to **${personData.name}** in <#${
+            message.channel.id
+          }> at ${dateMaker(new Date())}`,
+          components: [[repLogButton.setURL(message.url)]],
         });
       }
-      let personData = await rep.findOne({ id: personID });
-      let blabla =
-        (await (
-          await rep.find().sort({ rep: -1 })
-        ).findIndex((i) => i.id === personID)) + 1;
-      message.reply({
-        content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
-      });
-      recentlyRan.push(message.author.id);
-      setTimeout(() => {
-        recentlyRan = recentlyRan.filter(
-          (string) => string !== message.author.id
-        );
-      }, 420000);
-      logChannel.send({
-        content: `**${nicknameMaker(
-          message,
-          message.author.id
-        )}** has given \`1\` Rep to **${personData.name}** in <#${
-          message.channel.id
-        }> at ${dateMaker(new Date())}`,
-        components: [[repLogButton.setURL(message.url)]],
-      });
     });
   } else if (command === "rep") {
     if (message.channel.id === "722753194496753745") return;
