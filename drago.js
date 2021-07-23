@@ -9,6 +9,16 @@ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "GUILD_MEMBERS"],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
+const {
+  AvArow,
+  avalist,
+  row,
+  tankRow,
+  healRow,
+  dpsList,
+  healList,
+  list,
+} = require("./list");
 const mongo = require("./mongo");
 const splitz = require("./models/split-schema");
 const person = require("./models/person");
