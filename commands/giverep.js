@@ -1,6 +1,7 @@
 const rep = require("../models/reputation");
 const { nicknameMaker, dateMaker } = require("../functions");
 const { recentlyRan } = require("../cooldown");
+const { MessageButton, MessageEmbed }
 module.exports = {
   name: "giverep",
   description: "gives reputation to provided player!",
