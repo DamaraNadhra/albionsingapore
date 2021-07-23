@@ -1,5 +1,5 @@
 const { Message } = require("discord.js");
-const rep = require("./models/reputation");
+const rep = require("../models/reputation");
 module.exports = {
   name: "rename",
   description: "Blacklists people from joining Singapore Guild",
