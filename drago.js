@@ -942,5 +942,7 @@ client.on("ready", async () => {
     index++;
   }, 3000);
 });
-module.exports.cooldowns = recentlyRan;
+module.exports = {
+  recentlyRan,
+};
 client.login(process.env.token);
