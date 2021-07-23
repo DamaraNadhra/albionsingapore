@@ -593,15 +593,21 @@ client.on("message", async (message) => {
       const startIndex =
         personIGN.findIndex((i) => i.toLowerCase() === "name:") + 1;
       const endIndex = startIndex + 1;
+      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
-      message.member.setNickname(personIGN.slice(startIndex, endIndex));
+      message.member.setNickname(
+        personIGN.slice(startIndex, endIndex).toString()
+      );
     } else if (message.content.toLowerCase().includes("ign")) {
       let personIGN = message.content.split(/ +/g);
       const startIndex =
         personIGN.findIndex((i) => i.toLowerCase() === "ign:") + 1;
       const endIndex = startIndex + 1;
+      console.log(personIGN);
       console.log(personIGN.slice(startIndex, endIndex));
-      message.member.setNickname(personIGN.slice(startIndex, endIndex));
+      message.member.setNickname(
+        personIGN.slice(startIndex, endIndex).toString()
+      );
     }
   }
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
