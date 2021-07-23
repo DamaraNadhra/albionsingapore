@@ -1913,12 +1913,13 @@ client.on("message", async (message) => {
         if (mentionsNumber.length > 3)
           return message
             .reply({
-              content: `Max people you can give reputation to is \`3\`, ||This message will self destruct in 5s||`,
+              content: `Max people you can give reputation to is \`3\`, ||This message will self destruct in 10s||`,
             })
             .then((m) =>
               setTimeout(() => {
                 m.delete();
-              }, 5000)
+                message.delete();
+              }, 10000)
             );
         if (mentionsNumber.length > 1 && mentionsNumber.length < 4) {
           let theMap = message.mentions.members;
