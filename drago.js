@@ -37,7 +37,7 @@ const {
   billboard,
   nicknameMaker,
 } = require("./functions");
-const { recentlyRan } = require("./cooldown");
+let { recentlyRan } = require("./cooldown");
 let repLogButton = new MessageButton()
   .setStyle("LINK")
   .setLabel("Message Link");

@@ -1,6 +1,6 @@
 const rep = require("../models/reputation");
 const { nicknameMaker, dateMaker } = require("../functions");
-const { recentlyRan } = require("../cooldown");
+let { recentlyRan } = require("../cooldown");
 const { MessageButton, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "giverep",

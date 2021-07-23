@@ -1,4 +1,4 @@
-const recentlyRan = [];
+let recentlyRan = [];
 module.exports = {
   recentlyRan,
 };
