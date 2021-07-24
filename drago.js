@@ -196,6 +196,12 @@ client.on("message", async (message) => {
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
   //if (!client.commands.has(command)) return;
+  if (command.permissions) {
+    const authorPerms = message.channel.permissionsFor(message.author);
+    if (!authorPerms || !authorPerms.has(command.permissions)) {
+      return message.reply("You dont have the right to use this command");
+    }
+  }
   try {
     client.commands.get(command).execute(message, args, client);
   } catch (error) {
