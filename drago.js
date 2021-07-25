@@ -193,7 +193,7 @@ client.on("message", async (message) => {
     });
   }
   const command = args.shift().toLowerCase();
-  const { commands } = client;
+  const commands = client.commands.get(command);
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
   //if (!client.commands.has(command)) return;
