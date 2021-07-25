@@ -207,11 +207,13 @@ client.on("message", async (message) => {
       );
     }
   } else if (commands && commands.roles) {
-    const autorRoles = message.member.roles.cache.has(commands.roles);
-    if (!autorRoles) {
-      return message.reply(
-        "You don't have the sufficient role to execute this command!"
-      );
+    for (const role of commands.roles) {
+      const autorRoles = message.member.roles.cache.has(role);
+      if (!autorRoles) {
+        return message.reply(
+          "You don't have the sufficient role to execute this command!"
+        );
+      }
     }
   }
   try {
