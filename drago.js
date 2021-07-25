@@ -193,19 +193,20 @@ client.on("message", async (message) => {
     });
   }
   const command = args.shift().toLowerCase();
+  const { commands } = client;
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
   //if (!client.commands.has(command)) return;
-  if (command.permissions) {
+  if (commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
-    if (!authorPerms || !authorPerms.has(command.permissions)) {
+    if (!authorPerms || !authorPerms.has(commands.permissions)) {
       return message.reply("You dont have the right to use this command");
     }
   }
   try {
     client.commands.get(command).execute(message, args, client);
   } catch (error) {
-    console.log(error);
+    console.log("A person didnt follor the cor");
   }
   if (command === "fastcheck") {
     const eventId = args[0];
