@@ -1,5 +1,5 @@
 const { Message, Client, MessageEmbed } = require("discord.js");
-const { recentlyRan } = require("../list");
+let { recentlyRan } = require("../list");
 module.exports = {
   name: "checkcd",
   description:
@@ -24,5 +24,6 @@ module.exports = {
     message.channel.send({
       embeds: [embed],
     });
+    console.log(recentlyRan);
   },
 };
