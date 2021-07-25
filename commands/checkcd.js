@@ -16,12 +16,7 @@ module.exports = {
     if (recentlyRan.length === 0) {
       finalString = "Clear!";
     } else {
-      finalString = recentlyRan
-        .map(
-          (element) =>
-            `<@${(await message.guild.members.fetch()).get(element)}>`
-        )
-        .join("\n");
+      finalString = recentlyRan.map((element) => `<@${element}>`).join("\n");
     }
     const embed = new MessageEmbed()
       .setDescription(`**Cooldown List** \n\n${finalString}`)
