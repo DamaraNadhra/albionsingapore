@@ -1,5 +1,5 @@
 const { Message, Client, MessageEmbed } = require("discord.js");
-let { recentlyRan } = require("../list");
+let { recentlyRan } = require("../cooldown");
 module.exports = {
   name: "checkcd",
   description:
