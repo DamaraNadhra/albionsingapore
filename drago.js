@@ -193,18 +193,20 @@ client.on("message", async (message) => {
     });
   }
   const command = args.shift().toLowerCase();
-  const commands = client.commands.get(command);
+  const commands =
+    client.commands.get(command) ||
+    client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command));
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
   //if (!client.commands.has(command)) return;
-  if (commands.permissions) {
+  if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(commands.permissions)) {
       return message.reply("You dont have the right to use this command");
     }
   }
   try {
-    client.commands.get(command).execute(message, args, client);
+    commands.execute(message, args, client);
   } catch (error) {
     console.log("A person didnt follor the cor");
   }

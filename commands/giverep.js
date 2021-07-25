@@ -8,6 +8,7 @@ let repLogButton = new MessageButton()
 module.exports = {
   name: "giverep",
   description: "gives reputation to provided player!",
+  aliases: ["+rep", "reputation"],
   async execute(message, args, client) {
     if (message.channel.id === "722753194496753745") return;
     if (recentlyRan.includes(message.author.id)) {

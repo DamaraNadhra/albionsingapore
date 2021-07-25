@@ -3,6 +3,7 @@ const blacklist = require("../models/blacklist");
 module.exports = {
   name: "blacklist",
   description: "Blacklists people from joining Singapore Guild",
+  aliases: ["bl"],
   /**
    * @param {Message} message
    */
