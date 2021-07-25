@@ -209,6 +209,7 @@ client.on("message", async (message) => {
   } else if (commands && commands.roles) {
     for (const role of commands.roles) {
       const autorRoles = message.member.roles.cache.has(role);
+      console.log(role);
       if (!autorRoles) {
         return message.reply(
           "You don't have the sufficient role to execute this command!"
@@ -638,6 +639,31 @@ client.on("interaction", async (interaction) => {
           embeds: [embed],
           components: [[thisbutton]],
         });
+      });
+    } else if (
+      interaction.customID ===
+      "ధ妐Ⴈ湜ᝰ㟯堽析甥Ⲃ希槊㶈匬Ị㦓᷽活硍则Ēⵒá哾⸝澪㌔ქᬜ㷌耀"
+    ) {
+      let officer = await report.findOne({ channelId: interaction.channelID });
+      if (!officer) return;
+      let personExistable = await rep.findOne({ id: officer.officerId });
+      if (personExistable) {
+        await personExistable.updateOne({ rep: personExistable.rep + 1 });
+      } else {
+        await rep.create({
+          name: officer.officer,
+          id: officer.officerId,
+          rep: 1,
+        });
+      }
+      let personData = await rep.findOne({ id: officer.officerId });
+      let blabla =
+        (await (
+          await rep.find().sort({ rep: -1 })
+        ).findIndex((i) => i.id === officer.officerId)) + 1;
+      interaction.reply({
+        content: `Case settled! Congratulations... **${personData.name}** You have gained \`1\` Rep (current: \`#${blabla}\ \`${personData.rep}\`)`,
+        ephemeral: true,
       });
     }
   } else if (interaction.isSelectMenu()) {

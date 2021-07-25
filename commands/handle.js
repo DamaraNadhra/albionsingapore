@@ -150,9 +150,8 @@ module.exports = {
             const channel =
               message.guild.channels.cache.get("779514684797091850");
             const channelID = message.channel.id;
-            const nickname = message.guild.members.cache.get(
-              message.author.id
-            ).nickname;
+            const fetchedNicknames = await message.guild.members.fetch();
+            const nickname = fetchedNicknames.displayName;
             message.channel.setName(`${nickname}${ticketNumber}`);
             channel.send(
               `<@${message.author.id}> is handling case <#${channelID}>`
