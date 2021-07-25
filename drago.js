@@ -202,7 +202,16 @@ client.on("message", async (message) => {
   if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(commands.permissions)) {
-      return message.reply("You dont have the right to use this command");
+      return message.reply(
+        `Missing Permission... FLAG: \`${commands.permissions}\``
+      );
+    }
+  } else if (commands && commands.roles) {
+    const autorRoles = message.member.roles.cache.has(commands.roles);
+    if (!autorRoles) {
+      return message.reply(
+        "You don't have the sufficient role to execute this command!"
+      );
     }
   }
   try {
