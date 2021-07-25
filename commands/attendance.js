@@ -3,6 +3,7 @@ const axios = require("axios");
 module.exports = {
   name: "attendance",
   description: "Map a zvz players attender",
+  roles: ["759793776439984170", "855689169018814464"],
   async execute(message, args, client) {
     if (
       message.member.roles.cache.has("759793776439984170") |
