@@ -30,15 +30,27 @@ module.exports = {
         embeds: [embed],
       });
     } else if (firstArgument === "add") {
-      let mapel = args[1];
-      let deadline = args[2];
-      let description = args.slice(2).join(" ");
-      await task.create({
-        mapel,
-        deadline,
-        description,
-      });
-      message.reply("Task created!");
+      try {
+        let mapel = args[1];
+        let tanggal = args[2];
+        let description = args.slice(2).join(" ");
+        const date = new Date(tanggal);
+        const now = new Date();
+        let deadline = date - now;
+        await task.create({
+          mapel,
+          deadline: (deadline / 84600000).toFixed(0),
+          description,
+        });
+        message.reply("Task created!").then((msg) => {
+          setTimeout(() => {
+            msg.delete();
+            message.delete();
+          }, 5000);
+        });
+      } catch (error) {
+        message.reply("Something went wrong!");
+      }
     }
   },
 };
