@@ -52,6 +52,7 @@ module.exports = {
           mapel,
           deadline: tanggal,
           description,
+          id: dataCount,
         });
         message.reply("Task created!").then((msg) => {
           setTimeout(() => {
