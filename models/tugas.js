@@ -9,6 +9,7 @@ const testSchema = mongoose.Schema({
   mapel: reqString,
   deadline: reqString,
   description: reqString,
+  id: reqString,
 });
 
 module.exports = mongoose.model("tugas", testSchema);

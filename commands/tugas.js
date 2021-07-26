@@ -16,7 +16,15 @@ module.exports = {
       let data = await task.find();
       let listMapel = data.map((e) => e.mapel).join("\n");
       let listDeskripso = data.map((e) => e.description).join("\n");
-      let deadline = data.map((e) => e.deadline).join("\n");
+      let deadline = data
+        .map((e) => {
+          const date = new Date(e.deadline);
+          const now = new Date();
+          let deadline = date - now;
+
+          return `${(deadline / 86400000).toFixed(0)} hari lagi!`;
+        })
+        .join("\n");
       const embed = new MessageEmbed()
         .setColor("RED")
         .setAuthor("Daftar Tugas!", message.author.displayAvatarURL())
@@ -39,7 +47,7 @@ module.exports = {
         let deadline = date - now;
         await task.create({
           mapel,
-          deadline: (deadline / 84600000).toFixed(0) + " hari lagi",
+          deadline: tanggal,
           description,
         });
         message.reply("Task created!").then((msg) => {
@@ -50,6 +58,26 @@ module.exports = {
         });
       } catch (error) {
         message.reply("Something went wrong!");
+      }
+    } else if (firstArgument === "remove") {
+      let tugasID = args[1];
+      let existable = await task.findOne({ id: tugasID });
+      if (!existable)
+        return message.reply(
+          `Tidak dapat menemukan tugas dengan ID: \`${tugasID}\``
+        );
+      else {
+        await task.findOneAndRemove({ id: tugasID });
+        const embed = new MessageEmbed()
+          .setColor("GREEN")
+          .setAuthor("Damara", message.author.displayAvatarURL())
+          .setDescription(
+            `**Tugas!** \n**Mapel:** ${existable.mapel}. \n**Deskripsi:** ${existable.description} \n\nTelah dinyatakan **SELESAI**`
+          )
+          .setTimestamp(new Date());
+        message.channel.send({
+          embeds: [embed],
+        });
       }
     }
   },
