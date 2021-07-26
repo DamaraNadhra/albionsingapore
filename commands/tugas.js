@@ -39,7 +39,7 @@ module.exports = {
         let deadline = date - now;
         await task.create({
           mapel,
-          deadline: (deadline / 84600000).toFixed(0),
+          deadline: (deadline / 84600000).toFixed(0) + " hari lagi",
           description,
         });
         message.reply("Task created!").then((msg) => {
