@@ -14,7 +14,7 @@ module.exports = {
     let firstArgument = args[0];
     if (firstArgument === "list") {
       let data = await task.find();
-      let listMapel = data.map((e) => e.mapel).join("\n");
+      let listMapel = data.map((e) => `${e.mapel} (\`${e.id}\`)`).join("\n");
       let listDeskripso = data.map((e) => e.description).join("\n");
       let listID = data.map((e) => e.id).join("\n");
       let deadline = data
@@ -31,7 +31,6 @@ module.exports = {
         .setAuthor("Daftar Tugas!", message.author.displayAvatarURL())
         .setDescription("Memperlihatkan daftar tugas untuk gato!")
         .addFields([
-          { name: "**ID**", value: listID, inline: true },
           { name: "**Mapel**", value: listMapel, inline: true },
           { name: "**Deskripsi**", value: listDeskripso, inline: true },
           { name: "**Deadline**", value: deadline, inline: true },
@@ -43,7 +42,7 @@ module.exports = {
       try {
         let mapel = args[1];
         let tanggal = args[2];
-        let description = args.slice(2).join(" ");
+        let description = args.slice(3).join(" ");
         const date = new Date(tanggal);
         const now = new Date();
         let deadline = date - now;
