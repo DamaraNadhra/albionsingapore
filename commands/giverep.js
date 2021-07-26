@@ -131,7 +131,7 @@ module.exports = {
           await rep.create({
             name: nicknameMaker(message, personID),
             id: personID,
-            rep: "1",
+            rep: 1,
           });
         }
         let personData = await rep.findOne({ id: personID });
