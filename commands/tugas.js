@@ -47,7 +47,7 @@ module.exports = {
         const date = new Date(tanggal);
         const now = new Date();
         let deadline = date - now;
-        let dataCount = await task.count();
+        let dataCount = await task.estimatedDocumentCount();
         await task.create({
           mapel,
           deadline: tanggal,
