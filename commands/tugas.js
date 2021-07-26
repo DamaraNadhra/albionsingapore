@@ -22,9 +22,9 @@ module.exports = {
         .setAuthor("Daftar Tugas!", message.author.displayAvatarURL())
         .setDescription("Memperlihatkan daftar tugas untuk gato!")
         .addFields([
-          { name: "**Mapel**", value: listMapel },
-          { name: "**Deskripsi**", value: listDeskripso },
-          { name: "**Deadline**", value: deadline },
+          { name: "**Mapel**", value: listMapel, inline: true },
+          { name: "**Deskripsi**", value: listDeskripso, inline: true },
+          { name: "**Deadline**", value: deadline, inline: true },
         ]);
       message.channel.send({
         embeds: [embed],
