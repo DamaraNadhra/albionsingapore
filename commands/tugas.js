@@ -16,6 +16,7 @@ module.exports = {
       let data = await task.find();
       let listMapel = data.map((e) => e.mapel).join("\n");
       let listDeskripso = data.map((e) => e.description).join("\n");
+      let listID = data.map((e) => e.id).join("\n");
       let deadline = data
         .map((e) => {
           const date = new Date(e.deadline);
@@ -30,6 +31,7 @@ module.exports = {
         .setAuthor("Daftar Tugas!", message.author.displayAvatarURL())
         .setDescription("Memperlihatkan daftar tugas untuk gato!")
         .addFields([
+          { name: "**ID**", value: listID, inline: true },
           { name: "**Mapel**", value: listMapel, inline: true },
           { name: "**Deskripsi**", value: listDeskripso, inline: true },
           { name: "**Deadline**", value: deadline, inline: true },
@@ -45,6 +47,7 @@ module.exports = {
         const date = new Date(tanggal);
         const now = new Date();
         let deadline = date - now;
+        let dataCount = await task.count();
         await task.create({
           mapel,
           deadline: tanggal,

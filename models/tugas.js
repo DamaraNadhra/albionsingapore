@@ -9,7 +9,10 @@ const testSchema = mongoose.Schema({
   mapel: reqString,
   deadline: reqString,
   description: reqString,
-  id: reqString,
+  id: {
+    type: Number,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("tugas", testSchema);
