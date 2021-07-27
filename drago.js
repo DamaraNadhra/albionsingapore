@@ -1021,7 +1021,7 @@ client.on("ready", async () => {
   console.log("The Bot is Online");
   await database
     .connect(
-      "mongodb+srv://damaradewa:damaradewa@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority",
+      `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASS}@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
