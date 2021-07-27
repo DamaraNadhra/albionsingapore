@@ -56,7 +56,7 @@ for (const file of commandFiles) {
 client.on("message", async (message) => {
   if (message.channel.id === "752110992405692456") {
     if (
-      message.content.toLowerCase().includes("my in-game-name") ||
+      message.content.toLowerCase().includes("my in-game name") ||
       message.content.toLowerCase().includes("ign")
     ) {
       let appString = message.content;
