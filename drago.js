@@ -85,6 +85,7 @@ client.on("message", async (message) => {
                 "**This player is blacklisted! by ARCH** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info"
               )
               .setFooter("If this is wrong please contact the officers :D");
+            await message.react("❌");
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
               components: [[referenceButton.setURL(message.url)]],
@@ -106,11 +107,13 @@ client.on("message", async (message) => {
                   value: `\`\`\`${existable.reason} \`\`\``,
                 }
               );
+            await message.react("❌");
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
               components: [[referenceButton.setURL(message.url)]],
             });
           } else {
+            await message.react("✅");
             message.guild.channels.cache.get("779514684797091850").send({
               content: `**${result.data.name}** is not blacklisted :D`,
               components: [[referenceButton.setURL(message.url)]],
