@@ -571,3 +571,7 @@ module.exports = {
   healList,
   list,
 };
+let appString = "My In-Game-Name : MrGremory\nMy Timezone : GMT +9";
+appString = appString.replace("\n", ":");
+appString = appString.split(":");
+console.log(appString);

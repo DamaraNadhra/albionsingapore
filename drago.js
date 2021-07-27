@@ -55,26 +55,68 @@ for (const file of commandFiles) {
 
 client.on("message", async (message) => {
   if (message.channel.id === "752110992405692456") {
-    if (message.content.toLowerCase().includes("my in-game name:")) {
-      let personIGN = message.content.replace("\n", " ").split(/ +/g);
-      const startIndex =
-        personIGN.findIndex((i) => i.toLowerCase() === "name:") + 1;
-      const endIndex = startIndex + 1;
-      console.log(personIGN);
-      console.log(personIGN.slice(startIndex, endIndex));
-      message.member.setNickname(
-        personIGN.slice(startIndex, endIndex).toString()
-      );
-    } else if (message.content.toLowerCase().includes("ign")) {
-      let personIGN = message.content.replace("\n", " ").split(/ +/g);
-      const startIndex =
-        personIGN.findIndex((i) => i.toLowerCase() === "ign:") + 1;
-      const endIndex = startIndex + 1;
-      console.log(personIGN);
-      console.log(personIGN.slice(startIndex, endIndex));
-      message.member.setNickname(
-        personIGN.slice(startIndex, endIndex).toString()
-      );
+    if (
+      message.content.toLowerCase().includes("my in-game-name") ||
+      message.content.toLowerCase().includes("ign")
+    ) {
+      let appString = message.content;
+      appString = appString.replace(/\n/g, ":");
+      let splittedArray = appString.split(":");
+      splittedArray = splittedArray.map((m) => m.trim());
+      let personName = splittedArray[1];
+      message.member.setNickname(personName);
+      let existable = await blacklist.findOne({
+        blname: personName.toLowerCase(),
+      });
+      axios
+        .get(`https://api.aotools.net/v2/blacklist/${personName}`)
+        .then(async (result) => {
+          const referenceButton = new MessageButton()
+            .setStyle("LINK")
+            .setLabel("Application reference");
+          if (result.data.isBlacklisted === true) {
+            const embed = new MessageEmbed()
+              .setColor("AQUA")
+              .setAuthor(
+                "Singapore Police",
+                "https://cdn.discordapp.com/icons/703862691608920114/669f0e6605601754a64fbb829ede2c00.webp?size=256"
+              )
+              .setDescription(
+                "**This player is blacklisted! by ARCH** Please dont invite him over to the guild or just kick him directly! Please look into ARCH main discord for more info"
+              )
+              .setFooter("If this is wrong please contact the officers :D");
+            message.guild.channels.cache.get("779514684797091850").send({
+              embeds: [embed],
+              components: [[referenceButton.setURL(message.url)]],
+            });
+          } else if (existable) {
+            const embed = new MessageEmbed()
+              .setColor("RED")
+              .setAuthor("Singapore Police", client.user.displayAvatarURL())
+              .setTitle("Warning! Player blacklisted! by SG")
+              .addFields(
+                { name: "**Player**", value: existable.blname, inline: true },
+                {
+                  name: "**Blacklisted by**",
+                  value: `<@${existable.blacklister}> ${existable.date}`,
+                  inline: true,
+                },
+                {
+                  name: "**Reason**",
+                  value: `\`\`\`${existable.reason} \`\`\``,
+                }
+              );
+            message.guild.channels.cache.get("779514684797091850").send({
+              embeds: [embed],
+              components: [[referenceButton.setURL(message.url)]],
+            });
+          } else {
+            message.guild.channels.cache.get("779514684797091850").send({
+              content: `**${result.data.name}** is not blacklisted :D`,
+              components: [[referenceButton.setURL(message.url)]],
+            });
+          }
+        });
     }
   }
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
