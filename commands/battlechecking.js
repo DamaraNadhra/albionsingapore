@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require("axios");
 module.exports = {
-  name: "battle-checking",
+  name: "battlechecking",
   description: "none",
   async execute(message, args, client, battleId) {
     const channel = message.guild.channels.cache.get("855097807378448424");

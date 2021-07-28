@@ -140,7 +140,7 @@ client.on("message", async (message) => {
         });
     }
   } else if (message.channel.id === "779629935920152596") {
-    if (!message.embeds) return;
+    if (!message.embeds[0]) return;
     let value = message.embeds[0].fields[0].value;
     value = value.replace(")", "/");
     client.commands.get("battlechecking").execute(message, args, client, value);
