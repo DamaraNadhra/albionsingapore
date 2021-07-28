@@ -143,7 +143,7 @@ client.on("message", async (message) => {
     if (!message.embeds[0]) return;
     let value = message.embeds[0].fields[0].value;
     value = value.replace(")", "/");
-    client.commands.get("battlechecking").execute(message, args, client, value);
+    client.commands.get("battlechecking").execute(message, client, value);
   }
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   if (

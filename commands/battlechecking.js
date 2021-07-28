@@ -3,7 +3,7 @@ const axios = require("axios");
 module.exports = {
   name: "battlechecking",
   description: "none",
-  async execute(message, args, client, battleId) {
+  async execute(message, client, battleId) {
     const channel = message.guild.channels.cache.get("855097807378448424");
     axios
       .get(`https://gameinfo.albiononline.com/api/gameinfo/battles/${battleId}`)
