@@ -86,9 +86,15 @@ client.on("message", async (message) => {
               )
               .setFooter("If this is wrong please contact the officers :D");
             await message.react("❌");
-            message.reply(
-              "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
-            );
+            message
+              .reply(
+                "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
+              )
+              .then(() => {
+                setTimeout(() => {
+                  await message.member.ban({ reason: "Blacklisted from ARCH" });
+                }, 5000);
+              });
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
               components: [[referenceButton.setURL(message.url)]],
@@ -111,9 +117,15 @@ client.on("message", async (message) => {
                 }
               );
             await message.react("❌");
-            message.reply(
-              "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
-            );
+            message
+              .reply(
+                "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
+              )
+              .then(() => {
+                setTimeout(() => {
+                  await message.member.ban({ reason: "Blacklisted from ARCH" });
+                }, 5000);
+              });
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
               components: [[referenceButton.setURL(message.url)]],
