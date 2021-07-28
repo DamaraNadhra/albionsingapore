@@ -9,6 +9,7 @@ module.exports = {
    * @param {Message} message
    */
   async execute(message, args) {
+    if (!args[0]) return message.reply("Please be serious");
     let personName = args[0];
     let isBlacklisted = await blacklist.findOne({
       blname: personName.toLowerCase(),
