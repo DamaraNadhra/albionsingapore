@@ -90,8 +90,8 @@ client.on("message", async (message) => {
               .reply(
                 "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
               )
-              .then(() => {
-                setTimeout(() => {
+              .then(async () => {
+                setTimeout(async () => {
                   await message.member.ban({ reason: "Blacklisted from ARCH" });
                 }, 5000);
               });
@@ -121,8 +121,8 @@ client.on("message", async (message) => {
               .reply(
                 "Haha... hilarious, when you think you can join our guild when you are **blacklisted** from ARCH"
               )
-              .then(() => {
-                setTimeout(() => {
+              .then(async () => {
+                setTimeout(async () => {
                   await message.member.ban({ reason: "Blacklisted from ARCH" });
                 }, 5000);
               });
