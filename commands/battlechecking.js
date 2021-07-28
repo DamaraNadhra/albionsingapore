@@ -343,12 +343,6 @@ module.exports = {
                   }); //done lol ez
                 }
               }
-
-              if (hasTriggered) {
-                message.author.send({
-                  content: "All Clear!",
-                });
-              }
             });
           });
       });
