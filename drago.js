@@ -1052,7 +1052,7 @@ client.on("ready", async () => {
     });
   let channel = client.guilds.cache
     .get("703862691608920114")
-    .channels.cache.get("870249716556902440");
+    .channels.cache.get("870254501603467274");
   let index = 0;
   setInterval(() => {
     if (index === statusArray.length) index = 0;
