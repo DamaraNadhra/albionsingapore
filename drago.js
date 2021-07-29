@@ -1050,6 +1050,9 @@ client.on("ready", async () => {
     .then(() => {
       console.log("Connected to the database");
     });
+  let channel = client.guilds.cache
+    .get("703862691608920114")
+    .channels.cache.get("870249716556902440");
   let index = 0;
   setInterval(() => {
     if (index === statusArray.length) index = 0;
@@ -1057,6 +1060,12 @@ client.on("ready", async () => {
     client.user.setActivity(status, { type: "WATCHING" });
     index++;
   }, 3000);
+  setInterval(() => {
+    const date = new Date();
+    const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
+    const finalString = finalArray[0] + ":" + finalArray[1];
+    channel.setName(`🕐UTC: ${finalString}`);
+  }, 1000);
 });
 module.exports = {
   recentlyRan,
