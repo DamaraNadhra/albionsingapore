@@ -1053,6 +1053,9 @@ client.on("ready", async () => {
   let channel = client.guilds.cache
     .get("703862691608920114")
     .channels.cache.get("870254501603467274");
+  let sgmyChannel = client.guilds.cache
+    .get("565550094590672898")
+    .channels.cache.get("870570785163599924");
   let index = 0;
   setInterval(() => {
     if (index === statusArray.length) index = 0;
@@ -1065,6 +1068,12 @@ client.on("ready", async () => {
     const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
     const finalString = finalArray[0] + ":" + finalArray[1];
     channel
+      .setName(`🕐UTC: ${finalString}`)
+      .then((newChannel) =>
+        console.log(`Changed from ${channel.name} to ${newChannel.name}`)
+      )
+      .catch(console.error);
+    sgmyChannel
       .setName(`🕐UTC: ${finalString}`)
       .then((newChannel) =>
         console.log(`Changed from ${channel.name} to ${newChannel.name}`)
