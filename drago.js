@@ -1060,11 +1060,16 @@ client.on("ready", async () => {
     client.user.setActivity(status, { type: "WATCHING" });
     index++;
   }, 3000);
-  setInterval(async () => {
+  setInterval(() => {
     const date = new Date();
     const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
     const finalString = finalArray[0] + ":" + finalArray[1];
-    await channel.setName(`🕐UTC: ${finalString}`);
+    channel
+      .setName(`🕐UTC: ${finalString}`)
+      .then((newChannel) =>
+        console.log(`Changed from ${channel.name} to ${newChannel.name}`)
+      )
+      .catch(console.error);
   }, 600000);
 });
 module.exports = {
