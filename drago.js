@@ -1058,12 +1058,14 @@ client.on("ready", async () => {
     if (index === statusArray.length) index = 0;
     const status = statusArray[index];
     client.user.setActivity(status, { type: "WATCHING" });
+    index++;
+  }, 3000);
+  setInterval(() => {
     const date = new Date();
     const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
     const finalString = finalArray[0] + ":" + finalArray[1];
-    channel.setName(`🕐UTC: ${finalString}`);
-    index++;
-  }, 3000);
+    await channel.setName(`🕐UTC: ${finalString}`);
+  }, 600000);
 });
 module.exports = {
   recentlyRan,
