@@ -1060,7 +1060,7 @@ client.on("ready", async () => {
     client.user.setActivity(status, { type: "WATCHING" });
     index++;
   }, 3000);
-  setInterval(() => {
+  setInterval(async () => {
     const date = new Date();
     const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
     const finalString = finalArray[0] + ":" + finalArray[1];
