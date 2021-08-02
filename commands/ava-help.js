@@ -13,12 +13,12 @@ module.exports = {
     ) {
       message.delete();
       const listButton = new MessageButton()
-        .setCustomID("avabuildsbutton")
+        .setCustomId("avabuildsbutton")
         .setEmoji("🚀")
         .setLabel("Ava builds")
         .setStyle("SUCCESS");
       const closeButton = new MessageButton()
-        .setCustomID("closebutton")
+        .setCustomId("closebutton")
         .setEmoji("❌")
         .setLabel("Close")
         .setStyle("DANGER");
