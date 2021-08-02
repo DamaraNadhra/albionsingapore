@@ -611,7 +611,12 @@ client.on("interactionCreate", async (interaction) => {
           .setEmoji("🚨");
         interaction.update({
           content: "ZvZ build list! According to ARCH main zvz gears",
-          components: [row, tankRow, healRow.addComponents(deleteButton)],
+          components: [
+            row,
+            tankRow,
+            healRow,
+            new MessageActionRow().addComponents(deleteButton),
+          ],
           embeds: [],
         });
       }
@@ -973,7 +978,12 @@ client.on("interactionCreate", async (interaction) => {
           .setEmoji("🚨");
         await interaction.reply({
           content: "ZvZ build List! according to ARCH official zvz builds",
-          components: [row, tankRow, healRow.addComponents(deleteButton)],
+          components: [
+            row,
+            tankRow,
+            healRow,
+            new MessageActionRow().addComponents(deleteButton),
+          ],
         });
       }
     } else if (interaction.commandName === "rep") {
