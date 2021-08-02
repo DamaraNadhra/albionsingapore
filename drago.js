@@ -1198,7 +1198,7 @@ RPCclient.on("ready", () => {
   console.log("Online!");
 });
 RPCclient.login({
-  clientId: "805976602864386059",
+  clientId: "866310331826962453",
 });
 
 client.login(process.env.token);
