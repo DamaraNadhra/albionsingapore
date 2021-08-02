@@ -6,7 +6,7 @@ const {
 const recentlyRan = [];
 const AvArow = new MessageActionRow().addComponents(
   new MessageSelectMenu()
-    .setCustomID("avabuilds")
+    .setCustomId("avabuilds")
     .setPlaceholder("Search ava builds")
     .addOptions([
       {
@@ -194,7 +194,7 @@ const avalist = {
 };
 const row = new MessageActionRow().addComponents(
   new MessageSelectMenu()
-    .setCustomID("dps")
+    .setCustomId("dps")
     .setPlaceholder("ZvZ DPS builds")
     .addOptions([
       {
@@ -309,7 +309,7 @@ const row = new MessageActionRow().addComponents(
 );
 const tankRow = new MessageActionRow().addComponents(
   new MessageSelectMenu()
-    .setCustomID("tanks")
+    .setCustomId("tanks")
     .setPlaceholder("ZvZ TANK builds")
     .addOptions([
       {
@@ -346,7 +346,7 @@ const tankRow = new MessageActionRow().addComponents(
 );
 const healRow = new MessageActionRow().addComponents(
   new MessageSelectMenu()
-    .setCustomID("heals")
+    .setCustomId("heals")
     .setPlaceholder("ZvZ Heal and Supports builds")
     .addOptions([
       {
