@@ -93,6 +93,37 @@ module.exports = {
             },
           ],
         },
+        {
+          name: "zvz-builds",
+          description:
+            "Returns you a list of approved ZvZ builds according to ARCH main Discord",
+        },
+        {
+          name: "giverep",
+          description: "Gives rep to someone",
+          options: [
+            {
+              name: "user",
+              description: "define the person you want to give rep to..",
+              type: "USER",
+              required: true,
+            },
+          ],
+        },
+        {
+          name: "rep",
+          description:
+            "Shows yours or the specified users current reputation and rank",
+          options: [
+            {
+              name: "user",
+              description:
+                "the user, or dont fill if you want to check your reputation",
+              type: "USER",
+              required: false,
+            },
+          ],
+        },
       ]);
     console.log(commanz);
   },
