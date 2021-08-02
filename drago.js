@@ -439,7 +439,12 @@ client.on("messageCreate", async (message) => {
         message.channel.send({
           content: "Processing...",
           embeds: [embed],
-          components: [[zvzlistButton, referenceButton]],
+          components: [
+            new MessageActionRow().addComponents(
+              zvzlistButton,
+              referenceButton
+            ),
+          ],
         });
       } else {
         message.reply(`Please redo this command at ${botCommandChannel}`);
@@ -492,7 +497,12 @@ client.on("messageCreate", async (message) => {
         message.channel.send({
           content: "Processing...",
           embeds: [embed],
-          components: [[zvzlistButton, referenceButton]],
+          components: [
+            new MessageActionRow().addComponents(
+              zvzlistButton,
+              referenceButton
+            ),
+          ],
         });
       } else {
         message.reply(`Please redo this command at ${botCommandChannel}`);
@@ -545,7 +555,12 @@ client.on("messageCreate", async (message) => {
         message.channel.send({
           content: "Processing...",
           embeds: [embed],
-          components: [[zvzlistButton, referenceButton]],
+          components: [
+            new MessageActionRow().addComponents(
+              zvzlistButton,
+              referenceButton
+            ),
+          ],
         });
       } else {
         message.reply(`Please redo this command at ${botCommandChannel}`);
