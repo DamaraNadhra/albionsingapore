@@ -10,7 +10,7 @@ const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 const RPC = require("discord-rpc");
-const RPCclient = new RPC.Client({ transport: "ipc" });
+const RPCclient = new RPC.Client({ transport: "websocket" });
 const {
   AvArow,
   avalist,
@@ -41,7 +41,7 @@ let repLogButton = new MessageButton()
   .setStyle("LINK")
   .setLabel("Message Link");
 const fs = require("fs");
-client.commands = new Discord.Collection();
+client.commander = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
 const commandFiles = fs
@@ -49,7 +49,7 @@ const commandFiles = fs
   .filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
+  client.commander.set(command.name, command);
 }
 
 client.on("messageCreate", async (message) => {
@@ -148,7 +148,7 @@ client.on("messageCreate", async (message) => {
     if (!message.embeds[0]) return;
     let value = message.embeds[0].fields[0].value;
     value = value.replace(")", "/");
-    client.commands
+    client.commander
       .get("battlechecking")
       .execute(message, client, value.split("/")[6]);
   }
@@ -269,11 +269,13 @@ client.on("messageCreate", async (message) => {
   }
   const command = args.shift().toLowerCase();
   const commands =
-    client.commands.get(command) ||
-    client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command));
+    client.commander.get(command) ||
+    client.commander.find(
+      (cmd) => cmd.aliases && cmd.aliases.includes(command)
+    );
   //if (!message.content.startsWith(prefix)) return;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
-  //if (!client.commands.has(command)) return;
+  //if (!client.commander.has(command)) return;
   if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(commands.permissions)) {
