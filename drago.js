@@ -53,11 +53,6 @@ for (const file of commandFiles) {
 }
 
 client.on("messageCreate", async (message) => {
-  client.guilds.cache.get("703862691608920114").commands.create({
-    name: "audit",
-    description: "Search through the audit log, and return the answer.",
-    options: [{}],
-  });
   if (message.channel.id === "752110992405692456") {
     if (
       message.content.toLowerCase().includes("my in-game name") ||
