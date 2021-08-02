@@ -577,7 +577,7 @@ client.on("guildMemberAdd", (member) => {
 });
 client.on("interactionCreate", async (interaction) => {
   if (interaction.isButton()) {
-    if (interaction.customID === "back") {
+    if (interaction.customId === "back") {
       if (interaction.replied) {
         interaction.editReply({
           content: "ZvZ build list! According to ARCH main zvz gears",
@@ -595,9 +595,9 @@ client.on("interactionCreate", async (interaction) => {
           embeds: [],
         });
       }
-    } else if (interaction.customID === "delete") {
+    } else if (interaction.customId === "delete") {
       interaction.message.delete();
-    } else if (interaction.customID === "register") {
+    } else if (interaction.customId === "register") {
       let registerButton = new MessageButton()
         .setCustomId("register")
         .setStyle("SUCCESS")
@@ -638,7 +638,7 @@ client.on("interactionCreate", async (interaction) => {
           components: [new MessageActionRow().addComponents(registerButton)],
         });
       }, 1500);
-    } else if (interaction.customID === "avabuildsbutton") {
+    } else if (interaction.customId === "avabuildsbutton") {
       const closeButton = new MessageButton()
         .setCustomId("closebutton")
         .setEmoji("❌")
@@ -654,9 +654,9 @@ client.on("interactionCreate", async (interaction) => {
         content: "Listing avalonian builds...",
         components: [AvArow.addComponents(homeButton, closeButton)],
       });
-    } else if (interaction.customID === "closebutton") {
+    } else if (interaction.customId === "closebutton") {
       interaction.message.delete();
-    } else if (interaction.customID === "home") {
+    } else if (interaction.customId === "home") {
       const listButton = new MessageButton()
         .setCustomId("avabuildsbutton")
         .setEmoji("🚀")
@@ -682,7 +682,7 @@ client.on("interactionCreate", async (interaction) => {
           new MessageActionRow().addComponents(listButton, closeButton),
         ],
       });
-    } else if (interaction.customID === "listbutton") {
+    } else if (interaction.customId === "listbutton") {
       const closeButton = new MessageButton()
         .setCustomId("closebutton")
         .setEmoji("❌")
@@ -696,7 +696,7 @@ client.on("interactionCreate", async (interaction) => {
       interaction.update({
         components: [AvArow.addComponents(closeButton)],
       });
-    } else if (interaction.customID === "refreshbutton") {
+    } else if (interaction.customId === "refreshbutton") {
       await mongo().then(async (mongoose) => {
         let datta = await rep.find().sort({ rep: -1 }).limit(15);
         let pointsMap = datta.map((m) => m.rep).join("\n");
@@ -731,7 +731,7 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
   } else if (interaction.isSelectMenu()) {
-    if (interaction.customID === "dps") {
+    if (interaction.customId === "dps") {
       Object.keys(dpsList).forEach((m, i) => {
         if (interaction.values.includes(m)) {
           let embed = new MessageEmbed()
@@ -789,7 +789,7 @@ client.on("interactionCreate", async (interaction) => {
           }
         }
       });
-    } else if (interaction.customID === "tanks") {
+    } else if (interaction.customId === "tanks") {
       Object.keys(list).forEach((m, i) => {
         if (interaction.values.includes(m)) {
           let embed = new MessageEmbed()
@@ -847,7 +847,7 @@ client.on("interactionCreate", async (interaction) => {
           }
         }
       });
-    } else if (interaction.customID === "heals") {
+    } else if (interaction.customId === "heals") {
       Object.keys(healList).forEach((m, i) => {
         if (interaction.values.includes(m)) {
           let embed = new MessageEmbed()
@@ -905,7 +905,7 @@ client.on("interactionCreate", async (interaction) => {
           }
         }
       });
-    } else if (interaction.customID === "avabuilds") {
+    } else if (interaction.customId === "avabuilds") {
       Object.keys(avalist).forEach((m, i) => {
         if (interaction.values.includes(m)) {
           let embed = new MessageEmbed()
