@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton } = require("discord.js");
+const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 module.exports = {
   name: "leaderboard",
   description: "shows top 15 of all reputations",
@@ -35,7 +35,7 @@ module.exports = {
         .setFooter("Click the refresh button below to refresh the list!");
       message.channel.send({
         embeds: [embed],
-        components: [[thisbutton]],
+        components: [new MessageActionRow().addComponents(thisbutton)],
       });
     }
   },

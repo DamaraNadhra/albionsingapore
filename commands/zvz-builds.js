@@ -24,7 +24,7 @@ module.exports = {
         .setEmoji("🚨");
       await message.channel.send({
         content: "ZvZ build List! according to ARCH official zvz builds",
-        components: [row, tankRow, healRow, [deleteButton]],
+        components: [row, tankRow, healRow.addComponents(deleteButton)],
       });
     } else {
       const channel = message.guild.channels.cache.get("760731834354499585");

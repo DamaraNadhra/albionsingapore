@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton } = require("discord.js");
+const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 module.exports = {
   name: "ava-help",
   description: "Ava guide and ava builds inside",
@@ -33,7 +33,9 @@ module.exports = {
         .setFooter("Singapore", client.user.displayAvatarURL());
       message.channel.send({
         embeds: [embed],
-        components: [[listButton, closeButton]],
+        components: [
+          new MessageActionRow().addComponents(listButton, closeButton),
+        ],
       });
     }
   },

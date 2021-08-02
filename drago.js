@@ -579,7 +579,7 @@ client.on("interactionCreate", async (interaction) => {
           .setEmoji("🚨");
         interaction.update({
           content: "ZvZ build list! According to ARCH main zvz gears",
-          components: [row, tankRow, healRow, [deleteButton]],
+          components: [row, tankRow, healRow.addComponents(deleteButton)],
           embeds: [],
         });
       }
@@ -619,11 +619,11 @@ client.on("interactionCreate", async (interaction) => {
       });
 
       interaction.update({
-        components: [[permissionGiven]],
+        components: [new MessageActionRow().addComponents(permissionGiven)],
       });
       setTimeout(() => {
         interaction.editReply({
-          components: [[registerButton]],
+          components: [new MessageActionRow().addComponents(registerButton)],
         });
       }, 1500);
     } else if (interaction.customID === "avabuildsbutton") {
@@ -640,7 +640,7 @@ client.on("interactionCreate", async (interaction) => {
       interaction.update({
         embeds: [],
         content: "Listing avalonian builds...",
-        components: [AvArow, [homeButton, closeButton]],
+        components: [AvArow.addComponents(homeButton, closeButton)],
       });
     } else if (interaction.customID === "closebutton") {
       interaction.message.delete();
@@ -666,7 +666,9 @@ client.on("interactionCreate", async (interaction) => {
         .setFooter("Singapore", client.user.displayAvatarURL());
       interaction.update({
         embeds: [embed],
-        components: [[listButton, closeButton]],
+        components: [
+          new MessageActionRow().addComponents(listButton, closeButton),
+        ],
       });
     } else if (interaction.customID === "listbutton") {
       const closeButton = new MessageButton()
@@ -680,7 +682,7 @@ client.on("interactionCreate", async (interaction) => {
         .setLabel("Home")
         .setStyle("PRIMARY");
       interaction.update({
-        components: [AvArow, [closeButton]],
+        components: [AvArow.addComponents(closeButton)],
       });
     } else if (interaction.customID === "refreshbutton") {
       await mongo().then(async (mongoose) => {
@@ -712,33 +714,8 @@ client.on("interactionCreate", async (interaction) => {
           .setFooter("Click the refresh button below to refresh the list!");
         interaction.update({
           embeds: [embed],
-          components: [[thisbutton]],
+          components: [new MessageActionRow().addComponents(thisbutton)],
         });
-      });
-    } else if (
-      interaction.customID ===
-      "ధ妐Ⴈ湜ᝰ㟯堽析甥Ⲃ希槊㶈匬Ị㦓᷽活硍则Ēⵒá哾⸝澪㌔ქᬜ㷌耀"
-    ) {
-      let officer = await report.findOne({ channelId: interaction.channelID });
-      if (!officer) return;
-      let personExistable = await rep.findOne({ id: officer.officerId });
-      if (personExistable) {
-        await personExistable.updateOne({ rep: personExistable.rep + 1 });
-      } else {
-        await rep.create({
-          name: officer.officer,
-          id: officer.officerId,
-          rep: 1,
-        });
-      }
-      let personData = await rep.findOne({ id: officer.officerId });
-      let blabla =
-        (await (
-          await rep.find().sort({ rep: -1 })
-        ).findIndex((i) => i.id === officer.officerId)) + 1;
-      interaction.reply({
-        content: `Case settled! Congratulations... **${personData.name}** You have gained \`1\` Rep (current: \`#${blabla}\ \`${personData.rep}\`)`,
-        ephemeral: true,
       });
     }
   } else if (interaction.isSelectMenu()) {
@@ -774,13 +751,27 @@ client.on("interactionCreate", async (interaction) => {
           if (interaction.replied) {
             interaction.editReply({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           } else {
             interaction.update({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           }
@@ -818,13 +809,27 @@ client.on("interactionCreate", async (interaction) => {
           if (interaction.replied) {
             interaction.editReply({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           } else {
             interaction.update({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           }
@@ -862,13 +867,27 @@ client.on("interactionCreate", async (interaction) => {
           if (interaction.replied) {
             interaction.editReply({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           } else {
             interaction.update({
               content: "Hold on",
-              components: [[button, buttonback, referenceButton, deleteButton]],
+              components: [
+                new MessageActionRow().addComponents(
+                  button,
+                  buttonback,
+                  referenceButton,
+                  deleteButton
+                ),
+              ],
               embeds: [embed],
             });
           }
@@ -916,7 +935,7 @@ client.on("interactionCreate", async (interaction) => {
           .setEmoji("🚨");
         await interaction.reply({
           content: "ZvZ build List! according to ARCH official zvz builds",
-          components: [row, tankRow, healRow, [deleteButton]],
+          components: [row, tankRow, healRow.addComponents(deleteButton)],
         });
       }
     } else if (interaction.commandName === "rep") {

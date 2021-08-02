@@ -1,7 +1,7 @@
 const rep = require("../models/reputation");
 const { nicknameMaker, dateMaker } = require("../functions");
 let { recentlyRan } = require("../cooldown");
-const { MessageButton, MessageEmbed } = require("discord.js");
+const { MessageButton, MessageEmbed, MessageActionRow } = require("discord.js");
 let repLogButton = new MessageButton()
   .setStyle("LINK")
   .setLabel("Message Link");
@@ -96,7 +96,11 @@ module.exports = {
             )}** has given \`1\` Rep to ${finalString} in <#${
               message.channel.id
             }> at ${dateMaker(new Date())}`,
-            components: [[repLogButton.setURL(message.url)]],
+            components: [
+              new MessageActionRow().addComponents(
+                repLogButton.setURL(message.url)
+              ),
+            ],
           });
         });
       } else {
@@ -155,7 +159,11 @@ module.exports = {
           )}** has given \`1\` Rep to **${personData.name}** in <#${
             message.channel.id
           }> at ${dateMaker(new Date())}`,
-          components: [[repLogButton.setURL(message.url)]],
+          components: [
+            new MessageActionRow().addComponents(
+              repLogButton.setURL(message.url)
+            ),
+          ],
         });
       }
     } else {
@@ -217,7 +225,11 @@ module.exports = {
         )}** has given \`1\` Rep to **${personData.name}** in <#${
           message.channel.id
         }> at ${dateMaker(new Date())}`,
-        components: [[repLogButton.setURL(message.url)]],
+        components: [
+          new MessageActionRow().addComponents(
+            repLogButton.setURL(message.url)
+          ),
+        ],
       });
     }
   },

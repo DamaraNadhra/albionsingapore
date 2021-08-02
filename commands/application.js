@@ -1,4 +1,4 @@
-const { MessageButton, MessageEmbed } = require("discord.js");
+const { MessageButton, MessageActionRow } = require("discord.js");
 module.exports = {
   name: "application",
   description: "Application for new players",
@@ -25,7 +25,7 @@ module.exports = {
       .then(() => {
         message.channel.send({
           content: `> **3.** Read ${guildRulesChannel}. \n\n> **4.** ZvZ builds can be found in the Arch alliance discord or just simply type \`!zvz-builds\` in ${botCommandChannel}. \n\n> **5.** Please click the button below once you have read the rules to have access to all the server channels.`,
-          components: [[registerButton]],
+          components: [new MessageActionRow().addComponents(registerButton)],
         });
       });
   },
