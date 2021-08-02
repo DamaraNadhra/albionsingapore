@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "discord-rpc": "^4.0.1",
-    "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
+    "discord.js": "^13.0.0-dev.t1627862659.e2e4f65",
     "mongoose": "^5.13.2",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",

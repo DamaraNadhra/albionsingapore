@@ -15,6 +15,13 @@ class MessageEmbed {
    */
 
   /**
+   * A `Partial` object is a representation of any existing object.
+   * This object contains between 0 and all of the original objects parameters.
+   * This is true regardless of whether the parameters are optional in the base object.
+   * @typedef {Object} Partial
+   */
+
+  /**
    * Represents the possible options for a MessageEmbed
    * @typedef {Object} MessageEmbedOptions
    * @property {string} [title] The title of this embed
@@ -288,6 +295,16 @@ class MessageEmbed {
    */
   spliceFields(index, deleteCount, ...fields) {
     this.fields.splice(index, deleteCount, ...this.constructor.normalizeFields(...fields));
+    return this;
+  }
+
+  /**
+   * Sets the embed's fields (max 25).
+   * @param {...EmbedFieldData|EmbedFieldData[]} fields The fields to set
+   * @returns {MessageEmbed}
+   */
+  setFields(...fields) {
+    this.spliceFields(0, this.fields.length, fields);
     return this;
   }
 

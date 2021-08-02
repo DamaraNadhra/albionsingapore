@@ -76,13 +76,13 @@ class Invite extends Base {
      * The user who created this invite
      * @type {?User}
      */
-    this.inviter = data.inviter ? this.client.users.add(data.inviter) : null;
+    this.inviter = data.inviter ? this.client.users._add(data.inviter) : null;
 
     /**
      * The user whose stream to display for this voice channel stream invite
      * @type {?User}
      */
-    this.targetUser = data.target_user ? this.client.users.add(data.target_user) : null;
+    this.targetUser = data.target_user ? this.client.users._add(data.target_user) : null;
 
     /**
      * The embedded application to open for this voice channel embedded application invite
@@ -109,7 +109,7 @@ class Invite extends Base {
      * The channel the invite is for
      * @type {Channel}
      */
-    this.channel = this.client.channels.add(data.channel, this.guild, false);
+    this.channel = this.client.channels._add(data.channel, this.guild, { cache: false });
 
     /**
      * The timestamp the invite was created at
@@ -189,8 +189,9 @@ class Invite extends Base {
    * @param {string} [reason] Reason for deleting this invite
    * @returns {Promise<Invite>}
    */
-  delete(reason) {
-    return this.client.api.invites[this.code].delete({ reason }).then(() => this);
+  async delete(reason) {
+    await this.client.api.invites[this.code].delete({ reason });
+    return this;
   }
 
   /**
@@ -211,9 +212,9 @@ class Invite extends Base {
       presenceCount: false,
       memberCount: false,
       uses: false,
-      channel: 'channelID',
-      inviter: 'inviterID',
-      guild: 'guildID',
+      channel: 'channelId',
+      inviter: 'inviterId',
+      guild: 'guildId',
     });
   }
 
