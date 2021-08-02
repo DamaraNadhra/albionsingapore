@@ -9,6 +9,8 @@ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "GUILD_MEMBERS"],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
+const RPC = require("discord-rpc");
+const RPCclient = RPC.Client({ transport: "ipc" });
 const {
   AvArow,
   avalist,
@@ -51,6 +53,11 @@ for (const file of commandFiles) {
 }
 
 client.on("message", async (message) => {
+  client.guilds.cache.get("703862691608920114").commands.create({
+    name: "audit",
+    description: "Search through the audit log, and return the answer.",
+    options: [{}],
+  });
   if (message.channel.id === "752110992405692456") {
     if (
       message.content.toLowerCase().includes("my in-game name") ||
@@ -1012,6 +1019,77 @@ client.on("interaction", async (interaction) => {
           }> at ${dateMaker(new Date())}`,
         });
       });
+    } else if (interaction.commandName === "audit") {
+      try {
+        const type = interaction.options.getString("type");
+        const executors = interaction.options.getUser("executor");
+        const targets = interaction.options.getUser("target");
+        const keys = interaction.options.getString("key");
+        const limitz = interaction.options.getNumber("limit");
+        let fetchedGuildAuditLogs = await interaction.guild.fetchAuditLogs({
+          type: type,
+          limit: Boolean(limitz) ? limitz : 20,
+        });
+        let finalResult = fetchedGuildAuditLogs.entries
+          .filter((m) =>
+            Boolean(executors) ? m.executor.id === executors.id : m
+          )
+          .filter((m) => (Boolean(targets) ? m.target.id === targets.id : m))
+          .filter((m) => (Boolean(keys) ? m.changes[0].key === keys : m));
+        let final = finalResult
+          .map((element) => {
+            switch (element.action) {
+              case "MEMBER_ROLE_UPDATE":
+                switch (element.changes[0].key) {
+                  case "$add":
+                    changesString = `Added ${element.changes[0].new[0].name}`;
+                    break;
+                  case "$remove":
+                    changesString = `Removed ${element.changes[0].new[0].name}`;
+                    break;
+                  default:
+                    break;
+                }
+                break;
+              case "MEMBER_UPDATE":
+                changesString = `Changed from ${element.changes[0].old[0].name} to ${element.changes[0].new[0].name}`;
+                break;
+              default:
+                break;
+            }
+            return `#showing audit log entry: ${element.id}\nExecutor = '${element.executor.tag}' \nTarget = '${element.target.tag}' \nType = '${element.action}' \nChanges = '${changesString}'`;
+          })
+          .join("\n\n");
+        if (finalResult.size === 1) {
+          interaction.reply({
+            content: `\`\`\`prolog\n${final}\`\`\``,
+          });
+        } else {
+          fs.writeFile("auditlog.pl", final, (err) => {
+            if (err) {
+              console.log(err);
+            }
+          });
+          await interaction.reply({
+            files: [
+              {
+                attachment: "auditlog.pl",
+                name: "entry.prolog",
+              },
+            ],
+          });
+          setTimeout(() => {
+            fs.unlink("auditlog.pl", (err) => {
+              if (err) console.log(err);
+            });
+          }, 4000);
+        }
+      } catch (error) {
+        interaction.reply(
+          "I cannot find audit log entry with that information, please be more spesific!"
+        );
+        console.log(error);
+      }
     }
   }
 });
@@ -1086,4 +1164,41 @@ client.on("ready", async () => {
 module.exports = {
   recentlyRan,
 };
+rpc.on("ready", () => {
+  const statusArray = [
+    "Grailseeker Guardian",
+    "Crossbow Master",
+    "Locus Expert",
+    "Energy Shaper Abuser",
+    "Didi Kempot",
+    "The Godfather of Brokenheart",
+  ];
+  let index = 0;
+  setInterval(() => {
+    if (index === statusArray.length) index = 0;
+    const status = statusArray[index];
+    rpc.setActivity({
+      details: status,
+      state: "Programmer & Solution Designer.",
+      largeImageKey: "singaporepresence",
+      largeImageText: "Singapore Mammoth Army",
+      smallImageKey: "singapore",
+      smallImageText: "Albion Singapore",
+      buttons: [
+        {
+          label: "Join SGMY Banger Community",
+          url: "https://discord.gg/7Nf4jdNt",
+        },
+      ],
+      instance: false,
+    });
+    index++;
+  }, 4000);
+  console.log(rpc.user.username);
+  console.log("Online!");
+});
+rpc.login({
+  clientId: "805976602864386059",
+});
+
 client.login(process.env.token);
