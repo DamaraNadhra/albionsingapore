@@ -367,7 +367,7 @@ client.on("message", async (message) => {
         message.member.permissions.has("ADMINISTRATOR")
       ) {
         let listButton = new MessageButton()
-          .setCustomID("listbutton")
+          .setCustomId("listbutton")
           .setStyle("SUCCESS")
           .setLabel("Look for more builds!")
           .setEmoji("<:jennielove:844893922634235904>");
@@ -407,7 +407,7 @@ client.on("message", async (message) => {
         message.member.permissions.has("ADMINISTRATOR")
       ) {
         let zvzlistButton = new MessageButton()
-          .setCustomID("listbuttonzvz")
+          .setCustomId("listbuttonzvz")
           .setStyle("SUCCESS")
           .setLabel("Look for more builds!")
           .setEmoji("<:jennielove:844893922634235904>");
@@ -460,7 +460,7 @@ client.on("message", async (message) => {
         message.member.permissions.has("ADMINISTRATOR")
       ) {
         let zvzlistButton = new MessageButton()
-          .setCustomID("listbuttonzvz")
+          .setCustomId("listbuttonzvz")
           .setStyle("SUCCESS")
           .setLabel("Look for more builds!")
           .setEmoji("<:jennielove:844893922634235904>");
@@ -513,7 +513,7 @@ client.on("message", async (message) => {
         message.member.permissions.has("ADMINISTRATOR")
       ) {
         let zvzlistButton = new MessageButton()
-          .setCustomID("listbuttonzvz")
+          .setCustomId("listbuttonzvz")
           .setStyle("SUCCESS")
           .setLabel("Look for more builds!")
           .setEmoji("<:jennielove:844893922634235904>");
@@ -574,7 +574,7 @@ client.on("interaction", async (interaction) => {
       } else {
         let deleteButton = new MessageButton()
           .setStyle("DANGER")
-          .setCustomID("delete")
+          .setCustomId("delete")
           .setLabel("Delete")
           .setEmoji("🚨");
         interaction.update({
@@ -587,13 +587,13 @@ client.on("interaction", async (interaction) => {
       interaction.message.delete();
     } else if (interaction.customID === "register") {
       let registerButton = new MessageButton()
-        .setCustomID("register")
+        .setCustomId("register")
         .setStyle("SUCCESS")
         .setEmoji("✅")
         .setLabel("I have read all the rules");
       let permissionGiven = new MessageButton()
         .setLabel("Permission Given!")
-        .setCustomID("permissiongiven")
+        .setCustomId("permissiongiven")
         .setDisabled(true)
         .setEmoji("🔓")
         .setStyle("PRIMARY");
@@ -628,12 +628,12 @@ client.on("interaction", async (interaction) => {
       }, 1500);
     } else if (interaction.customID === "avabuildsbutton") {
       const closeButton = new MessageButton()
-        .setCustomID("closebutton")
+        .setCustomId("closebutton")
         .setEmoji("❌")
         .setLabel("Close")
         .setStyle("DANGER");
       const homeButton = new MessageButton()
-        .setCustomID("home")
+        .setCustomId("home")
         .setEmoji("🏘️")
         .setLabel("Home")
         .setStyle("PRIMARY");
@@ -646,12 +646,12 @@ client.on("interaction", async (interaction) => {
       interaction.message.delete();
     } else if (interaction.customID === "home") {
       const listButton = new MessageButton()
-        .setCustomID("avabuildsbutton")
+        .setCustomId("avabuildsbutton")
         .setEmoji("🚀")
         .setLabel("Ava builds")
         .setStyle("SUCCESS");
       const closeButton = new MessageButton()
-        .setCustomID("closebutton")
+        .setCustomId("closebutton")
         .setEmoji("❌")
         .setLabel("Close")
         .setStyle("DANGER");
@@ -670,12 +670,12 @@ client.on("interaction", async (interaction) => {
       });
     } else if (interaction.customID === "listbutton") {
       const closeButton = new MessageButton()
-        .setCustomID("closebutton")
+        .setCustomId("closebutton")
         .setEmoji("❌")
         .setLabel("Close")
         .setStyle("DANGER");
       const homeButton = new MessageButton()
-        .setCustomID("home")
+        .setCustomId("home")
         .setEmoji("🏘️")
         .setLabel("Home")
         .setStyle("PRIMARY");
@@ -695,7 +695,7 @@ client.on("interaction", async (interaction) => {
         let thisbutton = new MessageButton()
           .setStyle("PRIMARY")
           .setEmoji("🔄")
-          .setCustomID("refreshbutton")
+          .setCustomId("refreshbutton")
           .setLabel("Refresh");
         const embed = new MessageEmbed()
           .setColor("ORANGE")
@@ -759,12 +759,12 @@ client.on("interaction", async (interaction) => {
             .setLabel("Link to the Website");
           let buttonback = new MessageButton()
             .setStyle("SUCCESS")
-            .setCustomID("back")
+            .setCustomId("back")
             .setLabel("Back to the List")
             .setEmoji("🚀");
           let deleteButton = new MessageButton()
             .setStyle("DANGER")
-            .setCustomID("delete")
+            .setCustomId("delete")
             .setLabel("Delete this message")
             .setEmoji("🚨");
           let referenceButton = new MessageButton()
@@ -803,12 +803,12 @@ client.on("interaction", async (interaction) => {
             .setLabel("Link to the Website");
           let buttonback = new MessageButton()
             .setStyle("SUCCESS")
-            .setCustomID("back")
+            .setCustomId("back")
             .setLabel("Back to the List")
             .setEmoji("🚀");
           let deleteButton = new MessageButton()
             .setStyle("DANGER")
-            .setCustomID("delete")
+            .setCustomId("delete")
             .setLabel("Delete this message")
             .setEmoji("🚨");
           let referenceButton = new MessageButton()
@@ -847,12 +847,12 @@ client.on("interaction", async (interaction) => {
             .setLabel("Link to the Website");
           let buttonback = new MessageButton()
             .setStyle("SUCCESS")
-            .setCustomID("back")
+            .setCustomId("back")
             .setLabel("Back to the List")
             .setEmoji("🚀");
           let deleteButton = new MessageButton()
             .setStyle("DANGER")
-            .setCustomID("delete")
+            .setCustomId("delete")
             .setLabel("Delete this message")
             .setEmoji("🚨");
           let referenceButton = new MessageButton()
@@ -911,7 +911,7 @@ client.on("interaction", async (interaction) => {
       ) {
         let deleteButton = new MessageButton()
           .setStyle("DANGER")
-          .setCustomID("delete")
+          .setCustomId("delete")
           .setLabel("Delete")
           .setEmoji("🚨");
         await interaction.reply({

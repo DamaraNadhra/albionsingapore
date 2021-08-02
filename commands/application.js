@@ -8,7 +8,7 @@ module.exports = {
     let botCommandChannel =
       message.guild.channels.cache.get("760731834354499585");
     let registerButton = new MessageButton()
-      .setCustomID("register")
+      .setCustomId("register")
       .setStyle("SUCCESS")
       .setEmoji("✅")
       .setLabel("I have read all the rules");

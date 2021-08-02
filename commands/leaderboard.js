@@ -18,7 +18,7 @@ module.exports = {
       let thisbutton = new MessageButton()
         .setStyle("PRIMARY")
         .setEmoji("🔄")
-        .setCustomID("refreshbutton")
+        .setCustomId("refreshbutton")
         .setLabel("Refresh");
       const embed = new MessageEmbed()
         .setColor("ORANGE")

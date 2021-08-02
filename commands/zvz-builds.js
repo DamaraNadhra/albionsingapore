@@ -19,7 +19,7 @@ module.exports = {
       message.delete();
       let deleteButton = new MessageButton()
         .setStyle("DANGER")
-        .setCustomID("delete")
+        .setCustomId("delete")
         .setLabel("Delete")
         .setEmoji("🚨");
       await message.channel.send({
