@@ -96,7 +96,11 @@ client.on("messageCreate", async (message) => {
               });
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
-              components: [[referenceButton.setURL(message.url)]],
+              components: [
+                new MessageActionRow().addComponents(
+                  referenceButton.setURL(message.url)
+                ),
+              ],
             });
           } else if (existable) {
             const embed = new MessageEmbed()
@@ -127,13 +131,21 @@ client.on("messageCreate", async (message) => {
               });
             message.guild.channels.cache.get("779514684797091850").send({
               embeds: [embed],
-              components: [[referenceButton.setURL(message.url)]],
+              components: [
+                new MessageActionRow().addComponents(
+                  referenceButton.setURL(message.url)
+                ),
+              ],
             });
           } else {
             await message.react("✅");
             message.guild.channels.cache.get("779514684797091850").send({
               content: `**${result.data.name}** is not blacklisted :D`,
-              components: [[referenceButton.setURL(message.url)]],
+              components: [
+                new MessageActionRow().addComponents(
+                  referenceButton.setURL(message.url)
+                ),
+              ],
             });
           }
         });
@@ -215,7 +227,11 @@ client.on("messageCreate", async (message) => {
             )}** has given \`1\` Rep to ${finalString} in <#${
               message.channel.id
             }> at ${dateMaker(new Date())}`,
-            components: [[repLogButton.setURL(message.url)]],
+            components: [
+              new MessageActionRow().addComponents(
+                repLogButton.setURL(message.url)
+              ),
+            ],
           });
         });
       } else {
@@ -257,7 +273,11 @@ client.on("messageCreate", async (message) => {
           )}** has given \`1\` Rep to **${personData.name}** in <#${
             message.channel.id
           }> at ${dateMaker(new Date())}`,
-          components: [[repLogButton.setURL(message.url)]],
+          components: [
+            new MessageActionRow().addComponents(
+              repLogButton.setURL(message.url)
+            ),
+          ],
         });
       }
     });
@@ -386,7 +406,7 @@ client.on("messageCreate", async (message) => {
         message.channel.send({
           content: "Processing...",
           embeds: [embed],
-          components: [[listButton]],
+          components: [new MessageActionRow().addComponents(listButton)],
         });
       } else {
         message.reply(`Please redo this command at ${botCommandChannel}`);
@@ -728,6 +748,12 @@ client.on("interactionCreate", async (interaction) => {
           embeds: [embed],
           components: [new MessageActionRow().addComponents(thisbutton)],
         });
+      });
+    } else if (interaction.customId === "listbuttonzvz") {
+      interaction.update({
+        content: "Listing the approved zvz builds",
+        embeds: [],
+        components: [tankRow, row, healRow],
       });
     }
   } else if (interaction.isSelectMenu()) {
