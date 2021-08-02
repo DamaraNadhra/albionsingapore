@@ -10,7 +10,7 @@ const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 const RPC = require("discord-rpc");
-const RPCclient = RPC.Client({ transport: "ipc" });
+const RPCclient = new RPC.Client({ transport: "ipc" });
 const {
   AvArow,
   avalist,
