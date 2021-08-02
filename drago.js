@@ -1244,7 +1244,7 @@ RPCclient.on("ready", () => {
   setInterval(() => {
     if (index === statusArray.length) index = 0;
     const status = statusArray[index];
-    rpc.setActivity({
+    RPCclient.setActivity({
       details: status,
       state: "Programmer & Solution Designer.",
       largeImageKey: "singaporepresence",
