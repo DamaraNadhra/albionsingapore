@@ -728,7 +728,7 @@ const nicknameMaker = (message, userID) => {
   }
 };
 const getDate = () => {
-  const dateee = new Date("08/31/2021");
+  const dateee = new Date();
 
   switch (dateee.getDay()) {
     case 0:
