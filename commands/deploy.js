@@ -9,7 +9,7 @@ module.exports = {
    * @param {Client} client
    * @param {*} args
    */
-  async execute(message, client, args) {
+  async execute(message, args, client) {
     const commanz = await client.guilds.cache
       .get("703862691608920114")
       .commands.set([
