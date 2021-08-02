@@ -727,6 +727,68 @@ const nicknameMaker = (message, userID) => {
     return username;
   }
 };
+const getDate = () => {
+  const dateee = new Date("08/31/2021");
+
+  switch (dateee.getDay()) {
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
+  }
+  switch (dateee.getDate()) {
+    case 2:
+      date = "2nd";
+      break;
+
+    case 1:
+      date = "1st";
+      break;
+    case 3:
+      date = "3rd";
+      break;
+    case 11:
+      date = "11st";
+      break;
+    case 12:
+      date = "12nd";
+      break;
+    case 13:
+      date = "13rd";
+      break;
+    case 21:
+      date = "21st";
+      break;
+    case 22:
+      date = "22nd";
+      break;
+    case 23:
+      date = "23rd";
+      break;
+    case 31:
+      date = "31st";
+      break;
+    default:
+      date = `${dateee.getDate()}th`;
+  }
+  return `📅 ${day}, ${dateee.toUTCString().split(/ +/g)[2]} ${date}`;
+};
 
 module.exports = {
   nicknameMaker,
@@ -734,4 +796,5 @@ module.exports = {
   compareSet,
   sets,
   dateMaker,
+  getDate,
 };

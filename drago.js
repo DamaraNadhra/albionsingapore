@@ -20,11 +20,7 @@ const {
   list,
 } = require("./list");
 const mongo = require("./mongo");
-const splitz = require("./models/split-schema");
-const person = require("./models/person");
-const regear = require("./models/regear");
 const report = require("./models/report");
-const register = require("./models/register");
 const axios = require("axios");
 const prefix = "!";
 const blacklist = require("./models/blacklist");
@@ -36,6 +32,7 @@ const {
   sets,
   billboard,
   nicknameMaker,
+  getDate,
 } = require("./functions");
 let { recentlyRan } = require("./cooldown");
 let repLogButton = new MessageButton()
@@ -140,6 +137,7 @@ client.on("message", async (message) => {
         });
     }
   } else if (message.channel.id === "779629935920152596") {
+    //battlechecking
     if (!message.embeds[0]) return;
     let value = message.embeds[0].fields[0].value;
     value = value.replace(")", "/");
@@ -1056,6 +1054,9 @@ client.on("ready", async () => {
   let sgmyChannel = client.guilds.cache
     .get("565550094590672898")
     .channels.cache.get("870570785163599924");
+  let dateChannel = client.guilds.cache
+    .get("703862691608920114")
+    .channels.cache.get("871562052009865238");
   let index = 0;
   setInterval(() => {
     if (index === statusArray.length) index = 0;
@@ -1073,6 +1074,7 @@ client.on("ready", async () => {
         console.log(`Changed from ${channel.name} to ${newChannel.name}`)
       )
       .catch(console.error);
+    dateChannel.setName(getDate());
     sgmyChannel
       .setName(`🕐UTC: ${finalString}`)
       .then((newChannel) =>
