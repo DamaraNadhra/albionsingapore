@@ -1164,7 +1164,7 @@ client.on("ready", async () => {
 module.exports = {
   recentlyRan,
 };
-rpc.on("ready", () => {
+RPCclient.on("ready", () => {
   const statusArray = [
     "Grailseeker Guardian",
     "Crossbow Master",
@@ -1197,7 +1197,7 @@ rpc.on("ready", () => {
   console.log(rpc.user.username);
   console.log("Online!");
 });
-rpc.login({
+RPCclient.login({
   clientId: "805976602864386059",
 });
 
