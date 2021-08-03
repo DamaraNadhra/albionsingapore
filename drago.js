@@ -1097,6 +1097,7 @@ client.on("interactionCreate", async (interaction) => {
           .filter((m) => (Boolean(keys) ? m.changes[0].key === keys : m));
         let final = finalResult
           .map((element) => {
+            let elementChanges = element.changes;
             switch (element.action) {
               case "MEMBER_ROLE_UPDATE":
                 switch (element.changes[0].key) {
