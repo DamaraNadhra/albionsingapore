@@ -1101,17 +1101,27 @@ client.on("interactionCreate", async (interaction) => {
               case "MEMBER_ROLE_UPDATE":
                 switch (element.changes[0].key) {
                   case "$add":
-                    changesString = `Added ${element.changes[0].new[0].name}`;
+                    changesString = `Added ${elementChanges
+                      .map((m) => m.new.map((m) => m.name).join(", "))
+                      .join("\n")}`;
                     break;
                   case "$remove":
-                    changesString = `Removed ${element.changes[0].new[0].name}`;
+                    changesString = `Removed ${elementChanges[0].new[0].name}`;
                     break;
                   default:
                     break;
                 }
                 break;
               case "MEMBER_UPDATE":
-                changesString = `Changed from ${element.changes[0].old[0].name} to ${element.changes[0].new[0].name}`;
+                if (element.changes[0].new == undefined)
+                  changesString = `Changed from ${elementChanges[0].old} to ${elementChanges[0].new}`;
+                else changesString = `Changed to ${elementChanges[0].new}`;
+                break;
+              case "CHANNEL_DELETE":
+                changesString = `Deleted ${elementChanges[0].old}`;
+                break;
+              case "CHANNEL_UPDATE":
+                changesString = `Changed from ${elementChanges[0].old} to ${elementChanges[0].new}`;
                 break;
               default:
                 break;
@@ -1256,7 +1266,7 @@ RPCclient.on("ready", () => {
   console.log("Online!");
 });
 RPCclient.login({
-  clientId: "866310331826962453",
+  clientId: "805976602864386059",
 });
 
 client.login(process.env.token);
