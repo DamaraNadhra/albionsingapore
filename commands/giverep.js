@@ -105,16 +105,6 @@ module.exports = {
         });
       } else {
         let person = message.mentions.members.first().user;
-        if (person.id === message.author.id) {
-          let returnMessage = await message.reply({
-            content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-          });
-          setTimeout(() => {
-            returnMessage.delete();
-            message.delete();
-          }, 7000);
-          return;
-        }
         personID = person.id;
         isPersonHasRep = await rep.findOne({ id: person.id });
         if (personID === message.author.id) {
@@ -143,8 +133,22 @@ module.exports = {
           (await (
             await rep.find().sort({ rep: -1 })
           ).findIndex((i) => i.id === personID)) + 1;
+        switch (blabla) {
+          case 1:
+            rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+            break;
+          case 2:
+            rank = "#2 NUMBA TWO 🥈🥈";
+            break;
+          case 3:
+            rank = "#3 NUMBA THREE 🥉";
+            break;
+          default:
+            rank = "#" + blabla;
+            break;
+        }
         message.reply({
-          content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+          content: `Gave \`1\` Rep to **${personData.name}** (current: \`${rank}\` -\`${personData.rep}\`)`,
         });
         recentlyRan.push(message.author.id);
         setTimeout(() => {

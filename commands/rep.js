@@ -28,8 +28,22 @@ module.exports = {
           (await (
             await rep.find().sort({ rep: -1 })
           ).findIndex((i) => i.id === person.id)) + 1;
+        switch (blabla) {
+          case 1:
+            rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+            break;
+          case 2:
+            rank = "#2 NUMBA TWO 🥈🥈";
+            break;
+          case 3:
+            rank = "#3 NUMBA THREE 🥉";
+            break;
+          default:
+            rank = "#" + blabla;
+            break;
+        }
         message.channel.send({
-          content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`,
+          content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
         });
       }
     } else {
@@ -53,8 +67,22 @@ module.exports = {
           (await (
             await rep.find().sort({ rep: -1 })
           ).findIndex((i) => i.id === hisID.id)) + 1;
+        switch (blabla) {
+          case 1:
+            rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+            break;
+          case 2:
+            rank = "#2 NUMBA TWO 🥈🥈";
+            break;
+          case 3:
+            rank = "#3 NUMBA THREE 🥉";
+            break;
+          default:
+            rank = "#" + blabla;
+            break;
+        }
         message.channel.send({
-          content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`,
+          content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
         });
       }
     }

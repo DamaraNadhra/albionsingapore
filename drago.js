@@ -727,6 +727,9 @@ client.on("interactionCreate", async (interaction) => {
         .map(function (element, index) {
           return "**" + "#" + (parseInt(index) + 1) + "**";
         })
+        .filter((m) =>
+          m.replace("#1", "🥇").replace("#2", "🥈").replace("#3", "🥉")
+        )
         .join("\n");
       let thisbutton = new MessageButton()
         .setStyle("PRIMARY")
@@ -736,7 +739,7 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new MessageEmbed()
         .setColor("ORANGE")
         .setDescription(
-          "**Reputation Leaderboard!** \n**Syntax:** \n`!+rep [playerMention]` \n`!giverep [playerMention]` \n`thanks/thx/ty/thankyou [playerMentionS]`\n"
+          "**Reputation Leaderboard!** \n**Syntax:** \n`!+rep [playerMention]` \n`!giverep [playerMention(s)]` \n`thanks/thx/thank you [playerMention(s)]`\n\n**Countdown:** "
         )
         .setAuthor("Singapore Love Guardian", client.user.displayAvatarURL())
         .setThumbnail("https://i.imgur.com/GHJ9FLw.png")
@@ -1005,8 +1008,22 @@ client.on("interactionCreate", async (interaction) => {
             (await (
               await rep.find().sort({ rep: -1 })
             ).findIndex((i) => i.id === user.id)) + 1;
+          switch (blabla) {
+            case 1:
+              rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+              break;
+            case 2:
+              rank = "#2 NUMBA TWO 🥈🥈";
+              break;
+            case 3:
+              rank = "#3 NUMBA THREE 🥉";
+              break;
+            default:
+              rank = "#" + blabla;
+              break;
+          }
           interaction.reply({
-            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`,
+            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
           });
         }
       } else {
@@ -1025,8 +1042,22 @@ client.on("interactionCreate", async (interaction) => {
             (await (
               await rep.find().sort({ rep: -1 })
             ).findIndex((i) => i.id === interaction.member.id)) + 1;
+          switch (blabla) {
+            case 1:
+              rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+              break;
+            case 2:
+              rank = "#2 NUMBA TWO 🥈🥈";
+              break;
+            case 3:
+              rank = "#3 NUMBA THREE 🥉";
+              break;
+            default:
+              rank = "#" + blabla;
+              break;
+          }
           interaction.reply({
-            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**#${blabla}**)`,
+            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
           });
         }
       }
@@ -1061,8 +1092,22 @@ client.on("interactionCreate", async (interaction) => {
         (await (
           await rep.find().sort({ rep: -1 })
         ).findIndex((i) => i.id === personID)) + 1;
+      switch (blabla) {
+        case 1:
+          rank = "#1 NUMBA WANNN! 🥇🥇🥇";
+          break;
+        case 2:
+          rank = "#2 NUMBA TWO 🥈🥈";
+          break;
+        case 3:
+          rank = "#3 NUMBA THREE 🥉";
+          break;
+        default:
+          rank = "#" + blabla;
+          break;
+      }
       interaction.reply({
-        content: `Gave \`1\` Rep to **${personData.name}** (current: \`#${blabla}\` -\`${personData.rep}\`)`,
+        content: `Gave \`1\` Rep to **${personData.name}** (current: \`${rank}\` -\`${personData.rep}\`)`,
       });
       recentlyRan.push(interaction.member.id);
       setTimeout(() => {
@@ -1255,7 +1300,7 @@ RPCclient.on("ready", () => {
       smallImageText: "Albion Singapore",
       buttons: [
         {
-          label: "Join SGMY Banger Community",
+          label: "KAMIIKAZE Is Recruiting",
           url: "https://discord.gg/7Nf4jdNt",
         },
       ],
