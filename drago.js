@@ -42,7 +42,7 @@ let repLogButton = new MessageButton()
   .setLabel("Message Link");
 const fs = require("fs");
 client.commander = new Discord.Collection();
-client.slashcommander = new Discord.Collection();
+client.interactionCommand = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
 const commandFiles = fs
