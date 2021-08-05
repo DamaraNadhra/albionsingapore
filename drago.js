@@ -686,7 +686,10 @@ client.on("interactionCreate", async (interaction) => {
       interaction.update({
         embeds: [],
         content: "Listing avalonian builds...",
-        components: [AvArow.addComponents(homeButton, closeButton)],
+        components: [
+          AvArow,
+          new MessageActionRow().addComponents(homeButton, closeButton),
+        ],
       });
     } else if (interaction.customId === "closebutton") {
       interaction.message.delete();
@@ -728,7 +731,7 @@ client.on("interactionCreate", async (interaction) => {
         .setLabel("Home")
         .setStyle("PRIMARY");
       interaction.update({
-        components: [AvArow.addComponents(closeButton)],
+        components: [AvArow, new MessageActionRow().addComponents(closeButton)],
       });
     } else if (interaction.customId === "refreshbutton") {
       let datta = await rep.find().sort({ rep: -1 }).limit(15);
