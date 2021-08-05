@@ -560,6 +560,18 @@ const list = {
     "https://discord.com/channels/200746010102726657/807319001234407504/810356123470921749",
   ],
 };
+const AIReponses = [
+  "You’re getting better every day",
+  "You are so stupid, when you heard 90% of all crimes occur around the home, you went out.",
+  "I guess you prove that even god makes mistakes sometimes.",
+  "Who can argue with you",
+  "Your house is so nasty, I tripped over a rat, and a cockroach stole my wallet.",
+  "I’d explain it to you, but I don’t have any crayons with me.",
+  "Don't like my sarcasm, well I don't like your stupid.",
+  "You’re as useless as a screen door on a submarine.",
+  "I’m jealous of all the people that haven’t met you!",
+  "Some things are just not worth saying",
+];
 module.exports = {
   recentlyRan,
   AvArow,
@@ -570,4 +582,5 @@ module.exports = {
   dpsList,
   healList,
   list,
+  AIReponses,
 };

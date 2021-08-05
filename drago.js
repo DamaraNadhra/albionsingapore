@@ -10,6 +10,7 @@ const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 const RPC = require("discord-rpc");
+const deepai = require("deepai");
 const RPCclient = new RPC.Client({ transport: "ipc" });
 const {
   AvArow,
@@ -20,6 +21,7 @@ const {
   dpsList,
   healList,
   list,
+  AIReponses,
 } = require("./list");
 const report = require("./models/report");
 const axios = require("axios");
@@ -59,7 +61,7 @@ for (const folder of commandFolders) {
     client.interactionCommand.set(command.name, command);
   }
 }
-
+deepai.setApiKey("quickstart-QUdJIGlzIGNvbWluZy4uLi4K");
 client.on("messageCreate", async (message) => {
   if (message.channel.id === "752110992405692456") {
     if (
@@ -295,7 +297,8 @@ client.on("messageCreate", async (message) => {
       (cmd) => cmd.aliases && cmd.aliases.includes(command)
     );
   //if (!message.content.startsWith(prefix)) return;
-  if (!message.content.toLowerCase().startsWith(prefix)) return;
+  if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot)
+    return;
   //if (!client.commander.has(command)) return;
   if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
@@ -318,6 +321,19 @@ client.on("messageCreate", async (message) => {
     commands.execute(message, args, client);
   } catch (error) {
     console.log("A person didnt follor the cor");
+  }
+  const RNG = Math.floor(Math.random() * 25);
+  if (RNG === 12) {
+    var resp = await deepai.callStandardApi("sentiment-analysis", {
+      text: message.content,
+    });
+    if (resp === "Negative") {
+      const response =
+        AIReponses[Math.floor(Math.random() * AIReponses.length)];
+      message.channel.send({
+        content: `<@${message.author.id}>, ${response}`,
+      });
+    }
   }
   if (command === "fastcheck") {
     const eventId = args[0];
