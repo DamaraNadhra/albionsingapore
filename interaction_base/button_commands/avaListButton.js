@@ -1,4 +1,5 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
+const { AvArow } = require("../../list");
 module.exports = {
   name: "listbutton",
   description: "Listbutton whenever someone typed the !ava-[builds]",
