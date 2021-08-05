@@ -21,7 +21,7 @@ module.exports = {
       interaction.member.roles.cache.has("759793776439984170") |
       interaction.member.permissions.has("ADMINISTRATOR")
     ) {
-      let deleteButton = new MessageButton()
+      const deleteButton = new MessageButton()
         .setStyle("DANGER")
         .setCustomId("delete")
         .setLabel("Delete")

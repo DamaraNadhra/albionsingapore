@@ -21,7 +21,6 @@ const {
   healList,
   list,
 } = require("./list");
-const mongo = require("./mongo");
 const report = require("./models/report");
 const axios = require("axios");
 const prefix = "!";
@@ -43,14 +42,22 @@ let repLogButton = new MessageButton()
 const fs = require("fs");
 client.commander = new Discord.Collection();
 client.interactionCommand = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
-const { cooldowns } = client;
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commander.set(command.name, command);
+}
+const commandFolders = fs.readdirSync("./interaction_base");
+for (const folder of commandFolders) {
+  const commandFiles = fs
+    .readdirSync(`./interaction_base/${folder}`)
+    .filter((file) => file.endsWith(".js"));
+  for (const file of commandFiles) {
+    const command = require(`./interaction_base/${folder}/${file}`);
+    client.interactionCommand.set(command.name, command);
+  }
 }
 
 client.on("messageCreate", async (message) => {
@@ -394,11 +401,7 @@ client.on("messageCreate", async (message) => {
           .setDescription(avalist[m].string)
           .setFooter(
             `Requested by ${
-              Boolean(
-                message.guild.members.cache.get(message.author.id).nickname
-              )
-                ? message.guild.members.cache.get(message.author.id).nickname
-                : message.author.username
+              message.guild.members.cache.get(message.author.id).displayName
             }`,
             message.author.displayAvatarURL()
           );
@@ -434,11 +437,7 @@ client.on("messageCreate", async (message) => {
         let embed = new MessageEmbed()
           .setAuthor(
             `'zl [SING] ${
-              Boolean(
-                message.guild.members.cache.get(message.author.id).nickname
-              )
-                ? message.guild.members.cache.get(message.author.id).nickname
-                : message.author.username
+              message.guild.members.cache.get(message.author.id).displayName
             }`,
             message.author.displayAvatarURL()
           )
@@ -447,11 +446,7 @@ client.on("messageCreate", async (message) => {
           .setDescription("You must reach at least 1100 IP")
           .setFooter(
             `Requested by ${
-              Boolean(
-                message.guild.members.cache.get(message.author.id).nickname
-              )
-                ? message.guild.members.cache.get(message.author.id).nickname
-                : message.author.username
+              message.guild.members.cache.get(message.author.id).displayName
             }`,
             message.author.displayAvatarURL()
           );
@@ -492,11 +487,7 @@ client.on("messageCreate", async (message) => {
         let embed = new MessageEmbed()
           .setAuthor(
             `'zl [SING] ${
-              Boolean(
-                message.guild.members.cache.get(message.author.id).nickname
-              )
-                ? message.guild.members.cache.get(message.author.id).nickname
-                : message.author.username
+              message.guild.members.cache.get(message.author.id).displayName
             }`,
             message.author.displayAvatarURL()
           )
@@ -505,11 +496,7 @@ client.on("messageCreate", async (message) => {
           .setDescription("You must reach at least 1100 IP")
           .setFooter(
             `Requested by ${
-              Boolean(
-                message.guild.members.cache.get(message.author.id).nickname
-              )
-                ? message.guild.members.cache.get(message.author.id).nickname
-                : message.author.username
+              message.guild.members.cache.get(message.author.id).displayName
             }`,
             message.author.displayAvatarURL()
           );
@@ -595,184 +582,19 @@ client.on("guildMemberAdd", (member) => {
   );
 });
 client.on("interactionCreate", async (interaction) => {
-  const commandFolders = fs.readdirSync("./interaction_base");
-  for (const folder of commandFolders) {
-    const commandFiles = fs
-      .readdirSync(`./interaction_base/${folder}`)
-      .filter((file) => file.endsWith(".js"));
-    for (const file of commandFiles) {
-      const command = require(`./interaction_base/${folder}/${file}`);
-      client.interactionCommand.set(command.name, command);
-    }
-  }
   if (interaction.isButton()) {
-    if (interaction.customId === "back") {
-      if (interaction.replied) {
-        interaction.editReply({
-          content: "ZvZ build list! According to ARCH main zvz gears",
-          components: [row, tankRow, healRow],
-        });
-      } else {
-        let deleteButton = new MessageButton()
-          .setStyle("DANGER")
-          .setCustomId("delete")
-          .setLabel("Delete")
-          .setEmoji("🚨");
-        interaction.update({
-          content: "ZvZ build list! According to ARCH main zvz gears",
-          components: [
-            row,
-            tankRow,
-            healRow,
-            new MessageActionRow().addComponents(deleteButton),
-          ],
-          embeds: [],
-        });
-      }
-    } else if (interaction.customId === "delete") {
-      interaction.message.delete();
-    } else if (interaction.customId === "register") {
-      let registerButton = new MessageButton()
-        .setCustomId("register")
-        .setStyle("SUCCESS")
-        .setEmoji("✅")
-        .setLabel("I have read all the rules");
-      let permissionGiven = new MessageButton()
-        .setLabel("Permission Given!")
-        .setCustomId("permissiongiven")
-        .setDisabled(true)
-        .setEmoji("🔓")
-        .setStyle("PRIMARY");
-      let role = interaction.guild.roles.cache.get("706471167971557447");
-      let recruitRole = interaction.guild.roles.cache.get("849947414508863519");
-      let botCommandChannel =
-        interaction.guild.channels.cache.get("752110992405692456");
-      let welcomeChannel =
-        interaction.guild.channels.cache.get("742733429132754975");
-      interaction.member.roles.add(recruitRole);
-      if (
-        interaction.member.roles.cache.has("706471167971557447") |
-        interaction.member.roles.cache.has("849947414508863519")
-      ) {
-        return interaction.reply({
-          content: "You have already signed up! Please dont joke around!",
+    if (interaction.customId === "listbuttonzvz") {
+      try {
+        await client.interactionCommand
+          .get(interaction.customId)
+          .execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({
+          content: "There was an error while executing this button!",
           ephemeral: true,
         });
       }
-      interaction.user.send({
-        content: `Permission Given!, Please post your application at ${botCommandChannel} \nPlease refer to ${welcomeChannel} for application instruction! \n\nPlease remember that **after you have joined the guild** you **MUST** register in ARCH Main Discord by typing \`!register\` in #register-here. If we found out that you were not registered, we will kick you :D`,
-        files: ["https://i.imgur.com/9gsA1SO.png"],
-      });
-
-      interaction.update({
-        components: [new MessageActionRow().addComponents(permissionGiven)],
-      });
-      setTimeout(() => {
-        interaction.editReply({
-          components: [new MessageActionRow().addComponents(registerButton)],
-        });
-      }, 1500);
-    } else if (interaction.customId === "avabuildsbutton") {
-      const closeButton = new MessageButton()
-        .setCustomId("closebutton")
-        .setEmoji("❌")
-        .setLabel("Close")
-        .setStyle("DANGER");
-      const homeButton = new MessageButton()
-        .setCustomId("home")
-        .setEmoji("🏘️")
-        .setLabel("Home")
-        .setStyle("PRIMARY");
-      interaction.update({
-        embeds: [],
-        content: "Listing avalonian builds...",
-        components: [
-          AvArow,
-          new MessageActionRow().addComponents(homeButton, closeButton),
-        ],
-      });
-    } else if (interaction.customId === "closebutton") {
-      interaction.message.delete();
-    } else if (interaction.customId === "home") {
-      const listButton = new MessageButton()
-        .setCustomId("avabuildsbutton")
-        .setEmoji("🚀")
-        .setLabel("Ava builds")
-        .setStyle("SUCCESS");
-      const closeButton = new MessageButton()
-        .setCustomId("closebutton")
-        .setEmoji("❌")
-        .setLabel("Close")
-        .setStyle("DANGER");
-      let embed = new MessageEmbed()
-        .setColor("ORANGE")
-        .setAuthor("Singapore Ava Slave", client.user.displayAvatarURL())
-        .setTitle("Introduction...")
-        .setDescription(
-          `Avalonian Elite Dungeon is a difficult dungeon which can only be finished with 20 men. \nYou can only find the **Avalonian Elite Dungeon** around the outlands, you can also find **Avalonian Elite Dungeon** inside the Avalonian Roads as well. The tier starts from T6. \n\nHowever, finding a natural spawn dungeon is a little bit difficult, that's why people used to pop it from a map. \nIn Singapore guild we always do **8.2+ Avalonian Elite Dungeon** that's why you are expected to wear **8.3 gears** and hit at least **1650 IP**. \n\nAs for the shape of the dungeon entrance is like the image below `
-        )
-        .setImage("https://i.imgur.com/vjQoBtm.png")
-        .setFooter("Singapore", client.user.displayAvatarURL());
-      interaction.update({
-        embeds: [embed],
-        components: [
-          new MessageActionRow().addComponents(listButton, closeButton),
-        ],
-      });
-    } else if (interaction.customId === "listbutton") {
-      const closeButton = new MessageButton()
-        .setCustomId("closebutton")
-        .setEmoji("❌")
-        .setLabel("Close")
-        .setStyle("DANGER");
-      const homeButton = new MessageButton()
-        .setCustomId("home")
-        .setEmoji("🏘️")
-        .setLabel("Home")
-        .setStyle("PRIMARY");
-      interaction.update({
-        components: [AvArow, new MessageActionRow().addComponents(closeButton)],
-      });
-    } else if (interaction.customId === "refreshbutton") {
-      let datta = await rep.find().sort({ rep: -1 }).limit(15);
-      let pointsMap = datta.map((m) => m.rep).join("\n");
-      let nameMap = datta.map((m) => m.name).join("\n");
-      let rankMap = datta
-        .map(function (element, index) {
-          return "**" + "#" + (parseInt(index) + 1) + "**";
-        })
-        .filter((m) =>
-          m.replace("#1", "🥇").replace("#2", "🥈").replace("#3", "🥉")
-        )
-        .join("\n");
-      let thisbutton = new MessageButton()
-        .setStyle("PRIMARY")
-        .setEmoji("🔄")
-        .setCustomId("refreshbutton")
-        .setLabel("Refresh");
-      const embed = new MessageEmbed()
-        .setColor("ORANGE")
-        .setDescription(
-          "**Reputation Leaderboard!** \n**Syntax:** \n`!+rep [playerMention]` \n`!giverep [playerMention(s)]` \n`thanks/thx/thank you [playerMention(s)]`\n\n**Countdown:** "
-        )
-        .setAuthor("Singapore Love Guardian", client.user.displayAvatarURL())
-        .setThumbnail("https://i.imgur.com/GHJ9FLw.png")
-        .addFields(
-          { name: "**Rank**", value: rankMap, inline: true },
-          { name: "**Name**", value: nameMap, inline: true },
-          { name: "**Points**", value: pointsMap, inline: true }
-        )
-        .setFooter("Click the refresh button below to refresh the list!");
-      interaction.update({
-        embeds: [embed],
-        components: [new MessageActionRow().addComponents(thisbutton)],
-      });
-    } else if (interaction.customId === "listbuttonzvz") {
-      interaction.update({
-        content: "Listing the approved zvz builds",
-        embeds: [],
-        components: [tankRow, row, healRow],
-      });
     }
   } else if (interaction.isSelectMenu()) {
     try {
@@ -818,6 +640,8 @@ client.on("ready", async () => {
     "Luai is rich but gay",
     "Ybibaboo my god",
     "current prefix is !",
+    "Didi Kempot selalu di hati",
+    "Godfather of Brokenheart",
   ];
   console.log("The Bot is Online");
   await database

@@ -8,7 +8,8 @@ module.exports = {
       (interaction.channelID === "752110992405692456")
     )
       return;
-    let logChannel = interaction.guild.channels.cache.get("864669032811331584");
+    const logChannel =
+      interaction.guild.channels.cache.get("864669032811331584");
     const { user } = interaction.options.get("user");
     if (user.id === interaction.member.id)
       return interaction.reply({

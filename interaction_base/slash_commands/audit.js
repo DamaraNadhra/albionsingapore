@@ -9,19 +9,19 @@ module.exports = {
       const targets = interaction.options.getUser("target");
       const keys = interaction.options.getString("key");
       const limitz = interaction.options.getNumber("limit");
-      let fetchedGuildAuditLogs = await interaction.guild.fetchAuditLogs({
+      const fetchedGuildAuditLogs = await interaction.guild.fetchAuditLogs({
         type: type,
         limit: Boolean(limitz) ? limitz : 20,
       });
-      let finalResult = fetchedGuildAuditLogs.entries
+      const finalResult = fetchedGuildAuditLogs.entries
         .filter((m) =>
           Boolean(executors) ? m.executor.id === executors.id : m
         )
         .filter((m) => (Boolean(targets) ? m.target.id === targets.id : m))
         .filter((m) => (Boolean(keys) ? m.changes[0].key === keys : m));
-      let final = finalResult
+      const final = finalResult
         .map((element) => {
-          let elementChanges = element.changes;
+          const elementChanges = element.changes;
           switch (element.action) {
             case "MEMBER_ROLE_UPDATE":
               switch (element.changes[0].key) {
