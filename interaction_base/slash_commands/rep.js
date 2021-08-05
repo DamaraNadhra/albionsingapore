@@ -1,5 +1,5 @@
 const { Interaction, Client } = require("discord.js");
-const { dateMaker, nicknameMaker } = require("../functions");
+const { dateMaker, nicknameMaker } = require(".../functions");
 module.exports = {
   name: "rep",
   description: "Shows yours or specified user reputation",

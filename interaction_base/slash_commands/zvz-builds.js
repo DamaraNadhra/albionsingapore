@@ -4,7 +4,7 @@ const {
   MessageButton,
   MessageActionRow,
 } = require("discord.js");
-const { row, tankRow, healRow } = require("../list");
+const { row, tankRow, healRow } = require(".../list");
 module.exports = {
   name: "zvz-builds",
   description: "Showing list of approved zvz builds",
