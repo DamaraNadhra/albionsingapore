@@ -9,15 +9,8 @@ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "GUILD_MEMBERS"],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
-const RPC = require("discord-rpc");
-const deepai = require("deepai");
-const RPCclient = new RPC.Client({ transport: "ipc" });
 const {
-  AvArow,
   avalist,
-  row,
-  tankRow,
-  healRow,
   dpsList,
   healList,
   list,
@@ -30,14 +23,7 @@ const prefix = "!";
 const blacklist = require("./models/blacklist");
 const database = require("mongoose");
 const rep = require("./models/reputation");
-const {
-  dateMaker,
-  compareSet,
-  sets,
-  billboard,
-  nicknameMaker,
-  getDate,
-} = require("./functions");
+const { dateMaker, nicknameMaker, getDate } = require("./functions");
 let { recentlyRan } = require("./cooldown");
 let repLogButton = new MessageButton()
   .setStyle("LINK")
@@ -45,6 +31,8 @@ let repLogButton = new MessageButton()
 const fs = require("fs");
 client.commander = new Discord.Collection();
 client.interactionCommand = new Discord.Collection();
+const Sentiment = require("sentiment");
+const sentiment = new Sentiment();
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -62,7 +50,6 @@ for (const folder of commandFolders) {
     client.interactionCommand.set(command.name, command);
   }
 }
-deepai.setApiKey("quickstart-QUdJIGlzIGNvbWluZy4uLi4K");
 client.on("messageCreate", async (message) => {
   if (message.channel.id === "752110992405692456") {
     if (
@@ -322,11 +309,10 @@ client.on("messageCreate", async (message) => {
   } catch (error) {}
   const RNG = Math.floor(Math.random() * 17);
   if (RNG === 12 && message.content.length > 20) {
-    var resp = await deepai.callStandardApi("sentiment-analysis", {
-      text: message.content,
-    });
-    console.log(resp.output[0]);
-    if (resp.output[0] === "Negative" || resp.output[0] === "Neutral") {
+    var resp = sentiment.analyze(message.content.toLowerCase());
+
+    console.log(resp.score);
+    if (resp.score < 0 || resp.score === 0) {
       const response =
         negativeResponses[Math.floor(Math.random() * negativeResponses.length)];
       message.channel.send({
