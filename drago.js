@@ -324,6 +324,7 @@ client.on("messageCreate", async (message) => {
     console.log("A person didnt follor the cor");
   }
   const RNG = Math.floor(Math.random() * 17);
+  console.log(RNG);
   if (RNG === 12 && message.content.length > 20) {
     var resp = await deepai.callStandardApi("sentiment-analysis", {
       text: message.content,
