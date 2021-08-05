@@ -21,7 +21,8 @@ const {
   dpsList,
   healList,
   list,
-  AIReponses,
+  negativeResponses,
+  positiveResponses,
 } = require("./list");
 const report = require("./models/report");
 const axios = require("axios");
@@ -322,14 +323,20 @@ client.on("messageCreate", async (message) => {
   } catch (error) {
     console.log("A person didnt follor the cor");
   }
-  const RNG = Math.floor(Math.random() * 25);
+  const RNG = Math.floor(Math.random() * 17);
   if (RNG === 12 && message.content.length > 20) {
     var resp = await deepai.callStandardApi("sentiment-analysis", {
       text: message.content,
     });
-    if (resp === "Negative") {
+    if (resp.output[0] === "Negative" || resp.output[0] === "Neutral") {
       const response =
-        AIReponses[Math.floor(Math.random() * AIReponses.length)];
+        negativeResponses[Math.floor(Math.random() * negativeResponses.length)];
+      message.channel.send({
+        content: `<@${message.author.id}>, ${response}`,
+      });
+    } else {
+      const response =
+        positiveResponses[Math.floor(Math.random() * positiveResponses.length)];
       message.channel.send({
         content: `<@${message.author.id}>, ${response}`,
       });
