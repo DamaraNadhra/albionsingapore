@@ -772,205 +772,15 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
   } else if (interaction.isSelectMenu()) {
-    if (interaction.customId === "dps") {
-      Object.keys(dpsList).forEach((m, i) => {
-        if (interaction.values.includes(m)) {
-          let embed = new MessageEmbed()
-            .setColor("ORANGE")
-            .setAuthor(
-              "'zl [SING] LongLiveLuai",
-              client.user.displayAvatarURL()
-            )
-            .setImage(dpsList[m][0])
-            .setFooter("According to ARCH main discord zvz gears");
-          let button = new MessageButton()
-            .setStyle("LINK")
-            .setURL(dpsList[m][1])
-            .setLabel("Link to the Website");
-          let buttonback = new MessageButton()
-            .setStyle("SUCCESS")
-            .setCustomId("back")
-            .setLabel("Back to the List")
-            .setEmoji("🚀");
-          let deleteButton = new MessageButton()
-            .setStyle("DANGER")
-            .setCustomId("delete")
-            .setLabel("Delete this message")
-            .setEmoji("🚨");
-          let referenceButton = new MessageButton()
-            .setStyle("LINK")
-            .setURL(dpsList[m][2])
-            .setLabel("ARCH main discord reference");
-          if (interaction.replied) {
-            interaction.editReply({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          } else {
-            interaction.update({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          }
-        }
-      });
-    } else if (interaction.customId === "tanks") {
-      Object.keys(list).forEach((m, i) => {
-        if (interaction.values.includes(m)) {
-          let embed = new MessageEmbed()
-            .setColor("ORANGE")
-            .setAuthor(
-              "'zl [SING] LongLiveLuai",
-              client.user.displayAvatarURL()
-            )
-            .setImage(list[m][0])
-            .setFooter("According to ARCH main discord zvz gears");
-          let button = new MessageButton()
-            .setStyle("LINK")
-            .setURL(list[m][1])
-            .setLabel("Link to the Website");
-          let buttonback = new MessageButton()
-            .setStyle("SUCCESS")
-            .setCustomId("back")
-            .setLabel("Back to the List")
-            .setEmoji("🚀");
-          let deleteButton = new MessageButton()
-            .setStyle("DANGER")
-            .setCustomId("delete")
-            .setLabel("Delete this message")
-            .setEmoji("🚨");
-          let referenceButton = new MessageButton()
-            .setStyle("LINK")
-            .setURL(list[m][2])
-            .setLabel("ARCH main discord reference");
-          if (interaction.replied) {
-            interaction.editReply({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          } else {
-            interaction.update({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          }
-        }
-      });
-    } else if (interaction.customId === "heals") {
-      Object.keys(healList).forEach((m, i) => {
-        if (interaction.values.includes(m)) {
-          let embed = new MessageEmbed()
-            .setColor("ORANGE")
-            .setAuthor(
-              "'zl [SING] LongLiveLuai",
-              client.user.displayAvatarURL()
-            )
-            .setImage(healList[m][0])
-            .setFooter("According to ARCH main discord zvz gears");
-          let button = new MessageButton()
-            .setStyle("LINK")
-            .setURL(healList[m][1])
-            .setLabel("Link to the Website");
-          let buttonback = new MessageButton()
-            .setStyle("SUCCESS")
-            .setCustomId("back")
-            .setLabel("Back to the List")
-            .setEmoji("🚀");
-          let deleteButton = new MessageButton()
-            .setStyle("DANGER")
-            .setCustomId("delete")
-            .setLabel("Delete this message")
-            .setEmoji("🚨");
-          let referenceButton = new MessageButton()
-            .setStyle("LINK")
-            .setURL(healList[m][2])
-            .setLabel("ARCH main discord reference");
-          if (interaction.replied) {
-            interaction.editReply({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          } else {
-            interaction.update({
-              content: "Hold on",
-              components: [
-                new MessageActionRow().addComponents(
-                  button,
-                  buttonback,
-                  referenceButton,
-                  deleteButton
-                ),
-              ],
-              embeds: [embed],
-            });
-          }
-        }
-      });
-    } else if (interaction.customId === "avabuilds") {
-      Object.keys(avalist).forEach((m, i) => {
-        if (interaction.values.includes(m)) {
-          let embed = new MessageEmbed()
-            .setAuthor(avalist[m].name, avalist[m].icon)
-            .setColor("ORANGE")
-            .setImage(avalist[m].pic)
-            .setDescription(avalist[m].string)
-            .setFooter(
-              `Requested by ${
-                Boolean(
-                  interaction.guild.members.cache.get(interaction.user.id)
-                    .nickname
-                )
-                  ? interaction.guild.members.cache.get(interaction.user.id)
-                      .nickname
-                  : interaction.user.username
-              }`,
-              interaction.user.displayAvatarURL()
-            );
-          interaction.update({
-            content: "Processing...",
-            embeds: [embed],
-          });
-        }
+    try {
+      await client.interactionCommand
+        .get(interaction.customId)
+        .execute(interaction, client);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({
+        content: "There was an error while executing this command!",
+        ephemeral: true,
       });
     }
   } else if (interaction.isCommand()) {
@@ -1039,59 +849,13 @@ client.on("ready", async () => {
     const date = new Date();
     const finalArray = date.toUTCString().split(/ +/g)[4].split(":");
     const finalString = finalArray[0] + ":" + finalArray[1];
-    channel
-      .setName(`🕐UTC: ${finalString}`)
-      .then((newChannel) =>
-        console.log(`Changed from ${channel.name} to ${newChannel.name}`)
-      )
-      .catch(console.error);
+    channel.setName(`🕐UTC: ${finalString}`).catch(console.error);
     dateChannel.setName(getDate());
-    sgmyChannel
-      .setName(`🕐UTC: ${finalString}`)
-      .then((newChannel) =>
-        console.log(`Changed from ${channel.name} to ${newChannel.name}`)
-      )
-      .catch(console.error);
+    sgmyChannel.setName(`🕐UTC: ${finalString}`).catch(console.error);
   }, 600000);
 });
 module.exports = {
   recentlyRan,
 };
-RPCclient.on("ready", () => {
-  const statusArray = [
-    "Grailseeker Guardian",
-    "Crossbow Master",
-    "Locus Expert",
-    "Energy Shaper Abuser",
-    "Didi Kempot",
-    "The Godfather of Brokenheart",
-  ];
-  let index = 0;
-  setInterval(() => {
-    if (index === statusArray.length) index = 0;
-    const status = statusArray[index];
-    RPCclient.setActivity({
-      details: status,
-      state: "Programmer & Solution Designer.",
-      largeImageKey: "singaporepresence",
-      largeImageText: "Singapore Mammoth Army",
-      smallImageKey: "singapore",
-      smallImageText: "Albion Singapore",
-      buttons: [
-        {
-          label: "KAMIIKAZE Is Recruiting",
-          url: "https://discord.gg/7Nf4jdNt",
-        },
-      ],
-      instance: false,
-    });
-    index++;
-  }, 4000);
-  console.log(RPCclient.user.username);
-  console.log("Online!");
-});
-RPCclient.login({
-  clientId: "805976602864386059",
-});
 
 client.login(process.env.token);
