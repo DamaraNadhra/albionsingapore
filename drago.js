@@ -583,18 +583,16 @@ client.on("guildMemberAdd", (member) => {
 });
 client.on("interactionCreate", async (interaction) => {
   if (interaction.isButton()) {
-    if (interaction.customId === "listbuttonzvz") {
-      try {
-        await client.interactionCommand
-          .get(interaction.customId)
-          .execute(interaction, client);
-      } catch (error) {
-        console.error(error);
-        await interaction.reply({
-          content: "There was an error while executing this button!",
-          ephemeral: true,
-        });
-      }
+    try {
+      await client.interactionCommand
+        .get(interaction.customId)
+        .execute(interaction, client);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({
+        content: "There was an error while executing this button!",
+        ephemeral: true,
+      });
     }
   } else if (interaction.isSelectMenu()) {
     try {
