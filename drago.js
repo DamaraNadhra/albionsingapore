@@ -328,6 +328,7 @@ client.on("messageCreate", async (message) => {
     var resp = await deepai.callStandardApi("sentiment-analysis", {
       text: message.content,
     });
+    console.log(resp.output[0]);
     if (resp.output[0] === "Negative" || resp.output[0] === "Neutral") {
       const response =
         negativeResponses[Math.floor(Math.random() * negativeResponses.length)];
