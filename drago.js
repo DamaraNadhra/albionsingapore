@@ -298,7 +298,8 @@ client.on("messageCreate", async (message) => {
       (cmd) => cmd.aliases && cmd.aliases.includes(command)
     );
   //if (!message.content.startsWith(prefix)) return;
-  if (message.author.bot) return;
+  if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot)
+    return;
   //if (!client.commander.has(command)) return;
   if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
@@ -319,11 +320,8 @@ client.on("messageCreate", async (message) => {
   }
   try {
     commands.execute(message, args, client);
-  } catch (error) {
-    console.log("A person didnt follor the cor");
-  }
+  } catch (error) {}
   const RNG = Math.floor(Math.random() * 17);
-  console.log(RNG);
   if (RNG === 12 && message.content.length > 20) {
     var resp = await deepai.callStandardApi("sentiment-analysis", {
       text: message.content,
