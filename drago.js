@@ -42,6 +42,7 @@ let repLogButton = new MessageButton()
   .setLabel("Message Link");
 const fs = require("fs");
 client.commander = new Discord.Collection();
+client.slashcommander = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
 const commandFiles = fs
@@ -594,6 +595,16 @@ client.on("guildMemberAdd", (member) => {
   );
 });
 client.on("interactionCreate", async (interaction) => {
+  const commandFolders = fs.readdirSync("./interaction_base");
+  for (const folder of commandFolders) {
+    const commandFiles = fs
+      .readdirSync(`./interaction_base/${folder}`)
+      .filter((file) => file.endsWith(".js"));
+    for (const file of commandFiles) {
+      const command = require(`./interaction_base/${folder}/${file}`);
+      client.interactionCommand.set(command.name, command);
+    }
+  }
   if (interaction.isButton()) {
     if (interaction.customId === "back") {
       if (interaction.replied) {
@@ -963,248 +974,16 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
   } else if (interaction.isCommand()) {
-    if (interaction.commandName === "zvz-builds") {
-      if (
-        (interaction.channel.id === "760731834354499585") |
-        (interaction.channel.id === "779514684797091850") |
-        interaction.member.roles.cache.has("759793776439984170") |
-        interaction.member.permissions.has("ADMINISTRATOR")
-      ) {
-        let deleteButton = new MessageButton()
-          .setStyle("DANGER")
-          .setCustomId("delete")
-          .setLabel("Delete")
-          .setEmoji("🚨");
-        await interaction.reply({
-          content: "ZvZ build List! according to ARCH official zvz builds",
-          components: [
-            row,
-            tankRow,
-            healRow,
-            new MessageActionRow().addComponents(deleteButton),
-          ],
-        });
-      }
-    } else if (interaction.commandName === "rep") {
-      if (
-        (interaction.channelID === "840239735129767997") |
-        (interaction.channelID === "752110992405692456")
-      )
-        return;
-      let isPersonHasReputation;
-      const blabla = interaction.options.get("user");
-      if (interaction.options.get("user")) {
-        const { user } = interaction.options.get("user");
-        isPersonHasReputation = await rep.findOne({ id: user.id });
-        if (!isPersonHasReputation) {
-          interaction.reply({
-            content: `**${nicknameMaker(
-              interaction,
-              user.id
-            )}**: 0 **Rep** (#**#ω**)`,
-          });
-        } else {
-          let blabla =
-            (await (
-              await rep.find().sort({ rep: -1 })
-            ).findIndex((i) => i.id === user.id)) + 1;
-          switch (blabla) {
-            case 1:
-              rank = "#1 NUMBA WANNN! 🥇🥇🥇";
-              break;
-            case 2:
-              rank = "#2 NUMBA TWO 🥈🥈";
-              break;
-            case 3:
-              rank = "#3 NUMBA THREE 🥉";
-              break;
-            default:
-              rank = "#" + blabla;
-              break;
-          }
-          interaction.reply({
-            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
-          });
-        }
-      } else {
-        isPersonHasReputation = await rep.findOne({
-          id: interaction.member.id,
-        });
-        if (!isPersonHasReputation) {
-          interaction.reply({
-            content: `**${nicknameMaker(
-              interaction,
-              interaction.member.id
-            )}**: 0 **Rep** (#**#ω**)`,
-          });
-        } else {
-          let blabla =
-            (await (
-              await rep.find().sort({ rep: -1 })
-            ).findIndex((i) => i.id === interaction.member.id)) + 1;
-          switch (blabla) {
-            case 1:
-              rank = "#1 NUMBA WANNN! 🥇🥇🥇";
-              break;
-            case 2:
-              rank = "#2 NUMBA TWO 🥈🥈";
-              break;
-            case 3:
-              rank = "#3 NUMBA THREE 🥉";
-              break;
-            default:
-              rank = "#" + blabla;
-              break;
-          }
-          interaction.reply({
-            content: `**${isPersonHasReputation.name}**: ${isPersonHasReputation.rep} **Rep** (**${rank}**)`,
-          });
-        }
-      }
-    } else if (interaction.commandName === "giverep") {
-      if (
-        (interaction.channelID === "722753194496753745") |
-        (interaction.channelID === "752110992405692456")
-      )
-        return;
-      let logChannel =
-        interaction.guild.channels.cache.get("864669032811331584");
-      const { user } = interaction.options.get("user");
-      if (user.id === interaction.member.id)
-        return interaction.reply({
-          content: `You can give reputation to yourself haiz...., but nice try <:weirdchamp:839890533244862474>`,
-        });
-      let isPersonHasRep = await rep.findOne({ id: user.id });
-      let personID = user.id;
-      if (isPersonHasRep) {
-        await isPersonHasRep.updateOne({
-          rep: parseInt(isPersonHasRep.rep) + 1,
-        });
-      } else {
-        await rep.create({
-          name: nicknameMaker(interaction, personID),
-          id: personID,
-          rep: 1,
-        });
-      }
-      let personData = await rep.findOne({ id: personID });
-      let blabla =
-        (await (
-          await rep.find().sort({ rep: -1 })
-        ).findIndex((i) => i.id === personID)) + 1;
-      switch (blabla) {
-        case 1:
-          rank = "#1 NUMBA WANNN! 🥇🥇🥇";
-          break;
-        case 2:
-          rank = "#2 NUMBA TWO 🥈🥈";
-          break;
-        case 3:
-          rank = "#3 NUMBA THREE 🥉";
-          break;
-        default:
-          rank = "#" + blabla;
-          break;
-      }
-      interaction.reply({
-        content: `Gave \`1\` Rep to **${personData.name}** (current: \`${rank}\` -\`${personData.rep}\`)`,
+    try {
+      await client.interactionCommand
+        .get(interaction.commandName)
+        .execute(interaction, client);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({
+        content: "There was an error while executing this command!",
+        ephemeral: true,
       });
-      recentlyRan.push(interaction.member.id);
-      setTimeout(() => {
-        recentlyRan = recentlyRan.filter(
-          (string) => string !== interaction.member.id
-        );
-      }, 420000);
-      logChannel.send({
-        content: `**${nicknameMaker(
-          interaction,
-          interaction.member.id
-        )}** has given \`1\` Rep to **${personData.name}** in <#${
-          interaction.channelID
-        }> at ${dateMaker(new Date())}`,
-      });
-    } else if (interaction.commandName === "audit") {
-      try {
-        const type = interaction.options.getString("type");
-        const executors = interaction.options.getUser("executor");
-        const targets = interaction.options.getUser("target");
-        const keys = interaction.options.getString("key");
-        const limitz = interaction.options.getNumber("limit");
-        let fetchedGuildAuditLogs = await interaction.guild.fetchAuditLogs({
-          type: type,
-          limit: Boolean(limitz) ? limitz : 20,
-        });
-        let finalResult = fetchedGuildAuditLogs.entries
-          .filter((m) =>
-            Boolean(executors) ? m.executor.id === executors.id : m
-          )
-          .filter((m) => (Boolean(targets) ? m.target.id === targets.id : m))
-          .filter((m) => (Boolean(keys) ? m.changes[0].key === keys : m));
-        let final = finalResult
-          .map((element) => {
-            let elementChanges = element.changes;
-            switch (element.action) {
-              case "MEMBER_ROLE_UPDATE":
-                switch (element.changes[0].key) {
-                  case "$add":
-                    changesString = `Added ${elementChanges
-                      .map((m) => m.new.map((m) => m.name).join(", "))
-                      .join("\n")}`;
-                    break;
-                  case "$remove":
-                    changesString = `Removed ${elementChanges[0].new[0].name}`;
-                    break;
-                  default:
-                    break;
-                }
-                break;
-              case "MEMBER_UPDATE":
-                if (element.changes[0].new == undefined)
-                  changesString = `Changed from ${elementChanges[0].old} to ${elementChanges[0].new}`;
-                else changesString = `Changed to ${elementChanges[0].new}`;
-                break;
-              case "CHANNEL_DELETE":
-                changesString = `Deleted ${elementChanges[0].old}`;
-                break;
-              case "CHANNEL_UPDATE":
-                changesString = `Changed from ${elementChanges[0].old} to ${elementChanges[0].new}`;
-                break;
-              default:
-                break;
-            }
-            return `#showing audit log entry: ${element.id}\nExecutor = '${element.executor.tag}' \nTarget = '${element.target.tag}' \nType = '${element.action}' \nChanges = '${changesString}'`;
-          })
-          .join("\n\n");
-        if (finalResult.size === 1) {
-          interaction.reply({
-            content: `\`\`\`prolog\n${final}\`\`\``,
-          });
-        } else {
-          fs.writeFile("auditlog.pl", final, (err) => {
-            if (err) {
-              console.log(err);
-            }
-          });
-          await interaction.reply({
-            files: [
-              {
-                attachment: "auditlog.pl",
-                name: "entry.prolog",
-              },
-            ],
-          });
-          setTimeout(() => {
-            fs.unlink("auditlog.pl", (err) => {
-              if (err) console.log(err);
-            });
-          }, 4000);
-        }
-      } catch (error) {
-        interaction.reply(
-          "I cannot find audit log entry with that information, please be more spesific!"
-        );
-        console.log(error);
-      }
     }
   }
 });

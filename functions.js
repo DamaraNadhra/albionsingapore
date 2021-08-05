@@ -789,6 +789,7 @@ const getDate = () => {
   }
   return `📅 ${day}, ${dateee.toUTCString().split(/ +/g)[2]} ${date}`;
 };
+function countdown(date) {}
 
 module.exports = {
   nicknameMaker,
