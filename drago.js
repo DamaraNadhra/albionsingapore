@@ -298,8 +298,7 @@ client.on("messageCreate", async (message) => {
       (cmd) => cmd.aliases && cmd.aliases.includes(command)
     );
   //if (!message.content.startsWith(prefix)) return;
-  if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot)
-    return;
+  if (message.author.bot) return;
   //if (!client.commander.has(command)) return;
   if (commands && commands.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
