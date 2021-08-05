@@ -5,7 +5,7 @@ module.exports = {
   description: "Listbutton whenever someone typed the !ava-[builds]",
   execute(interaction, client) {
     const closeButton = new MessageButton()
-      .setCustomId("closebutton")
+      .setCustomId("delete")
       .setEmoji("❌")
       .setLabel("Close")
       .setStyle("DANGER");
