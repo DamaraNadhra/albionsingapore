@@ -47,7 +47,9 @@ module.exports = {
               .setTitle("List of Battle ID links for fast check:")
               .setDescription(`[Alliance][GuildName] KillerName | DeathFame | Death Timestamp | BattleID
             of ${personName} \n\n${kematian}`);
-            message.author.send(embed);
+            message.author.send({
+              embeds: [embed],
+            });
           });
       })
       .catch((e) => {
