@@ -644,6 +644,7 @@ const negativeResponses = [
   "Just because you have one doesn't mean you have to act like one.",
   "We can always tell when you are lying. Your lips move.",
   "Are you always this stupid or is today a special occasion?",
+  "Have you considered suing your brains for non-support?",
 ];
 const positiveResponses = [
   "I’m jealous of all the people that haven’t met you!",
@@ -652,7 +653,6 @@ const positiveResponses = [
   "That’s the way",
   "You conserve toilet paper by using both sides.",
   "You’re on the right track now",
-  "Have you considered suing your brains for non-support?",
   "Keep working, you’re getting better",
 ];
 module.exports = {
