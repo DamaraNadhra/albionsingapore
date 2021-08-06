@@ -1,5 +1,6 @@
 module.exports = {
   name: "add",
+  aliases: ["addperson", "addcase"],
   description: "Add a person personally into the case",
   async execute(message, args) {
     if (
