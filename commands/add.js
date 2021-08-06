@@ -17,17 +17,20 @@ module.exports = {
       message.member.permissions.has("ADMINISTRATOR")
     ) {
       let personMention = message.mentions.members.first();
-      let channelMention = message.mentions.channels.first();
+      const channelmention = message.mentions.channels.first();
+      const channelMention = message.guild.channels.cache.get(
+        channelmention.id
+      );
       message.delete().then(() => {
         if (!personMention)
           return message.reply(`Please state the person's mention`);
         if (!channelMention)
           return message.reply(`Please state the channel's mention`);
         if (
-          (channelMention.parentID === "853522303811321876") |
-          (channelMention.parentID === "853522605684686878")
+          (channelMention.parentId === "853522303811321876") |
+          (channelMention.parentId === "853522605684686878")
         ) {
-          channelMention.updateOverwrite(personMention.user, {
+          channelMention.permissionOverwrites.edit(personMention.user, {
             SEND_MESSAGES: true,
             VIEW_CHANNEL: true,
           });
