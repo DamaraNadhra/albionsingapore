@@ -1,12 +1,20 @@
+const { Message } = require("discord.js");
 module.exports = {
   name: "add",
   aliases: ["addperson", "addcase"],
   description: "Add a person personally into the case",
+  /**
+   *
+   * @param {Message} message
+   * @param {*} args
+   * @returns
+   */
   async execute(message, args) {
     if (
-      message.member.roles.cache.has("759793776439984170") |
-      message.member.roles.cache.has("855688610782248980") |
-      message.member.roles.cache.has("855689169018814464")
+      message.member.roles.cache.has("759793776439984170") ||
+      message.member.roles.cache.has("855688610782248980") ||
+      message.member.roles.cache.has("855689169018814464") ||
+      message.member.permissions.has("ADMINISTRATOR")
     ) {
       let personMention = message.mentions.members.first();
       let channelMention = message.mentions.channels.first();
