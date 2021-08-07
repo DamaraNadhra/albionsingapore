@@ -111,7 +111,7 @@ module.exports = {
                       if (val === "approvedScout") {
                         reaction.followUp({
                           content: `_Showing answer for <@${reaction.user.id}>_ \n<:singaporeDiscordEmoji:873354185645625414> __**${title}**__`,
-                          embeds: [faq.approvedScout],
+                          embeds: [faq.approvedScout(MessageEmbed, client)],
                         });
                       } else {
                         reaction.followUp({
