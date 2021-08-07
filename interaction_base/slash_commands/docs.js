@@ -11,7 +11,6 @@ module.exports = {
   description: "Showing docs of the guilds",
   /**
    *
-   * @param {CommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
