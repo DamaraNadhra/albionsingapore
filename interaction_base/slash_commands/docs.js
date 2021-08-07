@@ -45,13 +45,25 @@ module.exports = {
       default:
         break;
     }
-    if (answer !== undefined) {
+    if (answer !== undefined && answer !== "approvedScout") {
       interaction.reply({
         content: `_Showing answer for <@${
           target ? target.id : interaction.user.id
         }>_ \n<:singaporeDiscordEmoji:873354185645625414> __**${title}**__ \n${
           faq[answer]
         }`,
+      });
+    } else if (answer === "approvedScout") {
+      interaction.reply({
+        content: `_Showing answer for <@${interaction.user.id}>_ \n<:singaporeDiscordEmoji:873354185645625414> __**Approved Scout**__`,
+        embeds: [
+          new MessageEmbed()
+            .setAuthor(faq.approvedScout.author[0], faq.approvedScout.author[1])
+            .setColor(faq.approvedScout.color)
+            .setDescription(faq.approvedScout.description)
+            .setImage(faq.approvedScout.image)
+            .setFooter("Singapore ontop baby", client.user.displayAvatarURL()),
+        ],
       });
     } else {
       interaction
