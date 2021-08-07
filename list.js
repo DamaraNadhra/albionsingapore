@@ -2,7 +2,9 @@ const {
   MessageEmbed,
   MessageActionRow,
   MessageSelectMenu,
+  Client,
 } = require("discord.js");
+const client = new Client();
 const { cutSentence } = require("./functions");
 const recentlyRan = [];
 const AvArow = new MessageActionRow().addComponents(
