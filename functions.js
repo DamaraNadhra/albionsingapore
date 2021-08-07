@@ -708,6 +708,11 @@ const dateMaker = (date) => {
   let final = dateFix + " " + timeFix;
   return final;
 };
+function cutSentence(string, limit) {
+  if (typeof limit !== "number")
+    return console.error(new Error("Limit supposed to be number idiot!"));
+  return string.slice(0, limit + 1);
+}
 const billboard = async (id, param) => {
   var sortSelection = { points: 1 };
   let existable = await param
@@ -798,4 +803,5 @@ module.exports = {
   sets,
   dateMaker,
   getDate,
+  cutSentence,
 };
