@@ -651,7 +651,7 @@ client.on("ready", async () => {
   console.log("The Bot is Online");
   await database
     .connect(
-      `mongodb+srv://damaradewa:damaradewa@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority`,
+      `mongodb+srv://${process.env.databaseusername}:${process.env.databasepass}@cluster0.knsns.mongodb.net/database4?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -690,4 +690,4 @@ module.exports = {
   recentlyRan,
 };
 
-client.login("ODA1OTc2NjAyODY0Mzg2MDU5.YBiuNA.Nf3A_mtivhA_Puk8k69Nsnc2B1c");
+client.login(process.env.token);
