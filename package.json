@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "deepai": "^1.0.17",
     "discord-rpc": "^4.0.1",
-    "discord.js": "^13.0.0-dev.t1627862659.e2e4f65",
+    "discord.js": "^13.0.1",
     "mongoose": "^5.13.2",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
