@@ -4,7 +4,10 @@ const {
   MessageSelectMenu,
   Client,
 } = require("discord.js");
-const client = new Client();
+const client = new Client({
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "GUILD_MEMBERS"],
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
+});
 const { cutSentence } = require("./functions");
 const recentlyRan = [];
 const AvArow = new MessageActionRow().addComponents(
