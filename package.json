@@ -1,7 +1,10 @@
 {
   "name": "sgmy",
   "version": "1.0.0",
-  "description": "",
+  "description": "really cool app",
+  "engines": {
+    "node": "16.6.1"
+  },
   "main": "drago.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
