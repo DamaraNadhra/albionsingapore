@@ -95,6 +95,35 @@ const AvArow = new MessageActionRow().addComponents(
       },
     ])
 );
+const faq = {
+  commonlyUsedAcronyms: `Commonly Used Acronyms (and terms):\n• WWP = Whitewall Pass\n• CNA = CN Avalonian Company\n• R3 = Redtree Enclave\n• AR = Arthur's Rest\n• ML = Martlock\n• CL = Caerleon\n• FF = Fame Farm\n• Ava = Avalonian Raid\n• RL = Raid Leader\n• ZvZ = Zerg vs Zerg\n• CTA = Call to Arms`,
+  whatIsCaravan:
+    "Travelling en masse from point A to point B in a safe manner — transporting gears/items you want to sell and/or individual necessities. E.g WWP->ML->WWP",
+  howToJoinCaravan:
+    "Keep a look out on #ping / #events /in-game alliance or guild chat.",
+  caravanGears:
+    "Wear approved ZvZ gear during caravan unless told otherwise by the caravan organizer. To see approved gears press L and select the 2nd tab to see the guild loadouts in-game.",
+  howToGetIntoR3OrWwp:
+    "You can join an official caravan to R3 or a guild/CNA caravan to WWP to be safe. If you are feeling brave you can try to head over alone from the realmgate Windgrass Portal South. Another alternative is to look for roads to the destination you want to go, since it is relatively safer than travelling alone from the realmgate. You might be able to find a road that was already scouted in <#871082360895049728>.",
+  whichIsBetterR3OrWwp:
+    "Most guild activities are done with WWP as the starting/massing point. We do Avalonian dungeon and ZVZ from WWP. We have more slot for popping solo/Group dungeons in WWP than in R3 and WWP is relatively safer on certain timers. We can do more Avalonian dungeons in WWP than in R3.",
+  whatIsAvalonianRaidDungeon:
+    "It's a large dungeon instance that is usually done with 20 people with a party composition that has been constantly modified through balance changes for the upmost efficiency.",
+  howToJoinAva: `You can have several options:\n• Wait for a raid leader to post on the <#872047767655157800>  and/or <#872047767655157800> channel, \n• Keep an eye on the in-game guild chat to see if anyone popped an ava (e.g. LongLiveLuai: popped 8.2 ava, x up core roles)\n• Keep an eye on the in-game alliance chat or discord server at the #ava-ping channel`,
+  whatIsZvz:
+    "A zerg is a large mass of player (20+), so a ZvZ is a clash/fight between two or more zergs. A zerg has to act as a unit, which is why we adhere to the ZvZ builds that the alliance has created, which can be found in <#807319001234407504> in the alliance's main discord server. The other way to check zvz build is to press L on your keyboard in game and press the second tab and find zvz build there.",
+  approvedScout: new MessageEmbed()
+    .setAuthor(
+      "Approved Scout",
+      "https://render.albiononline.com/v1/item/T6_MAIN_ROCKMACE_KEEPER.png"
+    )
+    .setColor("ORANGE")
+    .setDescription(
+      `**Approved Scout** is a title given to trusted and tested scout, in order to be an **approved scout**, you must **follow the steps** explained below: \n\n**1.** Wear build that can buy time for the party to port out from the dungeon once the **divers/gankers** came in. (build example will show below) \n**2.** You must report the situation **regularly** to the party member. \n**3.** Turn on **mastery volume and combat log**, so you can hear gankers steps and whenever they pick stuff. \n**4.** After you have followed all the steps, contact one of the officers and send **a screenshot of your scout build**. \n**5.** The officer will add you into the **ARCH approved scout List** \n\n**Note:** \n**1.** If let's say your party got doved by divers. You **are not** responsible to regear / compensate the deaths, but they have the right **to not invite you** again in the future. \n**2.** If gankers came in, and you died when you are trying to hold them, it's **mandatory** to regear and come back to the dungeon asap. \n**3.** Not completing the task **means no PAYMENT** \n\n click this link below to see Singapore's approved scout list: \nhttps://arch.gay/scouts/g/singapore`
+    )
+    .setImage("https://i.imgur.com/eCq54NK.jpg")
+    .setFooter("Singapore ontop baby", client.user.displayAvatarURL()),
+};
 const avalist = {
   "ava-realmbreaker": {
     pic: "https://i.imgur.com/iU9Lh1c.jpg",
@@ -655,6 +684,61 @@ const positiveResponses = [
   "You’re on the right track now",
   "Keep working, you’re getting better",
 ];
+const errorSelectMenus = new MessageActionRow().addComponents(
+  new MessageSelectMenu()
+    .setPlaceholder("Search docs")
+    .setCustomId("docs")
+    .addOptions([
+      {
+        label: "ZvZ Definition",
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        description: `${cutSentence(faq.whatIsZvz, 50)}...`,
+        value: "whatIsZvz",
+      },
+      {
+        label: "Caravan Definition",
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        description: `${cutSentence(faq.whatIsCaravan, 50)}...`,
+        value: "whatIsCaravan",
+      },
+      {
+        label: "Approved Scout",
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        description: "Approved scout is a title given to someone that...",
+        value: "approvedScout",
+      },
+      {
+        label: "How to join Caravan?",
+        description: `${cutSentence(faq.howToJoinCaravan, 50)}...`,
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        value: "howToJoinCaravan",
+      },
+      {
+        label: "Caravan gears",
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        description: `${cutSentence(faq.caravanGears, 50)}...`,
+        value: "caravanGears",
+      },
+      {
+        label: "How do I get into R3 or WWP?",
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        description: `${cutSentence(faq.howToGetIntoR3OrWwp, 50)}...`,
+        value: "howToGetIntoR3OrWwp",
+      },
+      {
+        label: "Avalonian Dungeon",
+        description: `${cutSentence(faq.whatIsAvalonianRaidDungeon, 50)}...`,
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        value: "whatIsAvalonianRaidDungeon",
+      },
+      {
+        label: "How do I join Avalonian Dungeon raid?",
+        description: `${cutSentence(faq.howToJoinAva, 50)}...`,
+        emoji: "<:singaporeDiscordEmoji:873354185645625414>",
+        value: "howToJoinAva",
+      },
+    ])
+);
 module.exports = {
   recentlyRan,
   AvArow,
@@ -667,4 +751,6 @@ module.exports = {
   list,
   negativeResponses,
   positiveResponses,
+  faq,
+  errorSelectMenus,
 };

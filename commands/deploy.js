@@ -124,6 +124,26 @@ module.exports = {
             },
           ],
         },
+        {
+          name: "docs",
+          description:
+            "showing the documents of the most frequently asked questions.",
+          options: [
+            {
+              name: "query",
+              description: "the question.",
+              type: "STRING",
+              required: true,
+            },
+            {
+              name: "target",
+              description:
+                "the target to mention, this is optional, just to make it looks cooler.",
+              type: "USER",
+              required: false,
+            },
+          ],
+        },
       ]);
     console.log(commanz);
   },
