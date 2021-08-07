@@ -114,18 +114,15 @@ const faq = {
   howToJoinAva: `You can have several options:\n• Wait for a raid leader to post on the <#872047767655157800>  and/or <#872047767655157800> channel, \n• Keep an eye on the in-game guild chat to see if anyone popped an ava (e.g. LongLiveLuai: popped 8.2 ava, x up core roles)\n• Keep an eye on the in-game alliance chat or discord server at the #ava-ping channel`,
   whatIsZvz:
     "A zerg is a large mass of player (20+), so a ZvZ is a clash/fight between two or more zergs. A zerg has to act as a unit, which is why we adhere to the ZvZ builds that the alliance has created, which can be found in <#807319001234407504> in the alliance's main discord server. The other way to check zvz build is to press L on your keyboard in game and press the second tab and find zvz build there.",
-  approvedScout: function embed(MessageEmbed, client) {
-    MessageEmbed()
-      .setAuthor(
-        "Approved Scout",
-        "https://render.albiononline.com/v1/item/T6_MAIN_ROCKMACE_KEEPER.png"
-      )
-      .setColor("ORANGE")
-      .setDescription(
-        `**Approved Scout** is a title given to trusted and tested scout, in order to be an **approved scout**, you must **follow the steps** explained below: \n\n**1.** Wear build that can buy time for the party to port out from the dungeon once the **divers/gankers** came in. (build example will show below) \n**2.** You must report the situation **regularly** to the party member. \n**3.** Turn on **mastery volume and combat log**, so you can hear gankers steps and whenever they pick stuff. \n**4.** After you have followed all the steps, contact one of the officers and send **a screenshot of your scout build**. \n**5.** The officer will add you into the **ARCH approved scout List** \n\n**Note:** \n**1.** If let's say your party got doved by divers. You **are not** responsible to regear / compensate the deaths, but they have the right **to not invite you** again in the future. \n**2.** If gankers came in, and you died when you are trying to hold them, it's **mandatory** to regear and come back to the dungeon asap. \n**3.** Not completing the task **means no PAYMENT** \n\n click this link below to see Singapore's approved scout list: \nhttps://arch.gay/scouts/g/singapore`
-      )
-      .setImage("https://i.imgur.com/eCq54NK.jpg")
-      .setFooter("Singapore ontop baby", client.user.displayAvatarURL());
+  approvedScout: {
+    author: [
+      "Approved Scout",
+      "https://render.albiononline.com/v1/item/T6_MAIN_ROCKMACE_KEEPER.png",
+    ],
+
+    color: "ORANGE",
+    description: `**Approved Scout** is a title given to trusted and tested scout, in order to be an **approved scout**, you must **follow the steps** explained below: \n\n**1.** Wear build that can buy time for the party to port out from the dungeon once the **divers/gankers** came in. (build example will show below) \n**2.** You must report the situation **regularly** to the party member. \n**3.** Turn on **mastery volume and combat log**, so you can hear gankers steps and whenever they pick stuff. \n**4.** After you have followed all the steps, contact one of the officers and send **a screenshot of your scout build**. \n**5.** The officer will add you into the **ARCH approved scout List** \n\n**Note:** \n**1.** If let's say your party got doved by divers. You **are not** responsible to regear / compensate the deaths, but they have the right **to not invite you** again in the future. \n**2.** If gankers came in, and you died when you are trying to hold them, it's **mandatory** to regear and come back to the dungeon asap. \n**3.** Not completing the task **means no PAYMENT** \n\n click this link below to see Singapore's approved scout list: \nhttps://arch.gay/scouts/g/singapore`,
+    image: "https://i.imgur.com/eCq54NK.jpg",
   },
 };
 const avalist = {

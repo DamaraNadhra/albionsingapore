@@ -111,7 +111,20 @@ module.exports = {
                       if (val === "approvedScout") {
                         reaction.followUp({
                           content: `_Showing answer for <@${reaction.user.id}>_ \n<:singaporeDiscordEmoji:873354185645625414> __**${title}**__`,
-                          embeds: [faq.approvedScout(MessageEmbed, client)],
+                          embeds: [
+                            new MessageEmbed()
+                              .setAuthor(
+                                faq.approvedScout.author[0],
+                                faq.approvedScout.author[1]
+                              )
+                              .setColor(faq.approvedScout.color)
+                              .setDescription(faq.approvedScout.description)
+                              .setImage(faq.approvedScout.image)
+                              .setFooter(
+                                "Singapore ontop baby",
+                                client.user.displayAvatarURL()
+                              ),
+                          ],
                         });
                       } else {
                         reaction.followUp({
