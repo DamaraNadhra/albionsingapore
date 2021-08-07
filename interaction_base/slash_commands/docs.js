@@ -102,15 +102,12 @@ module.exports = {
                         case "whatIsAvalonianRaidDungeon":
                           title = "What is Avalonian Dungeon?";
                           break;
-                        case "approvedScout":
-                          title = "Approved Scout";
-                          break;
                         default:
                           break;
                       }
                       if (val === "approvedScout") {
                         reaction.followUp({
-                          content: `_Showing answer for <@${reaction.user.id}>_ \n<:singaporeDiscordEmoji:873354185645625414> __**${title}**__`,
+                          content: `_Showing answer for <@${reaction.user.id}>_ \n<:singaporeDiscordEmoji:873354185645625414> __**Approved Scout**__`,
                           embeds: [
                             new MessageEmbed()
                               .setAuthor(
