@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "really cool app",
   "engines": {
-    "node": "16.6.0"
+    "node": ">=16.6.0"
   },
   "main": "drago.js",
   "scripts": {
